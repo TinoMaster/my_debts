@@ -1,0 +1,90 @@
+[
+  {
+    "name": "Deuda con Oscar",
+    "creador": "Javier",
+    "deudor": "Javier",
+    "acreedor": "Oscar",
+    "deuda": 892,
+    "fecha": "17-8-2021",
+    "pagada": { "isDone": false, "fecha": "" },
+    "pagos": [
+      {
+        "cantidad": 120,
+        "fecha": "12-9-2021"
+      }
+    ],
+    "comentario": [
+      {
+        "descripction": "Esto es una prueba",
+        "usuario": "Oscar",
+        "fecha": "30-8-2021"
+      }
+    ]
+  },
+  {
+    "name": "Deuda con Oscar",
+    "creador": "Javier",
+    "deudor": "Javier",
+    "acreedor": "Oscar",
+    "deuda": 892,
+    "fecha": "17-8-2021",
+    "pagada": { "isDone": false, "fecha": "" },
+    "pagos": [
+      {
+        "cantidad": 120,
+        "fecha": "12-9-2021"
+      }
+    ],
+    "comentario": [
+      {
+        "descripction": "Esto es una prueba",
+        "usuario": "Oscar",
+        "fecha": "30-8-2021"
+      }
+    ]
+  },
+  {
+    "name": "Deuda con Oscar",
+    "creador": "Javier",
+    "deudor": "Javier",
+    "acreedor": "Oscar",
+    "deuda": 892,
+    "fecha": "17-8-2021",
+    "pagada": { "isDone": false, "fecha": "" },
+    "pagos": [
+      {
+        "cantidad": 120,
+        "fecha": "12-9-2021"
+      }
+    ],
+    "comentario": [
+      {
+        "descripction": "Esto es una prueba",
+        "usuario": "Oscar",
+        "fecha": "30-8-2021"
+      }
+    ]
+  },
+  {
+    "name": "Deuda con Oscar",
+    "creador": "Javier",
+    "deudor": "Javier",
+    "acreedor": "Oscar",
+    "deuda": 892,
+    "fecha": "17-8-2021",
+    "pagada": { "isDone": false, "fecha": "" },
+    "pagos": [
+      {
+        "cantidad": 120,
+        "fecha": "12-9-2021"
+      }
+    ],
+    "comentario": [
+      {
+        "descripction": "Esto es una prueba",
+        "usuario": "Oscar",
+        "fecha": "30-8-2021"
+      }
+    ]
+  }
+]
