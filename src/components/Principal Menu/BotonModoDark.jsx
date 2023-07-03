@@ -1,18 +1,19 @@
 import ThemeContext from "../../contexts/themeContext";
 import { useContext } from "react";
-import { FaMoon,FaSun } from "react-icons/fa6";
+import { FaMoon, FaSun } from "react-icons/fa6";
 
 export const ButtonModeDark = () => {
   const { darkMode, setDarkMode, DARK_MODE } = useContext(ThemeContext);
+  const onSwitchTheme = (e) => {
+    setDarkMode(!darkMode);
+    window.localStorage.setItem(DARK_MODE, !darkMode);
+    e.stopPropagation();
+  };
   return (
     <div className="flex right-0">
       <div className="Icono"></div>
       <div
-        onClick={(e) => {
-          setDarkMode(!darkMode);
-          window.localStorage.setItem(DARK_MODE, !darkMode);
-          e.stopPropagation();
-        }}
+        onClick={onSwitchTheme}
         className="flex justify-center items-center hover:cursor-pointer"
       >
         {!darkMode ? (

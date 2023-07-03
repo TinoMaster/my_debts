@@ -1,10 +1,11 @@
 [
   {
+    "_id": 985545122189,
     "name": "Deuda con Oscar",
     "creador": "Javier",
     "deudor": "Javier",
     "acreedor": "Oscar",
-    "deuda": 892,
+    "deuda": 311,
     "fecha": "17-8-2021",
     "pagada": { "isDone": false, "fecha": "" },
     "pagos": [
@@ -22,11 +23,12 @@
     ]
   },
   {
+    "_id": 985545122145,
     "name": "Deuda con Oscar",
     "creador": "Javier",
     "deudor": "Javier",
     "acreedor": "Oscar",
-    "deuda": 892,
+    "deuda": 987,
     "fecha": "17-8-2021",
     "pagada": { "isDone": false, "fecha": "" },
     "pagos": [
@@ -44,11 +46,12 @@
     ]
   },
   {
+    "_id": 985545122133,
     "name": "Deuda con Oscar",
     "creador": "Javier",
     "deudor": "Javier",
     "acreedor": "Oscar",
-    "deuda": 892,
+    "deuda": 2500,
     "fecha": "17-8-2021",
     "pagada": { "isDone": false, "fecha": "" },
     "pagos": [
@@ -66,11 +69,12 @@
     ]
   },
   {
-    "name": "Deuda con Oscar",
+    "_id": 985545122113,
+    "name": "Rolando",
     "creador": "Javier",
     "deudor": "Javier",
     "acreedor": "Oscar",
-    "deuda": 892,
+    "deuda": 1890,
     "fecha": "17-8-2021",
     "pagada": { "isDone": false, "fecha": "" },
     "pagos": [
