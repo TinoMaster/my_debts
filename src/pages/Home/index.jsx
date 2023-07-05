@@ -1,15 +1,19 @@
 import { Balance_Deudas } from "../../components/Home/Balance_Deudas";
 import { Colecciones } from "../../components/Home/Colecciones";
-import { my_debts } from "../../services/debts";
+import { useDebts } from "../../hooks/useDebts";
 
 export const Home = () => {
-  console.log(my_debts());
+  const { filter_collections, loading } = useDebts();
   return (
     <div className="w-full flex flex-wrap justify-around">
       {/* Balance Deudas */}
       <Balance_Deudas />
       {/* Colecciones */}
-      <Colecciones data={my_debts()} url={"#"} />
+      <Colecciones
+        collections={filter_collections()}
+        url={"#"}
+        loading={loading}
+      />
     </div>
   );
 };

@@ -69,6 +69,29 @@
     ]
   },
   {
+    "_id": 985545122112,
+    "name": "Deuda con Oscar",
+    "creador": "Javier",
+    "deudor": "Javier",
+    "acreedor": "Oscar",
+    "deuda": 2500,
+    "fecha": "17-8-2021",
+    "pagada": { "isDone": false, "fecha": "" },
+    "pagos": [
+      {
+        "cantidad": 120,
+        "fecha": "12-9-2021"
+      }
+    ],
+    "comentario": [
+      {
+        "descripction": "Esto es una prueba",
+        "usuario": "Oscar",
+        "fecha": "30-8-2021"
+      }
+    ]
+  },
+  {
     "_id": 985545122113,
     "name": "Rolando",
     "creador": "Javier",
