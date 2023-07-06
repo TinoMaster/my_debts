@@ -6,7 +6,7 @@ export const Collections_List = ({ collections, url }) => {
       {/*Colecciones  */}
       {collections?.map((collection) => (
         <Link
-          to={url}
+          to={`${url}/${collection.name}`}
           key={collection.name}
           className="m-2 p-3 shadow-md rounded-md flex justify-between bg-white/5"
         >

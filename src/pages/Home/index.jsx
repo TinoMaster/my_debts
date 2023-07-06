@@ -11,7 +11,7 @@ export const Home = () => {
       {/* Colecciones */}
       <Colecciones
         collections={filter_collections()}
-        url={"#"}
+        url={"/collection"}
         loading={loading}
       />
     </div>

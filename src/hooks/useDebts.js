@@ -11,7 +11,7 @@ export const useDebts = () => {
     setTimeout(() => {
       setDebts(my_debts());
       setLoading(false);
-    }, 3000);
+    }, 500);
   }, []);
 
   const filter_collections = () => {
@@ -35,5 +35,5 @@ export const useDebts = () => {
     return collections;
   };
 
-  return { filter_collections, loading };
+  return { filter_collections, loading, debts };
 };
