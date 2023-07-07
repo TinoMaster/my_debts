@@ -1,9 +1,8 @@
 import { Balance_Deudas } from "../../components/Home/Balance_Deudas";
 import { Colecciones } from "../../components/Home/Colecciones";
-import { useDebts } from "../../hooks/useDebts";
 
-export const Home = () => {
-  const { filter_collections, loading } = useDebts();
+export const Home = ({filter_collections, loading}) => {
+  
   return (
     <div className="w-full flex flex-wrap justify-around">
       {/* Balance Deudas */}
