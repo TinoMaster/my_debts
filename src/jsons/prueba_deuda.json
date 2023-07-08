@@ -2,6 +2,7 @@
   {
     "_id": 985545122189,
     "name": "Deuda con Oscar",
+    "description": "Lavadora",
     "creador": "Javier",
     "deudor": "Javier",
     "acreedor": "Oscar",
@@ -25,6 +26,7 @@
   {
     "_id": 985545122145,
     "name": "Deuda con Oscar",
+    "description": "Computadora",
     "creador": "Javier",
     "deudor": "Javier",
     "acreedor": "Oscar",
@@ -34,6 +36,10 @@
     "pagos": [
       {
         "cantidad": 120,
+        "fecha": "12-9-2021"
+      },
+      {
+        "cantidad": 320,
         "fecha": "12-9-2021"
       }
     ],
@@ -48,18 +54,14 @@
   {
     "_id": 985545122133,
     "name": "Deuda con Oscar",
+    "description": "Moto",
     "creador": "Javier",
     "deudor": "Javier",
     "acreedor": "Oscar",
     "deuda": 2500,
     "fecha": "17-8-2021",
     "pagada": { "isDone": false, "fecha": "" },
-    "pagos": [
-      {
-        "cantidad": 120,
-        "fecha": "12-9-2021"
-      }
-    ],
+    "pagos": [],
     "comentario": [
       {
         "descripction": "Esto es una prueba",
@@ -71,6 +73,7 @@
   {
     "_id": 985545122112,
     "name": "Deuda con Oscar",
+    "description": "Local",
     "creador": "Javier",
     "deudor": "Javier",
     "acreedor": "Oscar",
@@ -94,6 +97,7 @@
   {
     "_id": 985545122113,
     "name": "Rolando",
+    "description": "Esto es una prueba",
     "creador": "Javier",
     "deudor": "Javier",
     "acreedor": "Oscar",

@@ -8,11 +8,11 @@ export const View_Collection = ({ debts }) => {
   const collection = collection_by_name();
   return (
     <div className="flex flex-col w-full">
-      <h2 className="text-2xl font-serif text-secondary">{name}</h2>
+      <h2 className="text-2xl font-serif text-secondary py-4">{name}</h2>
       {/* Caja deudas */}
-      <div className="flex gap-3">
+      <div className="flex flex-wrap justify-center gap-3 py-5">
         {collection?.map((debt) => (
-          <Card_Debt key={debt._id} id={debt._id} />
+          <Card_Debt key={debt._id} debt={debt} />
         ))}
       </div>
     </div>
