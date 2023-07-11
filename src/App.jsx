@@ -4,9 +4,11 @@ import { Container_Page } from "./pages/Container_Page";
 import { Login } from "./pages/Login";
 import { useContext } from "react";
 import ThemeContext from "./contexts/themeContext";
+import { Register } from "./components/Login/register";
+import { LoginComponent } from "./components/Login/loginComponent";
 
 function App() {
-  const isAuth = true;
+  const isAuth = false;
   const { darkMode } = useContext(ThemeContext);
   return (
     <div
@@ -14,7 +16,7 @@ function App() {
         darkMode
           ? "from-darkMode to-slate-800 text-lightMode"
           : "from-slate-300 to-lightMode text-darkMode"
-      } justify-center`}
+      } justify-center font-roboto`}
     >
       <HashRouter>
         <Routes>
@@ -28,7 +30,10 @@ function App() {
               }
             />
           ) : (
-            <Route path="*" element={<Login />} />
+            <Route path="/" element={<Login />}>
+              <Route index element={<LoginComponent />} />
+              <Route path="/register" element={<Register />} />
+            </Route>
           )}
         </Routes>
       </HashRouter>

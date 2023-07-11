@@ -10,7 +10,7 @@ export const Collections_List = ({ collections, url }) => {
           key={collection.name}
           className="m-2 p-3 shadow-md rounded-md flex justify-between bg-white/5"
         >
-          <h4 className="md:text-lg font-semibold">{collection.name}</h4>
+          <h4 className="">{collection.name}</h4>
           <p className="text-sm md:text-base">
             {collection.deuda ? collection.deuda : 0}
           </p>

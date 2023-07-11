@@ -4,11 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#262626",
-        primaryLight: "#404040",
-        secondary: "#B4BF02",
+        primary: "#4338CA",
+        secondary: "#047857",
+        third: "#A16207",
         darkMode: "#171717",
         lightMode: "#F1F5F9",
+      },
+      fontFamily: {
+        roboto: ["Roboto"],
       },
       spacing: {
         128: "32rem",

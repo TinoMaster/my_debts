@@ -4,7 +4,7 @@ import { Collections_List } from "./Collections_List";
 export const Colecciones = ({ collections, url, loading }) => {
   return (
     <div className="w-full h-full p-2 flex flex-col justify-center rounded-md">
-      <h4 className="m-1 ml-3 text-md font-medium">Mi coleccion de deudas</h4>
+      <h4 className="m-1 ml-3 text-sm font-medium">Mi coleccion de deudas</h4>
       {loading ? (
         <div className="w-full flex flex-col items-center mb-3">
           <ListLoading />
