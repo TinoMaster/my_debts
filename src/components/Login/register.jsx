@@ -1,9 +1,46 @@
 import { Link } from "react-router-dom";
-import { FaEnvelope, FaKey, FaLock, FaUser } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaEye,
+  FaEyeSlash,
+  FaKey,
+  FaLock,
+  FaUser,
+} from "react-icons/fa";
+import { PiSealWarning } from "react-icons/pi";
+import useRegister from "../../hooks/Login/useRegister";
+import { PrincipalLoader } from "../loaders/principalLoader";
 
 export const Register = () => {
+  const {
+    register,
+    loading,
+    error,
+    success,
+    handlerRegister,
+    seePassword,
+    setSeePassword,
+    sendRegister,
+  } = useRegister();
   return (
     <>
+      {loading && (
+        <div className="absolute flex justify-center items-center w-full h-full bg-black/40 z-10">
+          <PrincipalLoader />
+        </div>
+      )}
+      {error?.error && (
+        <div className="absolute flex items-center gap-1 top-10 bg-red-400 z-10 py-2 px-4 rounded-md">
+          <PiSealWarning className="text-xl" />{" "}
+          <p className="font-thin">{error?.message}</p>
+        </div>
+      )}
+      {success && (
+        <div className="absolute flex items-center gap-1 top-10 right-4 bg-green-400/80 z-10 py-2 px-4 rounded-md">
+          <PiSealWarning className="text-xl" />{" "}
+          <p className="font-thin">Registro satisfactorio</p>
+        </div>
+      )}
       <h2 className="font-serif text-primaryLight text-3xl text-center font-extrabold">
         Registrarse
       </h2>
@@ -12,15 +49,17 @@ export const Register = () => {
         {/*  <img className="w-full h-full scale-75" src={logo} alt="Logo" /> */}
       </div>
 
-      <form className="w-full flex flex-col">
+      <form onSubmit={sendRegister} className="w-full flex flex-col">
         <label htmlFor="name-register" className="flex flex-col w-4/5 m-auto">
           <span className=" font-serif text-slate-500 ml-1">Nombre:</span>
           <div className="flex items-center">
             <FaUser className=" text-slate-500 absolute pl-1" />
             <input
+              onChange={handlerRegister}
               id="name-register"
               type="text"
-              name="nombre"
+              name="name"
+              value={register.name}
               placeholder="Escriba su nombre"
               className="inputAuth"
             />
@@ -32,9 +71,11 @@ export const Register = () => {
           <div className="flex items-center">
             <FaEnvelope className=" text-slate-500 absolute pl-1" />
             <input
+              onChange={handlerRegister}
               id="email-register"
               type="email"
               name="email"
+              value={register.email}
               placeholder="Escriba su Correo"
               className="inputAuth"
             />
@@ -49,18 +90,25 @@ export const Register = () => {
           <div className="flex items-center">
             <FaLock className=" text-slate-500 absolute pl-1" />
             <input
+              onChange={handlerRegister}
               id="pasword-register"
-              type="text"
-              /* type={!seePassword ? "password" : "text"} */
-              name="contraseña"
+              type={!seePassword ? "password" : "text"}
+              name="password"
+              value={register.password}
               placeholder="Escriba su Contraseña"
               className="inputAuth"
             />
-            {/*  <FontAwesomeIcon
-              className=" text-slate-500 absolute right-0 pr-1"
-              onClick={() => setSeePassword((prevState) => !prevState)}
-              icon={!seePassword ? faEye : faEyeLowVision}
-            /> */}
+            {!seePassword ? (
+              <FaEye
+                onClick={() => setSeePassword((prevState) => !prevState)}
+                className=" text-slate-500 absolute right-0 pr-1"
+              />
+            ) : (
+              <FaEyeSlash
+                onClick={() => setSeePassword((prevState) => !prevState)}
+                className=" text-slate-500 absolute right-0 pr-1"
+              />
+            )}
           </div>
         </label>
 
@@ -74,10 +122,11 @@ export const Register = () => {
           <div className="flex items-center">
             <FaKey className=" text-slate-500 absolute pl-1" />
             <input
+              onChange={handlerRegister}
               id="repeat-password"
-              type="text"
-              /* type={!seePassword ? "password" : "text"} */
-              name="repetir_contraseña"
+              type={!seePassword ? "password" : "text"}
+              name="verifyPassword"
+              /* value={register.verifyPassword} */
               placeholder="Confirme su Contraseña"
               className="inputAuth"
             />
@@ -95,7 +144,7 @@ export const Register = () => {
 
         <input
           value="Registrar"
-          type="button"
+          type="submit"
           className="my-5 p-2 w-2/3 m-auto bg-secondary/80 text-white rounded-lg shadow-md shadow-secondary/75 hover:cursor-pointer hover:bg-secondary"
         />
       </form>

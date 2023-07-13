@@ -6,10 +6,11 @@ import { useContext } from "react";
 import ThemeContext from "./contexts/themeContext";
 import { Register } from "./components/Login/register";
 import { LoginComponent } from "./components/Login/loginComponent";
+import AuthContext from "./contexts/authContext";
 
 function App() {
-  const isAuth = false;
   const { darkMode } = useContext(ThemeContext);
+  const { session } = useContext(AuthContext);
   return (
     <div
       className={`w-screen h-screen flex bg-gradient-to-tr ${
@@ -20,7 +21,7 @@ function App() {
     >
       <HashRouter>
         <Routes>
-          {isAuth ? (
+          {session ? (
             <Route
               path="*"
               element={

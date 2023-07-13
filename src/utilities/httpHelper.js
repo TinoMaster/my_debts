@@ -1,8 +1,16 @@
-export const httpHelper = () => {
+export const httpHelper = (token = "") => {
   const funcionHttps = (endpoint, options) => {
-    const defaultHeaders = {
-      accept: "application/json",
-    };
+    let defaultHeaders = {};
+    if (token.length > 0)
+      defaultHeaders = {
+        accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+    else
+      defaultHeaders = {
+        accept: "application/json",
+      };
+
     const error = {};
 
     const controller = new AbortController();
@@ -29,7 +37,7 @@ export const httpHelper = () => {
               err: "Error con la base de datos",
             })
       )
-      .catch((err) => error.err = err);
+      .catch((err) => (error.err = err));
   };
 
   const get = (url, options = {}) => funcionHttps(url, options);

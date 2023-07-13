@@ -1,17 +1,28 @@
-import { useEffect, useState } from "react";
-import { my_debts } from "../services/debts/debts";
+import { useContext, useEffect, useState } from "react";
+import AuthContext from "../contexts/authContext";
+import { httpHelper } from "../utilities/httpHelper";
+import { urls } from "../utilities/urls";
 
 export const useDebts = () => {
   const [debts, setDebts] = useState([]);
   const [loading, setLoading] = useState(false);
-  /* const [error, setError] = useState({}); */
+  const [error, setError] = useState({});
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => {
-      setDebts(my_debts());
-      setLoading(false);
-    }, 500);
+    httpHelper(user.token)
+      .get(`${urls.getMyDebts}/${user._id}`)
+      .then((res) => {
+        if (res.error) {
+          setLoading(false);
+          setError(res);
+        } else {
+          setLoading(false);
+          setError({});
+          setDebts(res.data);
+        }
+      });
   }, []);
 
   const filter_collections = () => {
@@ -35,5 +46,5 @@ export const useDebts = () => {
     return collections;
   };
 
-  return { filter_collections, loading, debts };
+  return { filter_collections, loading, debts, error };
 };
