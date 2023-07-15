@@ -6,7 +6,7 @@ import { useDebts } from "../hooks/useDebts";
 export const Container_Page = () => {
   const { filter_collections, loading, debts } = useDebts();
   return (
-    <div className="w-full p-2 md:p-5">
+    <div className="w-full h-full overflow-auto p-2 pb-24 pt-8 md:p-5">
       <Routes>
         <Route
           path="/"

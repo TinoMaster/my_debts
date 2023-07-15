@@ -1,7 +1,7 @@
 import { FaDollarSign } from "react-icons/fa";
 export const Balance_Deudas = () => {
   return (
-    <div className="w-full h-full p-2 flex flex-col rounded-md">
+    <div className="w-full p-2 flex flex-col rounded-md">
       <h4 className="m-1 ml-4 text-sm font-medium">Mi balance de deudas</h4>
 
       <div className="p-1">

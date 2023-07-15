@@ -3,7 +3,6 @@ import { useBalance } from "../../hooks/View Collection/useBalance";
 
 export const Balance = ({ collection }) => {
   const { prueba } = useBalance(collection);
-  console.log(prueba);
   return (
     <div className="text-sm shadow-md rounded-md bg-secondary/5">
       {/*Balance Total  */}

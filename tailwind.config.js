@@ -18,7 +18,7 @@ export default {
       },
       maxWidth: {
         "1080p": "1920px",
-        "720p": "1000px",
+        "720p": "1100px",
       },
       minHeight: {
         movil: "850px",

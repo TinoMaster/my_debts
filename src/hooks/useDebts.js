@@ -10,33 +10,45 @@ export const useDebts = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    setLoading(true);
-    httpHelper(user.token)
-      .get(`${urls.getMyDebts}/${user._id}`)
-      .then((res) => {
-        if (res.error) {
-          setLoading(false);
-          setError(res);
-        } else {
-          setLoading(false);
-          setError({});
-          setDebts(res.data);
-        }
-      });
-  }, []);
+    if (user._id.length > 0) {
+      setLoading(true);
+      httpHelper(user.token)
+        .get(`${urls.getMyDebts}/${user._id}`)
+        .then((res) => {
+          if (res.error) {
+            setLoading(false);
+            setError(res);
+          } else {
+            setLoading(false);
+            setError({});
+            setDebts(res.data);
+          }
+        });
+    }
+  }, [user]);
 
   const filter_collections = () => {
     const collections = debts?.reduce((result, value) => {
       const check = {
         name: value.name,
-        deuda: value.deuda,
+        deuda:
+          value.deuda -
+          value.pagos?.reduce((res, el) => (res -= el.cantidad), 0),
+        creador: value.creador._id,
+        deudor: value.deudor._id,
+        acreedor: value.acreedor._id,
       };
-
       if (result.length === 0) result.push(check);
 
-      if (result.some((el) => el.name === check.name)) {
+      if (
+        result.some(
+          (el) => el.name === check.name && check.creador === user._id
+        )
+      ) {
         result.forEach((el) =>
-          el.name === check.name ? (el.deuda += check.deuda) : null
+          el.name === check.name && check.acreedor === user._id
+            ? (el.deuda += check.deuda)
+            : (el.deuda -= check.deuda)
         );
       } else result.push(check);
 

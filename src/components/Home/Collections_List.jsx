@@ -1,21 +1,48 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../../contexts/authContext";
 
 export const Collections_List = ({ collections, url }) => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="w-full">
       {/*Colecciones  */}
-      {collections?.map((collection) => (
-        <Link
-          to={`${url}/${collection.name}`}
-          key={collection.name}
-          className="m-2 p-3 shadow-md rounded-md flex justify-between bg-white/5"
-        >
-          <h4 className="">{collection.name}</h4>
-          <p className="text-sm md:text-base">
-            {collection.deuda ? collection.deuda : 0}
-          </p>
-        </Link>
-      ))}
+      <div className="">
+        <h3 className="text-center text-sm">Mias</h3>
+        {collections
+          ?.filter((collection) => collection?.creador === user._id)
+          ?.map((collection) => (
+            <Link
+              to={`${url}/${collection.name}`}
+              state={{ _id: collection.creador }}
+              key={collection.name}
+              className="m-2 p-3 shadow-md rounded-md flex justify-between bg-white/5"
+            >
+              <h4 className="">{collection.name}</h4>
+              <p className="text-sm md:text-base">
+                {collection.deuda ? collection.deuda : 0}
+              </p>
+            </Link>
+          ))}
+      </div>
+      <div className="">
+        <h3 className="text-center text-sm">Otras</h3>
+        {collections
+          ?.filter((collection) => collection?.creador !== user._id)
+          ?.map((collection) => (
+            <Link
+              to={`${url}/${collection.name}`}
+              state={{ _id: collection.creador }}
+              key={collection.name}
+              className="m-2 p-3 shadow-md rounded-md flex justify-between bg-white/5"
+            >
+              <h4 className="">{collection.name}</h4>
+              <p className="text-sm md:text-base">
+                {collection.deuda ? collection.deuda : 0}
+              </p>
+            </Link>
+          ))}
+      </div>
     </div>
   );
 };

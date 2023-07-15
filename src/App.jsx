@@ -17,7 +17,7 @@ function App() {
         darkMode
           ? "from-darkMode to-slate-800 text-lightMode"
           : "from-slate-300 to-lightMode text-darkMode"
-      } justify-center font-roboto`}
+      } justify-center items-start font-roboto overflow-hidden`}
     >
       <HashRouter>
         <Routes>
