@@ -1,11 +1,11 @@
 import { Balance_Deudas } from "../../components/Home/Balance_Deudas";
 import { Colecciones } from "../../components/Home/Colecciones";
 
-export const Home = ({ filter_collections, loading }) => {
+export const Home = ({ filter_collections, balanceTotal, loading }) => {
   return (
     <div className="w-full h-full flex flex-col">
       {/* Balance Deudas */}
-      <Balance_Deudas collections={filter_collections} />
+      <Balance_Deudas balanceTotal={balanceTotal} />
       {/* Colecciones */}
       <Colecciones
         collections={filter_collections()}

@@ -27,54 +27,6 @@ export const useDebts = () => {
     }
   }, [user]);
 
-  /* const filter_collections = () => {
-    const collections = debts?.reduce((result, value) => {
-      const check = {
-        name: value.name,
-        deuda:
-          value.deuda -
-          value.pagos?.reduce((res, el) => (res += el.cantidad), 0),
-        creador: value.creador._id,
-        deudor: value.deudor._id,
-        acreedor: value.acreedor._id,
-      };
-      if (result.length === 0) result.push(check);
-
-      if (
-        result.some(
-          (el) => el.name === check.name && check.creador === el.creador
-        )
-      )
-        for (const obj of result) {
-          if (obj.name === check.name && obj.creador === check.creador) {
-            if (check.acreedor === user._id && check.creador === user._id) {
-              obj.deuda += check.deuda;
-            } else if (
-              check.acreedor !== user._id &&
-              check.creador === user._id
-            ) {
-              obj.deuda -= check.deuda;
-            } else if (
-              check.acreedor === user._id &&
-              check.creador !== user._id
-            ) {
-              obj.deuda += check.deuda;
-            } else if (
-              check.acreedor !== user._id &&
-              check.creador !== user._id
-            )
-              obj.deuda += check.deuda;
-          } else {
-            console.log(obj);
-          }
-        }
-      else result.push(check);
-
-      return result;
-    }, []);
-    console.log(collections);
-    return collections;
-  }; */
   const filter_collections = () => {
     const collections = debts?.reduce((result, value) => {
       const check = {
@@ -121,5 +73,23 @@ export const useDebts = () => {
     return collections;
   };
 
-  return { filter_collections, loading, debts, error };
+  const balanceTotal = () => {
+    const balance = debts.reduce(
+      (result, debt) => {
+        const deuda =
+          debt.deuda - debt.pagos?.reduce((res, el) => res + el.cantidad, 0);
+        if (debt.acreedor._id === user._id) {
+          result[0] += deuda;
+        } else if (debt.deudor._id === user._id) {
+          result[1] += deuda;
+        }
+        return result;
+      },
+      [0, 0]
+    );
+    balance[2] = balance[0] - balance[1];
+    return balance;
+  };
+
+  return { filter_collections, balanceTotal, loading, debts, error };
 };

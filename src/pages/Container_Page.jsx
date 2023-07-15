@@ -4,14 +4,18 @@ import { View_Collection } from "./View Collection";
 import { useDebts } from "../hooks/useDebts";
 
 export const Container_Page = () => {
-  const { filter_collections, loading, debts } = useDebts();
+  const { filter_collections, balanceTotal, loading, debts } = useDebts();
   return (
     <div className="w-full h-full overflow-auto p-2 pb-24 pt-8 md:p-5">
       <Routes>
         <Route
           path="/"
           element={
-            <Home filter_collections={filter_collections} loading={loading} />
+            <Home
+              filter_collections={filter_collections}
+              balanceTotal={balanceTotal}
+              loading={loading}
+            />
           }
         />
         <Route
