@@ -5,7 +5,7 @@ export const Home = ({ filter_collections, loading }) => {
   return (
     <div className="w-full h-full flex flex-col">
       {/* Balance Deudas */}
-      <Balance_Deudas />
+      <Balance_Deudas collections={filter_collections} />
       {/* Colecciones */}
       <Colecciones
         collections={filter_collections()}

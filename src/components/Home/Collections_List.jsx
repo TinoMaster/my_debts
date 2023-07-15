@@ -19,7 +19,11 @@ export const Collections_List = ({ collections, url }) => {
               className="m-2 p-3 shadow-md rounded-md flex justify-between bg-white/5"
             >
               <h4 className="">{collection.name}</h4>
-              <p className="text-sm md:text-base">
+              <p
+                className={`${
+                  collection.deuda < 0 ? "text-red-400" : "text-green-400"
+                } text-sm md:text-base`}
+              >
                 {collection.deuda ? collection.deuda : 0}
               </p>
             </Link>
@@ -37,8 +41,12 @@ export const Collections_List = ({ collections, url }) => {
               className="m-2 p-3 shadow-md rounded-md flex justify-between bg-white/5"
             >
               <h4 className="">{collection.name}</h4>
-              <p className="text-sm md:text-base">
-                {collection.deuda ? collection.deuda : 0}
+              <p
+                className={`${
+                  -collection.deuda < 0 ? "text-red-400" : "text-green-400"
+                } text-sm md:text-base`}
+              >
+                {collection.deuda ? -collection.deuda : 0}
               </p>
             </Link>
           ))}

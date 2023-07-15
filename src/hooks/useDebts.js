@@ -27,13 +27,13 @@ export const useDebts = () => {
     }
   }, [user]);
 
-  const filter_collections = () => {
+  /* const filter_collections = () => {
     const collections = debts?.reduce((result, value) => {
       const check = {
         name: value.name,
         deuda:
           value.deuda -
-          value.pagos?.reduce((res, el) => (res -= el.cantidad), 0),
+          value.pagos?.reduce((res, el) => (res += el.cantidad), 0),
         creador: value.creador._id,
         deudor: value.deudor._id,
         acreedor: value.acreedor._id,
@@ -42,19 +42,82 @@ export const useDebts = () => {
 
       if (
         result.some(
-          (el) => el.name === check.name && check.creador === user._id
+          (el) => el.name === check.name && check.creador === el.creador
         )
-      ) {
-        result.forEach((el) =>
-          el.name === check.name && check.acreedor === user._id
-            ? (el.deuda += check.deuda)
-            : (el.deuda -= check.deuda)
-        );
-      } else result.push(check);
+      )
+        for (const obj of result) {
+          if (obj.name === check.name && obj.creador === check.creador) {
+            if (check.acreedor === user._id && check.creador === user._id) {
+              obj.deuda += check.deuda;
+            } else if (
+              check.acreedor !== user._id &&
+              check.creador === user._id
+            ) {
+              obj.deuda -= check.deuda;
+            } else if (
+              check.acreedor === user._id &&
+              check.creador !== user._id
+            ) {
+              obj.deuda += check.deuda;
+            } else if (
+              check.acreedor !== user._id &&
+              check.creador !== user._id
+            )
+              obj.deuda += check.deuda;
+          } else {
+            console.log(obj);
+          }
+        }
+      else result.push(check);
 
       return result;
     }, []);
+    console.log(collections);
+    return collections;
+  }; */
+  const filter_collections = () => {
+    const collections = debts?.reduce((result, value) => {
+      const check = {
+        name: value.name,
+        deuda:
+          value.deuda - value.pagos?.reduce((res, el) => res + el.cantidad, 0),
+        creador: value.creador._id,
+        deudor: value.deudor._id,
+        acreedor: value.acreedor._id,
+      };
+      if (result.length === 0) result.push(check);
+      else if (
+        result.some(
+          (el) => el.name === check.name && check.creador === el.creador
+        )
+      )
+        for (const obj of result) {
+          if (obj.name === check.name && obj.creador === check.creador) {
+            if (check.acreedor === user._id && check.creador === user._id) {
+              obj.deuda += check.deuda;
+            } else if (
+              check.acreedor !== user._id &&
+              check.creador === user._id
+            ) {
+              obj.deuda -= check.deuda;
+            } else if (
+              check.acreedor === user._id &&
+              check.creador !== user._id
+            ) {
+              obj.deuda -= check.deuda;
+            } else if (
+              check.acreedor !== user._id &&
+              check.creador !== user._id
+            )
+              obj.deuda += check.deuda;
+          }
+        }
+      else {
+        result.push(check);
+      }
 
+      return result;
+    }, []);
     return collections;
   };
 
