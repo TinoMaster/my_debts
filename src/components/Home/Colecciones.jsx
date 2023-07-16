@@ -1,5 +1,4 @@
 import { ListLoading } from "../loaders/listLoader";
-import { Button_create_collection } from "./Button_create_collection";
 import { Collections_List } from "./Collections_List";
 export const Colecciones = ({ collections, url, loading }) => {
   return (
@@ -16,7 +15,6 @@ export const Colecciones = ({ collections, url, loading }) => {
           Cree su primera coleccion
         </h3>
       )}
-      <Button_create_collection />
     </div>
   );
 };

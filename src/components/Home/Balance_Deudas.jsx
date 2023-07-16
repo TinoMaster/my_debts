@@ -8,15 +8,15 @@ export const Balance_Deudas = ({ balanceTotal }) => {
       <div className="p-1">
         {/*Balance Total  */}
         <div className="m-2 p-2 shadow-md rounded-md flex justify-between bg-white/5">
-          <h4 className="text-primary font-semibold flex">Mis Deudas</h4>
-          <p className="text-sm text-primary flex items-center gap-1 mr-2">
+          <h4 className="text-secondary font-semibold flex">Me Deben</h4>
+          <p className="text-sm text-secondary flex items-center gap-1 mr-2">
             <FaDollarSign /> {balance[0]}
           </p>
         </div>
         {/* Dueño */}
         <div className="m-2 shadow-md p-2 rounded-md flex justify-between bg-white/5">
-          <h4 className="text-secondary font-semibold flex">Me Deben</h4>
-          <p className="text-sm text-secondary flex items-center gap-1 mr-2">
+          <h4 className="font-semibold flex">Debo</h4>
+          <p className="text-sm flex items-center gap-1 mr-2">
             <FaDollarSign /> {balance[1]}
           </p>
         </div>
