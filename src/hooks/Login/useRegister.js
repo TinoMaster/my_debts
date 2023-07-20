@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { urls } from "../../utilities/urls";
-import { httpHelper } from "../../utilities/httpHelper";
+import { register_user } from "../../services/auth";
 
 const initialRegister = {
   name: "",
@@ -62,26 +61,20 @@ const useRegister = () => {
       username: register.name + date.getDate(),
     };
 
-    const options = {
-      body: dataToSend,
-      headers: { "content-type": "application/json" },
-    };
-    httpHelper()
-      .post(urls.register, options)
-      .then((res) => {
-        if (res.error) {
-          setLoading(false);
-          setError(res);
-        } else {
-          setSuccess(true);
-          setLoading(false);
-          setError({});
-          setTimeout(() => {
-            setSuccess(false);
-            window.location.href = "/login";
-          }, 2000);
-        }
-      });
+    register_user(dataToSend).then((res) => {
+      if (res.error) {
+        setLoading(false);
+        setError(res);
+      } else {
+        setSuccess(true);
+        setLoading(false);
+        setError({});
+        setTimeout(() => {
+          setSuccess(false);
+          window.location.href = "/login";
+        }, 2000);
+      }
+    });
   };
 
   return {
