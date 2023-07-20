@@ -10,7 +10,7 @@ export const Collections_List = ({ collections, url }) => {
       <div className="">
         <h3 className="text-center text-sm">Mias</h3>
         {collections
-          ?.filter((collection) => collection?.creador === user._id)
+          ?.filter((collection) => collection?.creador === user?._id)
           ?.map((collection) => (
             <Link
               to={`${url}/${collection.name}`}
@@ -32,7 +32,7 @@ export const Collections_List = ({ collections, url }) => {
       <div className="">
         <h3 className="text-center text-sm">Otras</h3>
         {collections
-          ?.filter((collection) => collection?.creador !== user._id)
+          ?.filter((collection) => collection?.creador !== user?._id)
           ?.map((collection) => (
             <Link
               to={`${url}/${collection.name}`}

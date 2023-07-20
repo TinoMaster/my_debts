@@ -1,7 +1,7 @@
 export const httpHelper = (token = "") => {
   const funcionHttps = (endpoint, options) => {
     let defaultHeaders = {};
-    if (token.length > 0)
+    if (token?.length > 0)
       defaultHeaders = {
         accept: "application/json",
         Authorization: `Bearer ${token}`,

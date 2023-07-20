@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../contexts/authContext";
 import { httpHelper } from "../utilities/httpHelper";
 import { urls } from "../utilities/urls";
+import { getDebts } from "../services/debts";
 
 export const useDebts = () => {
   const [debts, setDebts] = useState([]);
@@ -12,20 +13,18 @@ export const useDebts = () => {
   useEffect(() => {
     if (user._id.length > 0) {
       setLoading(true);
-      httpHelper(user.token)
-        .get(`${urls.getMyDebts}/${user._id}`)
-        .then((res) => {
-          if (res.error) {
-            setLoading(false);
-            setError(res);
-          } else {
-            setLoading(false);
-            setError({});
-            setDebts(res.data);
-          }
-        });
+      getDebts(user.token, user._id).then((res) => {
+        if (res.error) {
+          setLoading(false);
+          setError(response);
+        } else {
+          setLoading(false);
+          setError({});
+          setDebts(res.data);
+        }
+      });
     }
-  }, [user]);
+  }, []);
 
   const filter_collections = () => {
     const collections = debts?.reduce((result, value) => {
