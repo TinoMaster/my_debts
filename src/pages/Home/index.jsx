@@ -1,13 +1,13 @@
 import { Balance_Deudas } from "../../components/Home/Balance_Deudas";
 import { Button_create_collection } from "../../components/Home/Button_create_collection";
 import { Colecciones } from "../../components/Home/Colecciones";
-import { Modal_Create_Debt } from "../../components/Home/Modal_Create_Debt";
+import { Modal_Create_Debt } from "../../components/Modal_Create_Debt";
 import { Modal_Create_collection } from "../../components/Home/Modal_Create_collection";
 import { ModalPortal } from "../../components/modals/modalPortal";
 import { useCreateNewCollection } from "../../hooks/View Collection/useCreateNewCollection";
-import { useCreateNewDebt } from "../../hooks/View Collection/useCreateNewDebt";
+import { useCreateNewDebt } from "../../hooks/useCreateNewDebt";
 
-export const Home = ({ collections, balanceTotal, loading, darkMode }) => {
+export const Home = ({ collections, ballance, loading, darkMode }) => {
   const {
     openCloseWindow,
     openModal,
@@ -21,7 +21,7 @@ export const Home = ({ collections, balanceTotal, loading, darkMode }) => {
   return (
     <div className="w-full h-full flex flex-col">
       {/* Modal create collection */}
-      {openModal && (
+      {openModal ? (
         <ModalPortal>
           <Modal_Create_collection
             darkMode={darkMode}
@@ -33,9 +33,9 @@ export const Home = ({ collections, balanceTotal, loading, darkMode }) => {
             errorNameCollection={errorNameCollection}
           />
         </ModalPortal>
-      )}
+      ) : null}
 
-      {openNewDebt && (
+      {openNewDebt ? (
         <ModalPortal>
           <Modal_Create_Debt
             darkMode={darkMode}
@@ -44,10 +44,10 @@ export const Home = ({ collections, balanceTotal, loading, darkMode }) => {
             newDebt={newDebt}
           />
         </ModalPortal>
-      )}
+      ) : null}
 
       {/* Balance Deudas */}
-      <Balance_Deudas balanceTotal={balanceTotal} />
+      <Balance_Deudas ballance={ballance} />
       {/* Colecciones */}
       <Colecciones
         collections={collections}

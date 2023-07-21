@@ -48,7 +48,7 @@ export const Modal_Create_Debt = ({
       <div className="w-full flex flex-wrap justify-between gap-4">
         {/* Subtitulo */}
         <div className="w-full flex flex-wrap">
-          <h4 className="w-full text-center font-serif">Subtitulo:</h4>
+          <h4 className="w-full text-center font-serif">Titulo:</h4>
           <input
             value={newDebt.description}
             onChange={handlerInputNewDebt}

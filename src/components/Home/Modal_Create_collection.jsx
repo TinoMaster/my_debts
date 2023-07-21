@@ -9,19 +9,19 @@ export const Modal_Create_collection = ({
 }) => {
   return (
     <div
-      className={`bg-gradient-to-tr ${
+      className={`bg-gradient-to-tr flex flex-col justify-center items-center ${
         darkMode
           ? "from-darkMode to-slate-900 text-lightMode"
           : "from-lightMode to-slate-200 text-darkMode"
       } p-10 rounded-md relative`}
     >
-      {errorNameCollection?.error && (
-        <div className="flex justify-center items-center absolute top-0">
+      {errorNameCollection?.error ? (
+        <div className="absolute top-0">
           <p className="text-red-300 text-sm p-2 w-full">
             {errorNameCollection.message}
           </p>
         </div>
-      )}
+      ) : null}
       <div className="flex flex-col justify-center">
         <h2 className="text-lg font-semibold w-full text-center">
           Nueva Coleccion

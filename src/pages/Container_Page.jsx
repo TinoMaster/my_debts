@@ -6,7 +6,7 @@ import { useContext } from "react";
 import ThemeContext from "../contexts/themeContext";
 
 export const Container_Page = () => {
-  const { collections, balanceTotal, loading, debts } = useDebts();
+  const { collections, ballance, loading, debts } = useDebts();
   const { darkMode } = useContext(ThemeContext);
   return (
     <div className="w-full h-full overflow-auto p-2 pb-24 pt-8 md:p-5">
@@ -17,7 +17,7 @@ export const Container_Page = () => {
             <Home
               darkMode={darkMode}
               collections={collections}
-              balanceTotal={balanceTotal}
+              ballance={ballance}
               loading={loading}
             />
           }
