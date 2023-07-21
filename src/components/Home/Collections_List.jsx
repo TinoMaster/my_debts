@@ -1,9 +1,6 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../../contexts/authContext";
 
-export const Collections_List = ({ collections, url }) => {
-  const { user } = useContext(AuthContext);
+export const Collections_List = ({ collections, url, user }) => {
   return (
     <div className="w-full">
       {/*Colecciones  */}
@@ -32,7 +29,7 @@ export const Collections_List = ({ collections, url }) => {
       <div className="">
         <h3 className="text-center text-sm">Otras</h3>
         {collections
-          ?.filter((collection) => collection?.creador !== user?._id)
+          ?.filter((collection) => collection?.creador !== user?._id) 
           ?.map((collection) => (
             <Link
               to={`${url}/${collection.name}`}

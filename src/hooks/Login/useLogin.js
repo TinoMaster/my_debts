@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { urls } from "../../utilities/urls";
 import { httpHelper } from "../../utilities/httpHelper";
+import { login_user } from "../../services/login";
 
 const initialRegister = {
   email: "",
@@ -56,12 +57,7 @@ const useLogin = () => {
       return false;
     }
 
-    const options = {
-      body: login,
-      headers: { "content-type": "application/json" },
-    };
-    httpHelper()
-      .post(urls.login, options)
+    login_user(login)
       .then((res) => {
         if (res.error) {
           setLoading(false);

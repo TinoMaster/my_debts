@@ -7,12 +7,7 @@ import { ModalPortal } from "../../components/modals/modalPortal";
 import { useCreateNewCollection } from "../../hooks/View Collection/useCreateNewCollection";
 import { useCreateNewDebt } from "../../hooks/View Collection/useCreateNewDebt";
 
-export const Home = ({
-  filter_collections,
-  balanceTotal,
-  loading,
-  darkMode,
-}) => {
+export const Home = ({ collections, balanceTotal, loading, darkMode }) => {
   const {
     openCloseWindow,
     openModal,
@@ -55,7 +50,7 @@ export const Home = ({
       <Balance_Deudas balanceTotal={balanceTotal} />
       {/* Colecciones */}
       <Colecciones
-        collections={filter_collections()}
+        collections={collections}
         url={"/collection"}
         loading={loading}
       />
