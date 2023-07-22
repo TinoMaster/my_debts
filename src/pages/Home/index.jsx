@@ -1,7 +1,7 @@
 import { Balance_Deudas } from "../../components/Home/Balance_Deudas";
 import { Button_create_collection } from "../../components/Home/Button_create_collection";
 import { Colecciones } from "../../components/Home/Colecciones";
-import { Modal_Create_Debt } from "../../components/Modal_Create_Debt";
+import { Modal_Create_Debt } from "../../components/Modal Create Debt";
 import { Modal_Create_collection } from "../../components/Home/Modal_Create_collection";
 import { ModalPortal } from "../../components/modals/modalPortal";
 import { useCreateNewCollection } from "../../hooks/View Collection/useCreateNewCollection";
@@ -16,7 +16,7 @@ export const Home = ({ collections, ballance, loading, darkMode }) => {
     collectionName,
     errorNameCollection,
   } = useCreateNewCollection();
-  const { openCloseNewDebt, openNewDebt, handlerInputNewDebt, newDebt } =
+  const { openCloseNewDebt, openNewDebt, funcHandlers, newDebt } =
     useCreateNewDebt();
   return (
     <div className="w-full h-full flex flex-col">
@@ -40,8 +40,8 @@ export const Home = ({ collections, ballance, loading, darkMode }) => {
           <Modal_Create_Debt
             darkMode={darkMode}
             openCloseNewDebt={openCloseNewDebt}
-            handlerInputNewDebt={handlerInputNewDebt}
             newDebt={newDebt}
+            funcHandlers={funcHandlers}
           />
         </ModalPortal>
       ) : null}

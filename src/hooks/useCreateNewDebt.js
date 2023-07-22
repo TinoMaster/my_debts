@@ -13,6 +13,7 @@ const initialState = {
     fecha: "",
   },
   pagos: [],
+  comentario: [],
 };
 
 export const useCreateNewDebt = () => {
@@ -28,5 +29,28 @@ export const useCreateNewDebt = () => {
     setNewDebt({ ...newDebt, [name]: value });
   };
 
-  return { openCloseNewDebt, openNewDebt, handlerInputNewDebt, newDebt };
+  const handlerIsPaid = (e) => {
+    setNewDebt({ ...newDebt, pagada: { isDone: e.target.checked } });
+  };
+
+  const handlerDebtType = (e, user) => {
+    if (e.target.value === "deudor") {
+      setNewDebt({ ...newDebt, deudor: user._id, acreedor: "" });
+    } else if (e.target.value === "acreedor") {
+      setNewDebt({ ...newDebt, acreedor: user._id, deudor: "" });
+    }
+  };
+
+  const funcHandlers = {
+    handlerInputNewDebt,
+    handlerIsPaid,
+    handlerDebtType,
+  };
+
+  return {
+    openCloseNewDebt,
+    funcHandlers,
+    openNewDebt,
+    newDebt,
+  };
 };
