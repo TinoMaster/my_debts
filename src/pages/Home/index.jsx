@@ -6,6 +6,7 @@ import { Modal_Create_collection } from "../../components/Home/Modal_Create_coll
 import { ModalPortal } from "../../components/modals/modalPortal";
 import { useCreateNewCollection } from "../../hooks/View Collection/useCreateNewCollection";
 import { useCreateNewDebt } from "../../hooks/useCreateNewDebt";
+import { Friends } from "../../components/Home/Friends";
 
 export const Home = ({ collections, ballance, loading, darkMode }) => {
   const {
@@ -19,7 +20,7 @@ export const Home = ({ collections, ballance, loading, darkMode }) => {
   const { openCloseNewDebt, openNewDebt, funcHandlers, newDebt } =
     useCreateNewDebt();
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full h-full flex flex-col px-2">
       {/* Modal create collection */}
       {openModal ? (
         <ModalPortal>
@@ -46,6 +47,8 @@ export const Home = ({ collections, ballance, loading, darkMode }) => {
         </ModalPortal>
       ) : null}
 
+      {/* Friend */}
+      <Friends />
       {/* Balance Deudas */}
       <Balance_Deudas ballance={ballance} />
       {/* Colecciones */}

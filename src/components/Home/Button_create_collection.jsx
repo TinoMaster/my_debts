@@ -4,7 +4,7 @@ import ThemeContext from "../../contexts/themeContext";
 export const Button_create_collection = ({ openCloseWindow }) => {
   const { darkMode } = useContext(ThemeContext);
   return (
-    <div className="m-2 flex">
+    <div className="my-2 flex">
       <h4
         onClick={openCloseWindow}
         className={`${
