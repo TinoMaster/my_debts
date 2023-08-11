@@ -18,7 +18,7 @@ export const Balance_Deudas = ({ ballance }) => {
             <FaDollarSign /> {ballance[1]}
           </p>
         </div>
-        <div className="my-2 mb-6 shadow-md p-2 rounded-md flex justify-between bg-white/5">
+        <div className="my-2 shadow-md p-2 rounded-md flex justify-between bg-white/5">
           <h4 className="text-third font-semibold flex">Balance</h4>
           <p className="text-sm text-third flex items-center gap-1 mr-2">
             <FaDollarSign /> {ballance[2]}

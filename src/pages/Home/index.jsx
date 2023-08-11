@@ -20,7 +20,7 @@ export const Home = ({ collections, ballance, loading, darkMode }) => {
   const { openCloseNewDebt, openNewDebt, funcHandlers, newDebt } =
     useCreateNewDebt();
   return (
-    <div className="w-full h-full flex flex-col px-2">
+    <div className="w-full h-full flex flex-col px-2 gap-5">
       {/* Modal create collection */}
       {openModal ? (
         <ModalPortal>
