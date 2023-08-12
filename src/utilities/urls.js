@@ -4,5 +4,7 @@ export const urls = {
   register: `${host}/users/register`,
   login: `${host}/users/login`,
   islogin: `${host}/users/isLogin`,
+  friend_request: `${host}/users/contactrequest`,
+  friend_response: `${host}/users/response_friend_request`,
   getMyDebts: `${host}/debts`,
 };

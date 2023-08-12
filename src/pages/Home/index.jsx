@@ -48,7 +48,7 @@ export const Home = ({ collections, ballance, loading, darkMode }) => {
       ) : null}
 
       {/* Friend */}
-      <Friends />
+      <Friends darkMode={darkMode} />
       {/* Balance Deudas */}
       <Balance_Deudas ballance={ballance} />
       {/* Colecciones */}

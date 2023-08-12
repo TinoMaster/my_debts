@@ -4,10 +4,12 @@ import { View_Collection } from "./View Collection";
 import { useDebts } from "../hooks/useDebts";
 import { useContext } from "react";
 import ThemeContext from "../contexts/themeContext";
+import AuthContext from "../contexts/authContext";
 
 export const Container_Page = () => {
   const { collections, ballance, loading, debts } = useDebts();
   const { darkMode } = useContext(ThemeContext);
+  const { user } = useContext(AuthContext);
   return (
     <div className="w-full h-full overflow-auto p-2 pb-24 pt-8 md:p-5">
       <Routes>
