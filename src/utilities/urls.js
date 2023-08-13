@@ -7,4 +7,5 @@ export const urls = {
   friend_request: `${host}/users/contactrequest`,
   friend_response: `${host}/users/response_friend_request`,
   getMyDebts: `${host}/debts`,
+  getContacts: `${host}/users/contacts`,
 };

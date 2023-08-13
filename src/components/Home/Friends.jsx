@@ -15,7 +15,6 @@ export const Friends = ({ users = [], darkMode }) => {
     username,
     sendFriendRequest,
   } = friendRequest();
-  console.log(users);
   return (
     <div className="flex flex-wrap gap-3">
       {/* Modal */}

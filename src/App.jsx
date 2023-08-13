@@ -16,7 +16,7 @@ function App() {
       className={`w-screen h-screen flex bg-gradient-to-tr ${
         darkMode
           ? "from-darkMode to-slate-800 text-lightMode"
-          : "from-slate-300 to-lightMode text-darkMode"
+          : "from-slate-300 to-lightMode text-slate-700"
       } justify-center items-start font-roboto overflow-hidden`}
     >
       <HashRouter>

@@ -1,6 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 import { httpHelper } from "../utilities/httpHelper";
 import { urls } from "../utilities/urls";
+import { getToken } from "../utilities/getToken";
+import { isLogin } from "../services/login";
+import { my_contacts } from "../services/friend";
+import { getID } from "../utilities/getId";
 
 const AuthContext = createContext(null);
 
@@ -24,23 +28,26 @@ export const AuthProvider = ({ children }) => {
   const [dataConnected, setDataConnected] = useState(false);
   const [session, setSession] = useState(sessionStorage);
   const [user, setUser] = useState(initialUser);
+  const [myContacts, setMyContacts] = useState({});
 
   useEffect(() => {
-    if (user.token.length === 0) {
+    const token = getToken();
+    if (token?.length === 0) {
       setDataConnected(true);
     } else {
-      httpHelper(user.token)
-        .get(urls.islogin)
-        .then((res) => {
-          if (res.error) {
-            setDataConnected(true);
-          } else if (res.success) {
-            setDataConnected(true);
-            setSession(true);
-          }
-        });
+      isLogin(token).then((res) => {
+        if (res.error) {
+          console.log(res);
+          setDataConnected(true);
+        } else if (res.success) {
+          const id = getID();
+          setDataConnected(true);
+          setSession(true);
+          my_contacts(token, id).then((res) => setMyContacts(res.data));
+        }
+      });
     }
-  }, [user]);
+  }, []);
 
   const closeSession = () => {
     window.localStorage.removeItem(TOKEN);
@@ -53,7 +60,7 @@ export const AuthProvider = ({ children }) => {
     window.location.href = "/";
   };
 
-  const data = { user, session, dataConnected, closeSession };
+  const data = { user, session, dataConnected, closeSession, myContacts };
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
 };
 

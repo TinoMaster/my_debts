@@ -8,3 +8,6 @@ export const login_user = async (user) => {
   };
   return await httpHelper().post(urls.login, options);
 };
+
+export const isLogin = async (token) =>
+  await httpHelper(token).get(urls.islogin);
