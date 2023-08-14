@@ -7,8 +7,15 @@ import { ModalPortal } from "../../components/modals/modalPortal";
 import { useCreateNewCollection } from "../../hooks/View Collection/useCreateNewCollection";
 import { useCreateNewDebt } from "../../hooks/useCreateNewDebt";
 import { Friends } from "../../components/Home/Friends";
+import { getUserName } from "../../utilities/getUserName";
 
-export const Home = ({ collections, ballance, loading, darkMode }) => {
+export const Home = ({
+  collections,
+  ballance,
+  loading,
+  darkMode,
+  myContacts,
+}) => {
   const {
     openCloseWindow,
     openModal,
@@ -19,6 +26,7 @@ export const Home = ({ collections, ballance, loading, darkMode }) => {
   } = useCreateNewCollection();
   const { openCloseNewDebt, openNewDebt, funcHandlers, newDebt } =
     useCreateNewDebt();
+  const username = getUserName();
   return (
     <div className="w-full h-full flex flex-col px-2 gap-5">
       {/* Modal create collection */}
@@ -47,8 +55,10 @@ export const Home = ({ collections, ballance, loading, darkMode }) => {
         </ModalPortal>
       ) : null}
 
+      {/* Username Provisional */}
+      <h3>{username}</h3>
       {/* Friend */}
-      <Friends darkMode={darkMode} />
+      <Friends users={myContacts?.contacts} darkMode={darkMode} />
       {/* Balance Deudas */}
       <Balance_Deudas ballance={ballance} />
       {/* Colecciones */}

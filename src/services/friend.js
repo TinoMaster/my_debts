@@ -9,6 +9,17 @@ export const frien_request = async (token, idRequester, username) => {
   return await httpHelper(token).post(urls.friend_request, options);
 };
 
-export const my_contacts = async (token, id) => {
-  return await httpHelper(token).get(`${urls.getContacts}/${id}`);
+export const my_contacts = async (token, id) =>
+  await httpHelper(token).get(`${urls.getContacts}/${id}`);
+export const responseFriendRequest = async (
+  token,
+  idRequester,
+  idReciever,
+  response
+) => {
+  const options = {
+    body: { idRequester, idReciever, response },
+    headers: { "content-type": "application/json" },
+  };
+  return await httpHelper(token).post(urls.friend_response, options);
 };

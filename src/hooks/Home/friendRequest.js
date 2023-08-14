@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { frien_request } from "../../services/friend";
 import { getToken } from "../../utilities/getToken";
+import { getID } from "../../utilities/getId";
 
 export const friendRequest = () => {
   const [modalUserName, setModalUserName] = useState(false);
@@ -22,7 +23,7 @@ export const friendRequest = () => {
   const sendFriendRequest = () => {
     const validate = validate_username();
     if (validate) {
-      const idRequester = window.localStorage.getItem("ID_USER");
+      const idRequester = getID();
       const token = getToken();
       setLoading(true);
       frien_request(token, idRequester, username).then((res) => {

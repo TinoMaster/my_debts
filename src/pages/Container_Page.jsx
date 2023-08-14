@@ -5,10 +5,12 @@ import { useDebts } from "../hooks/useDebts";
 import { useContext } from "react";
 import ThemeContext from "../contexts/themeContext";
 import { Contacts } from "./Contacts";
+import AuthContext from "../contexts/authContext";
 
 export const Container_Page = () => {
   const { collections, ballance, loading, debts } = useDebts();
   const { darkMode } = useContext(ThemeContext);
+  const { myContacts } = useContext(AuthContext);
   return (
     <div className="w-full h-full overflow-auto p-2 pb-24 pt-8 md:p-5">
       <Routes>
@@ -20,6 +22,7 @@ export const Container_Page = () => {
               collections={collections}
               ballance={ballance}
               loading={loading}
+              myContacts={myContacts}
             />
           }
         />

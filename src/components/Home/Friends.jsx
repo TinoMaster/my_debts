@@ -37,8 +37,11 @@ export const Friends = ({ users = [], darkMode }) => {
       <div className="min-w-11/12 overflow-auto flex rounded-md scroll-auto scroll-pe-0 snap-mandatory">
         <div className="flex gap-3">
           {users.map((user) => (
-            <div className="w-14 h-14 bg-white/10 shadow-md rounded-full flex justify-center items-center hover:cursor-pointer hover:bg-primary/30 transition-colors">
-              <h3>{cutName(user.name)}</h3>
+            <div
+              key={user.friend._id}
+              className="w-14 h-14 bg-white/10 shadow-md rounded-full flex justify-center items-center hover:cursor-pointer hover:bg-primary/30 transition-colors"
+            >
+              <h3>{cutName(user.friend.name)}</h3>
             </div>
           ))}
         </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { PrincipalLoader } from "../loaders/principalLoader";
 
 export const Modal_friendRequest = ({
   error,
@@ -18,6 +19,11 @@ export const Modal_friendRequest = ({
           : "from-lightMode to-slate-200 text-darkMode"
       } p-10 rounded-md relative`}
     >
+      {loading ? (
+        <div className="absolute bg-black/50 w-full h-full flex justify-center items-center">
+          <PrincipalLoader />
+        </div>
+      ) : null}
       {error?.error ? (
         <div className="absolute top-0">
           <p className="text-red-300 text-sm p-2 w-full">{error.message}</p>
@@ -25,7 +31,7 @@ export const Modal_friendRequest = ({
       ) : null}
       {success?.success ? (
         <div className="absolute top-0">
-          <p className="text-red-300 text-sm p-2 w-full">{success.message}</p>
+          <p className="text-green-300 text-sm p-2 w-full">{success.message}</p>
         </div>
       ) : null}
       <div className="flex flex-col justify-center items-center">

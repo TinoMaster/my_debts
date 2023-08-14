@@ -1,6 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { httpHelper } from "../utilities/httpHelper";
-import { urls } from "../utilities/urls";
 import { getToken } from "../utilities/getToken";
 import { isLogin } from "../services/login";
 import { my_contacts } from "../services/friend";
@@ -37,7 +35,6 @@ export const AuthProvider = ({ children }) => {
     } else {
       isLogin(token).then((res) => {
         if (res.error) {
-          console.log(res);
           setDataConnected(true);
         } else if (res.success) {
           const id = getID();
