@@ -3,8 +3,9 @@ import { cutName } from "../../utilities/cutName";
 import { friendRequest } from "../../hooks/Home/friendRequest";
 import { ModalPortal } from "../modals/modalPortal";
 import { Modal_friendRequest } from "./Modal_friendRequest";
+import { ContactsLoading } from "../loaders/contactsLoader";
 
-export const Friends = ({ users = [], darkMode }) => {
+export const Friends = ({ users = [], darkMode, loadingAuth }) => {
   const {
     error,
     loading,
@@ -14,6 +15,7 @@ export const Friends = ({ users = [], darkMode }) => {
     success,
     username,
     sendFriendRequest,
+    deleteFriend,
   } = friendRequest();
   return (
     <div className="flex flex-wrap gap-3">
@@ -34,18 +36,26 @@ export const Friends = ({ users = [], darkMode }) => {
       ) : null}
       {/* Component */}
       <h3 className="w-full">Contactos</h3>
-      <div className="min-w-11/12 overflow-auto flex rounded-md scroll-auto scroll-pe-0 snap-mandatory">
-        <div className="flex gap-3">
-          {users.map((user) => (
-            <div
-              key={user.friend._id}
-              className="w-14 h-14 bg-white/10 shadow-md rounded-full flex justify-center items-center hover:cursor-pointer hover:bg-primary/30 transition-colors"
-            >
-              <h3>{cutName(user.friend.name)}</h3>
-            </div>
-          ))}
+      {loadingAuth ? (
+        <ContactsLoading />
+      ) : (
+        <div className="min-w-11/12 overflow-auto flex rounded-md scroll-auto scroll-pe-0 snap-mandatory">
+          <div className="flex gap-3">
+            {users.length > 0
+              ? users.map((user) => (
+                  <div
+                    key={user.friend._id}
+                    onClick={() => deleteFriend(user.friend._id)}
+                    className="w-14 h-14 bg-white/10 shadow-md rounded-full flex justify-center items-center hover:cursor-pointer hover:bg-primary/30 transition-colors"
+                  >
+                    <h3>{cutName(user.friend?.name)}</h3>
+                  </div>
+                ))
+              : null}
+          </div>
         </div>
-      </div>
+      )}
+
       {/* Crear nuevo user */}
       <div className="flex">
         <div
@@ -53,7 +63,7 @@ export const Friends = ({ users = [], darkMode }) => {
           className="w-14 h-14 relative bg-gradient-to-tr from-slate-900/40 to-primary/40 shadow-lg shadow-primary/30 rounded-full flex justify-center items-center hover:cursor-pointer hover:bg-primary/50 hover:shadow-primary/40 transition-colors"
         >
           <h3 className="text-2xl">+</h3>
-          <p className="absolute text-xs bottom-0">Nuevo</p>
+          <p className="absolute text-xs bottom-1">Nuevo</p>
         </div>
       </div>
     </div>

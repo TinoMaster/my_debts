@@ -20,23 +20,32 @@ const initialUser = {
   _id: JSON.parse(localStorage.getItem(ID_USER)) || "",
   token: JSON.parse(localStorage.getItem(TOKEN)) || "",
 };
+const initialContacts = {
+  contacts: [],
+  contactRequestsRecieved: [],
+  contactRequestsSent: [],
+};
 const sessionStorage = localStorage.getItem(SESSION) || false;
 
 export const AuthProvider = ({ children }) => {
   const [dataConnected, setDataConnected] = useState(false);
   const [session, setSession] = useState(sessionStorage);
   const [user, setUser] = useState(initialUser);
-  const [myContacts, setMyContacts] = useState({});
+  const [myContacts, setMyContacts] = useState(initialContacts);
+  const [loadingAuth, setLoadingAuth] = useState(false);
 
   useEffect(() => {
     const token = getToken();
     if (token?.length === 0) {
       setDataConnected(true);
     } else {
+      setLoadingAuth(true);
       isLogin(token).then((res) => {
         if (res.error) {
+          setLoadingAuth(false);
           setDataConnected(true);
         } else if (res.success) {
+          setLoadingAuth(false);
           const id = getID();
           setDataConnected(true);
           setSession(true);
@@ -45,6 +54,27 @@ export const AuthProvider = ({ children }) => {
       });
     }
   }, []);
+
+  const delete_contact_from_array = (idFriend) => {
+    const contactsUpdate = myContacts.contacts.filter(
+      (friend) => friend.friend._id.toString() !== idFriend
+    );
+    setMyContacts({ ...myContacts, contacts: contactsUpdate });
+  };
+  const add_friend_request_to_array = (user) => {
+    const userUpdate = {
+      _id: user._id,
+      name: user.name,
+      username: user.username,
+    };
+    setMyContacts({
+      ...myContacts,
+      contactRequestsSent: [
+        ...myContacts.contactRequestsSent,
+        { user: userUpdate },
+      ],
+    });
+  };
 
   const closeSession = () => {
     window.localStorage.removeItem(TOKEN);
@@ -57,7 +87,16 @@ export const AuthProvider = ({ children }) => {
     window.location.href = "/";
   };
 
-  const data = { user, session, dataConnected, closeSession, myContacts };
+  const data = {
+    user,
+    session,
+    dataConnected,
+    closeSession,
+    myContacts,
+    delete_contact_from_array,
+    add_friend_request_to_array,
+    loadingAuth,
+  };
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
 };
 

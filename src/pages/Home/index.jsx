@@ -15,6 +15,7 @@ export const Home = ({
   loading,
   darkMode,
   myContacts,
+  loadingAuth,
 }) => {
   const {
     openCloseWindow,
@@ -58,7 +59,11 @@ export const Home = ({
       {/* Username Provisional */}
       <h3>{username}</h3>
       {/* Friend */}
-      <Friends users={myContacts?.contacts} darkMode={darkMode} />
+      <Friends
+        users={myContacts?.contacts}
+        darkMode={darkMode}
+        loadingAuth={loadingAuth}
+      />
       {/* Balance Deudas */}
       <Balance_Deudas ballance={ballance} />
       {/* Colecciones */}
