@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { responseFriendRequest } from "../../services/friend";
 import { getToken } from "../../utilities/getToken";
 import { getID } from "../../utilities/getId";
+import AuthContext from "../../contexts/authContext";
 
 export const useContacts = () => {
   const [error, setError] = useState({});
@@ -10,6 +11,7 @@ export const useContacts = () => {
 
   const token = getToken();
   const idReciever = getID();
+  const { delete_friendRequest_from_array } = useContext(AuthContext);
 
   const responseFriendReq = (response, idRequester) => {
     setLoading(true);
@@ -19,6 +21,8 @@ export const useContacts = () => {
           setLoading(false);
           setError(res);
         } else if (res.success) {
+          console.log(res);
+          delete_friendRequest_from_array(idRequester);
           setLoading(false);
           setSuccess({ success: true, message: "Amistad aceptada" });
         }
