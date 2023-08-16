@@ -11,7 +11,7 @@ export const useContacts = () => {
 
   const token = getToken();
   const idReciever = getID();
-  const { delete_friendRequest_from_array } = useContext(AuthContext);
+  const { delete_friendReceives_from_array } = useContext(AuthContext);
 
   const responseFriendReq = (response, idRequester) => {
     setLoading(true);
@@ -21,10 +21,9 @@ export const useContacts = () => {
           setLoading(false);
           setError(res);
         } else if (res.success) {
-          console.log(res);
-          delete_friendRequest_from_array(idRequester);
+          delete_friendReceives_from_array(res.accept, res.data.userRequester);
           setLoading(false);
-          setSuccess({ success: true, message: "Amistad aceptada" });
+          setSuccess({ success: true, message: "Respuesta enviada" });
         }
       }
     );

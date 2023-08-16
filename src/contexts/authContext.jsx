@@ -61,15 +61,36 @@ export const AuthProvider = ({ children }) => {
     );
     setMyContacts({ ...myContacts, contacts: contactsUpdate });
   };
-  const delete_friendRequest_from_array = (idFriend) => {
-    console.log(idFriend, myContacts);
+
+  const delete_friendReceives_from_array = (response, friend) => {
     const contactRequestsRecievedUpdate =
       myContacts.contactRequestsReceived.filter(
-        (user) => user.user._id !== idFriend
+        (user) => user.user._id !== friend._id
       );
+    if (response) {
+      const userUpdate = {
+        _id: friend._id,
+        name: friend.name,
+        username: friend.username,
+      };
+      setMyContacts({
+        ...myContacts,
+        contactRequestsReceived: contactRequestsRecievedUpdate,
+        contacts: [...myContacts.contacts, { friend: userUpdate }],
+      });
+    } else
+      setMyContacts({
+        ...myContacts,
+        contactRequestsReceived: contactRequestsRecievedUpdate,
+      });
+  };
+  const delete_friendRequest_from_array = (idUser) => {
+    const contactRequestsSentUpdate = myContacts.contactRequestsSent.filter(
+      (user) => user.user._id.toString() !== idUser
+    );
     setMyContacts({
       ...myContacts,
-      contactRequestsReceived: contactRequestsRecievedUpdate,
+      contactRequestsSent: contactRequestsSentUpdate,
     });
   };
   const add_friend_request_to_array = (user) => {
@@ -107,6 +128,7 @@ export const AuthProvider = ({ children }) => {
     delete_contact_from_array,
     add_friend_request_to_array,
     delete_friendRequest_from_array,
+    delete_friendReceives_from_array,
     loadingAuth,
   };
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;

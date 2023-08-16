@@ -4,6 +4,7 @@ import { MdOutlineCancel } from "react-icons/md";
 export const RequestSents = ({ requestSents }) => {
   return (
     <div className="flex flex-col gap-2 w-full">
+      {/* //TODO:implementar la logica para poder borrar la peticion de amistad que el usuario realizo  */}
       <h3 className="text-center">Solicitudes enviadas</h3>
       {requestSents?.map((solicitud) => (
         <div

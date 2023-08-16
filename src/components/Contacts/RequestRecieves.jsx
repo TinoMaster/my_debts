@@ -10,7 +10,7 @@ export const RequestRecieves = ({
   const negative = false;
   return (
     <div className="flex flex-col gap-2 w-full">
-      <h3 className="text-center">Solicitudes recibidas</h3>
+      <h3 className="text-center">Solicitudes recibidas</h3> {/* "BUG: Hola" */}
       {requestRecieves?.map((solicitud) => (
         <div
           key={solicitud.user._id}
