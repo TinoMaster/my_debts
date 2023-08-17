@@ -6,7 +6,8 @@ import { useContacts } from "../../hooks/Contacts/useContacts";
 
 export const Contacts = () => {
   const { myContacts } = useContext(AuthContext);
-  const { error, loading, success, responseFriendReq } = useContacts();
+  const { error, loading, success, responseFriendReq, deleteFriendReq } =
+    useContacts();
 
   return (
     <div className="flex w-full justify-center items-center">
@@ -22,7 +23,10 @@ export const Contacts = () => {
             />
           ) : null}
           {myContacts?.contactRequestsSent?.length > 0 ? (
-            <RequestSents requestSents={myContacts.contactRequestsSent} />
+            <RequestSents
+              requestSents={myContacts.contactRequestsSent}
+              deleteFriendReq={deleteFriendReq}
+            />
           ) : null}
         </div>
       )}

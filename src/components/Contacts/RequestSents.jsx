@@ -1,10 +1,9 @@
 import React from "react";
 import { MdOutlineCancel } from "react-icons/md";
 
-export const RequestSents = ({ requestSents }) => {
+export const RequestSents = ({ requestSents, deleteFriendReq }) => {
   return (
     <div className="flex flex-col gap-2 w-full">
-      {/* //TODO:implementar la logica para poder borrar la peticion de amistad que el usuario realizo  */}
       <h3 className="text-center">Solicitudes enviadas</h3>
       {requestSents?.map((solicitud) => (
         <div
@@ -13,7 +12,7 @@ export const RequestSents = ({ requestSents }) => {
         >
           <p className="text-lg">{solicitud.user.name}</p>
           <div className="flex gap-2">
-            <button>
+            <button onClick={() => deleteFriendReq(solicitud.user._id)}>
               <MdOutlineCancel className="text-2xl text-red-400 hover:text-red-500 transition-colors" />{" "}
             </button>
           </div>

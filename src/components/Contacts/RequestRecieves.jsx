@@ -10,10 +10,10 @@ export const RequestRecieves = ({
   const negative = false;
   return (
     <div className="flex flex-col gap-2 w-full">
-      <h3 className="text-center">Solicitudes recibidas</h3> {/* "BUG: Hola" */}
+      <h3 className="text-center">Solicitudes recibidas</h3>
       {requestRecieves?.map((solicitud) => (
         <div
-          key={solicitud.user._id}
+        key={solicitud.user._id}
           className="flex w-full justify-between p-2 bg-white/5 rounded-md shadow-md"
         >
           <p className="text-lg">{solicitud.user.name}</p>

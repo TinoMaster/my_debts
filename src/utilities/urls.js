@@ -9,4 +9,5 @@ export const urls = {
   getMyDebts: `${host}/debts`,
   getContacts: `${host}/users/contacts`,
   deleteFriend: `${host}/users/delete_friend`,
+  deleteFriendRequest: `${host}/users/delete_friend_request`,
 };

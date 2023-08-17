@@ -13,7 +13,7 @@ export const friendRequest = () => {
 
   const idRequester = getID();
   const token = getToken();
-  const { delete_contact_from_array, add_friend_request_to_array } =
+  const { delete_contact_from_array, add_friend_request_to_array, myContacts } =
     useContext(AuthContext);
 
   const handleUserName = (e) => {
@@ -22,13 +22,18 @@ export const friendRequest = () => {
   };
 
   const validate_username = () => {
-    if (username.length < 13) return false;
-    return true;
+    const isDuplicated = myContacts.contactRequestsSent.some(
+      (el) => el.user.username === username
+    );
+    if (username.length < 13)
+      return { error: true, message: "Username invalido" };
+    if (isDuplicated) return { error: true, message: "Solicitud duplicada" };
+    return { error: false };
   };
 
   const sendFriendRequest = () => {
     const validate = validate_username();
-    if (validate) {
+    if (!validate.error) {
       setLoading(true);
       frien_request(token, idRequester, username).then((res) => {
         if (res.error) {
@@ -37,14 +42,14 @@ export const friendRequest = () => {
         } else if (res.success) {
           setLoading(false);
           add_friend_request_to_array(res.data.userReciever);
-          setSuccess({ success: true, message: "Peticion enviada" });
+          setSuccess({ success: true, message: "Solicitud enviada" });
           setTimeout(() => {
             setSuccess({});
             setModalUserName(false);
-          }, 1000);
+          }, 2000);
         }
       });
-    } else setError({ error: true, message: "username incorrecto" });
+    } else setError(validate);
   };
 
   const deleteFriend = (idFriend) => {

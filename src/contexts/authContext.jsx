@@ -84,6 +84,7 @@ export const AuthProvider = ({ children }) => {
         contactRequestsReceived: contactRequestsRecievedUpdate,
       });
   };
+
   const delete_friendRequest_from_array = (idUser) => {
     const contactRequestsSentUpdate = myContacts.contactRequestsSent.filter(
       (user) => user.user._id.toString() !== idUser
@@ -93,6 +94,7 @@ export const AuthProvider = ({ children }) => {
       contactRequestsSent: contactRequestsSentUpdate,
     });
   };
+  
   const add_friend_request_to_array = (user) => {
     const userUpdate = {
       _id: user._id,

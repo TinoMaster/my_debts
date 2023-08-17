@@ -25,6 +25,14 @@ export const responseFriendRequest = async (
   return await httpHelper(token).post(urls.friend_response, options);
 };
 
+export const deleteFriendRequest = async (token, idRequester, idReciever) => {
+  const options = {
+    body: { idRequester, idReciever },
+    headers: { "content-type": "application/json" },
+  };
+  return await httpHelper(token).post(urls.deleteFriendRequest, options);
+};
+
 export const delete_friend = async (token, idRequester, idReciever) => {
   const options = {
     body: { idRequester, idReciever },
