@@ -2,15 +2,27 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/layout";
 import { Container_Page } from "./pages/Container_Page";
 import { Login } from "./pages/Login";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ThemeContext from "./contexts/themeContext";
 import { Register } from "./components/Login/register";
 import { LoginComponent } from "./components/Login/loginComponent";
 import AuthContext from "./contexts/authContext";
+import io from "socket.io-client";
 
+const socket = io("http://localhost:5000");
+/* //TODO: continuar la logica de socket io y refactorizarla */
 function App() {
   const { darkMode } = useContext(ThemeContext);
   const { session } = useContext(AuthContext);
+
+  useEffect(() => {
+    socket.on("friendRequest", (res) => console.log(res));
+
+    return () => {
+      socket.off("friendRequest", (res) => console.log(res));
+    };
+  }, []);
+
   return (
     <div
       className={`w-screen h-screen flex bg-gradient-to-tr ${

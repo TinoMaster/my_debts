@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import AuthContext from "../../contexts/authContext";
 import { DebtType } from "./DebtType";
-import { DebtorOrCreditor } from "./DebtorOrCreditor";
+import { OtherCamps } from "./OtherCamps";
 
 export const Modal_Create_Debt = ({
   darkMode,
@@ -10,7 +10,7 @@ export const Modal_Create_Debt = ({
   funcHandlers,
 }) => {
   const { handlerInputNewDebt, handlerIsPaid, handlerDebtType } = funcHandlers;
-  const { user } = useContext(AuthContext);
+  const { myContacts } = useContext(AuthContext);
   return (
     <div
       className={`bg-gradient-to-tr text-white ${
@@ -22,56 +22,13 @@ export const Modal_Create_Debt = ({
       {/* Encabezado */}
       <h2 className="text-lg font-semibold w-full text-center">Nueva Deuda</h2>
       {/*Caja Elegir tipo de deuda */}
-      <DebtType handlerDebtType={handlerDebtType} user={user} />
+      <DebtType handlerDebtType={handlerDebtType} />
       {/* Caja inferior */}
-      <div className="w-full flex flex-wrap justify-between gap-4">
-        {/* Subtitulo */}
-        <div className="w-full flex flex-wrap">
-          <h4 className="w-full text-center font-serif">Titulo:</h4>
-          <input
-            value={newDebt.description}
-            onChange={handlerInputNewDebt}
-            name="description"
-            type="text"
-            className="w-full p-1 shadow-inner shadow-black/30 text-darkMode font-medium rounded-md focus:outline-none"
-          />
-        </div>
-        {/* Cantidad */}
-        <div className="w-1/3 flex flex-wrap">
-          <h4 className="w-full text-center font-serif">Cantidad</h4>
-          <input
-            value={newDebt.deuda}
-            onChange={handlerInputNewDebt}
-            name="deuda"
-            type="number"
-            className="w-full p-1 shadow-inner shadow-black/30 text-darkMode font-medium rounded-md focus:outline-none"
-          />
-        </div>
-        {/* Pagada */}
-        <div className="w-1/5 flex flex-wrap justify-center">
-          <h4 className="w-full text-center font-serif">Pagada</h4>
-          <input type="checkbox" onChange={handlerIsPaid} />
-        </div>
-        {/* Pago Parcial */}
-        <div className="w-1/3 flex flex-wrap">
-          <h4 className="w-full text-center font-serif">Pago Parcial</h4>
-          <input
-            type="number"
-            disabled={newDebt.pagada.isDone ? true : false}
-            className="w-full p-1 shadow-inner shadow-black/30 text-darkMode font-medium rounded-md focus:outline-none"
-          />
-        </div>
-        {/* Deudores/acreedores */}
-        <DebtorOrCreditor />
-        {/* Comentarios */}
-        <div className="w-full flex flex-wrap">
-          <h4 className="w-full text-center font-serif">Comentario</h4>
-          <textarea
-            name="comentario"
-            className="w-full p-1 shadow-inner shadow-black/30 text-darkMode font-medium rounded-md focus:outline-none"
-          />
-        </div>
-      </div>
+      <OtherCamps
+        newDebt={newDebt}
+        handlerInputNewDebt={handlerInputNewDebt}
+        handlerIsPaid={handlerIsPaid}
+      />
       <div className="flex justify-center py-2 mt-5">
         <button className="p-2 mx-2 bg-black/30 rounded-md shadow">
           Aceptar

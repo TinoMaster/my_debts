@@ -1,11 +1,11 @@
 import React from "react";
 
-export const DebtType = ({ handlerDebtType, user }) => {
+export const DebtType = ({ handlerDebtType }) => {
   return (
     <div className="flex flex-wrap justify-center p-2 border-2 border-dashed my-5">
       <h3 className="w-full text-center pb-2">Escoge el tipo de deuda</h3>
       <input
-        onChange={(e) => handlerDebtType(e, user)}
+        onChange={handlerDebtType}
         type="radio"
         name="debtTipe"
         id="deudor"
@@ -19,7 +19,7 @@ export const DebtType = ({ handlerDebtType, user }) => {
         Deudor
       </label>
       <input
-        onChange={(e) => handlerDebtType(e, user)}
+        onChange={handlerDebtType}
         type="radio"
         name="debtTipe"
         id="acreedor"

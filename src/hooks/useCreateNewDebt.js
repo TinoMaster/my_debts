@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getID } from "../utilities/getId";
 
 const initialState = {
   name: "",
@@ -20,6 +21,8 @@ export const useCreateNewDebt = () => {
   const [openNewDebt, setOpenNewDebt] = useState(false);
   const [newDebt, setNewDebt] = useState(initialState);
 
+  const idUser = getID();
+
   const openCloseNewDebt = () => {
     setOpenNewDebt((prev) => !prev);
   };
@@ -33,11 +36,11 @@ export const useCreateNewDebt = () => {
     setNewDebt({ ...newDebt, pagada: { isDone: e.target.checked } });
   };
 
-  const handlerDebtType = (e, user) => {
+  const handlerDebtType = (e) => {
     if (e.target.value === "deudor") {
-      setNewDebt({ ...newDebt, deudor: user._id, acreedor: "" });
+      setNewDebt({ ...newDebt, deudor: idUser, acreedor: "" });
     } else if (e.target.value === "acreedor") {
-      setNewDebt({ ...newDebt, acreedor: user._id, deudor: "" });
+      setNewDebt({ ...newDebt, acreedor: idUser, deudor: "" });
     }
   };
 
