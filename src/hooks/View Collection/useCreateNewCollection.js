@@ -34,7 +34,7 @@ export const useCreateNewCollection = () => {
   const createCollection = (openCloseNewDebt) => {
     const validate = validateCollectionName();
     if (validate) {
-      openCloseNewDebt();
+      openCloseNewDebt(collectionName);
     }
   };
 

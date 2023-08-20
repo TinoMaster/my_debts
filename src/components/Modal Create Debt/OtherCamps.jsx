@@ -1,9 +1,15 @@
 import React from "react";
 import { DebtorOrCreditor } from "./DebtorOrCreditor";
 
-export const OtherCamps = ({ newDebt, handlerInputNewDebt, handlerIsPaid }) => {
+export const OtherCamps = ({
+  newDebt,
+  handlerInputNewDebt,
+  handlerIsPaid,
+  friends,
+  darkMode,
+}) => {
   return (
-    <div className="w-full flex flex-wrap justify-between gap-4">
+    <div className="w-full flex flex-wrap justify-between gap-5">
       {/* Subtitulo */}
       <div className="w-full flex flex-wrap">
         <h4 className="w-full text-center font-serif">Titulo:</h4>
@@ -41,11 +47,16 @@ export const OtherCamps = ({ newDebt, handlerInputNewDebt, handlerIsPaid }) => {
         />
       </div>
       {/* Deudores/acreedores */}
-      <DebtorOrCreditor />
+      <DebtorOrCreditor
+        friends={friends}
+        newDebt={newDebt}
+        darkMode={darkMode}
+      />
       {/* Comentarios */}
       <div className="w-full flex flex-wrap">
         <h4 className="w-full text-center font-serif">Comentario</h4>
         <textarea
+          onChange={handlerInputNewDebt}
           name="comentario"
           className="w-full p-1 shadow-inner shadow-black/30 text-darkMode font-medium rounded-md focus:outline-none"
         />

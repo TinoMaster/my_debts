@@ -14,16 +14,19 @@ const initialState = {
     fecha: "",
   },
   pagos: [],
-  comentario: [],
+  comentario: "",
 };
 
 export const useCreateNewDebt = () => {
   const [openNewDebt, setOpenNewDebt] = useState(false);
   const [newDebt, setNewDebt] = useState(initialState);
 
+  console.log(newDebt);
+
   const idUser = getID();
 
-  const openCloseNewDebt = () => {
+  const openCloseNewDebt = (name) => {
+    setNewDebt({ ...newDebt, name });
     setOpenNewDebt((prev) => !prev);
   };
 

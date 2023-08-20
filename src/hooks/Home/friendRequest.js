@@ -1,8 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { delete_friend, frien_request } from "../../services/friend";
 import { getToken } from "../../utilities/getToken";
 import { getID } from "../../utilities/getId";
 import AuthContext from "../../contexts/authContext";
+import { subscribeToEvent } from "../../services/socket.io";
 
 export const friendRequest = () => {
   const [modalUserName, setModalUserName] = useState(false);
@@ -15,6 +16,14 @@ export const friendRequest = () => {
   const token = getToken();
   const { delete_contact_from_array, add_friend_request_to_array, myContacts } =
     useContext(AuthContext);
+
+  useEffect(() => {
+    subscribeToEvent("friendRequest", (res) => console.log(res));
+
+    /* return () => {
+      subscribeToEvent("friendRequest", (res) => console.log(res));
+    }; */
+  }, []);
 
   const handleUserName = (e) => {
     setError({});

@@ -2,7 +2,7 @@ import React from "react";
 
 export const DebtType = ({ handlerDebtType }) => {
   return (
-    <div className="flex flex-wrap justify-center p-2 border-2 border-dashed my-5">
+    <div className="flex flex-wrap justify-center p-2  my-5">
       <h3 className="w-full text-center pb-2">Escoge el tipo de deuda</h3>
       <input
         onChange={handlerDebtType}
@@ -10,7 +10,7 @@ export const DebtType = ({ handlerDebtType }) => {
         name="debtTipe"
         id="deudor"
         value="deudor"
-        className="imputCheckedAddDebt"
+        className="hidden"
       />
       <label
         htmlFor="deudor"
@@ -24,7 +24,7 @@ export const DebtType = ({ handlerDebtType }) => {
         name="debtTipe"
         id="acreedor"
         value="acreedor"
-        className="imputCheckedAddDebt"
+        className="hidden"
       />
       <label
         htmlFor="acreedor"

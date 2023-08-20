@@ -12,7 +12,7 @@ export const Modal_Create_collection = ({
       className={`bg-gradient-to-tr flex flex-col justify-center items-center ${
         darkMode
           ? "from-darkMode to-slate-900 text-lightMode"
-          : "from-lightMode to-slate-200 text-darkMode"
+          : "from-lightMode to-slate-200 text-darkMode/80"
       } p-10 rounded-md relative`}
     >
       {errorNameCollection?.error ? (
