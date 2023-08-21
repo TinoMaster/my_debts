@@ -14,6 +14,7 @@ export const useContacts = () => {
 
   const token = getToken();
   const myId = getID();
+
   const { delete_friendReceives_from_array, delete_friendRequest_from_array } =
     useContext(AuthContext);
 

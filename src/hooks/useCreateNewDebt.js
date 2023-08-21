@@ -21,7 +21,7 @@ export const useCreateNewDebt = () => {
   const [openNewDebt, setOpenNewDebt] = useState(false);
   const [newDebt, setNewDebt] = useState(initialState);
 
-  console.log(newDebt);
+ /*  console.log(newDebt); */
 
   const idUser = getID();
 
@@ -46,6 +46,7 @@ export const useCreateNewDebt = () => {
       setNewDebt({ ...newDebt, acreedor: idUser, deudor: "" });
     }
   };
+
 
   const funcHandlers = {
     handlerInputNewDebt,

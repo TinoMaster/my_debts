@@ -3,7 +3,9 @@ import { delete_friend, frien_request } from "../../services/friend";
 import { getToken } from "../../utilities/getToken";
 import { getID } from "../../utilities/getId";
 import AuthContext from "../../contexts/authContext";
-import { subscribeToEvent } from "../../services/socket.io";
+import { emitEvent, subscribeToEvent } from "../../services/socket.io";
+import { getUserName } from "../../utilities/getUserName";
+import { getName } from "../../utilities/getName";
 
 export const friendRequest = () => {
   const [modalUserName, setModalUserName] = useState(false);
@@ -13,6 +15,8 @@ export const friendRequest = () => {
   const [username, setUsername] = useState("");
 
   const idRequester = getID();
+  const usernameRequester = getUserName();
+  const nameRequester = getName();
   const token = getToken();
   const { delete_contact_from_array, add_friend_request_to_array, myContacts } =
     useContext(AuthContext);
@@ -51,6 +55,15 @@ export const friendRequest = () => {
         } else if (res.success) {
           setLoading(false);
           add_friend_request_to_array(res.data.userReciever);
+          const data = {
+            applicant: {
+              _id: idRequester,
+              name: nameRequester,
+              username: usernameRequester,
+            },
+            receptorId: res.data.userReciever._id,
+          };
+          emitEvent("friendRequest", data);
           setSuccess({ success: true, message: "Solicitud enviada" });
           setTimeout(() => {
             setSuccess({});

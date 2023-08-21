@@ -3,6 +3,10 @@ import { getToken } from "../utilities/getToken";
 import { isLogin } from "../services/login";
 import { my_contacts } from "../services/friend";
 import { getID } from "../utilities/getId";
+import {
+  subscribeToEvent,
+  userSocketConnected,
+} from "../services/socket.io";
 
 const AuthContext = createContext(null);
 
@@ -22,7 +26,7 @@ const initialUser = {
 };
 const initialContacts = {
   contacts: [],
-  contactRequestsRecieved: [],
+  contactRequestsReceived: [],
   contactRequestsSent: [],
 };
 const sessionStorage = localStorage.getItem(SESSION) || false;
@@ -47,12 +51,25 @@ export const AuthProvider = ({ children }) => {
         } else if (res.success) {
           setLoadingAuth(false);
           const id = getID();
+          userSocketConnected(id);
           setDataConnected(true);
           setSession(true);
           my_contacts(token, id).then((res) => setMyContacts(res.data));
         }
       });
     }
+  }, []);
+
+  useEffect(() => {
+    subscribeToEvent("friendReqEmit", (user) => {
+      setMyContacts({
+        ...myContacts,
+        contactRequestsReceived: [
+          ...myContacts.contactRequestsReceived,
+          { user },
+        ],
+      });
+    });
   }, []);
 
   const delete_contact_from_array = (idFriend) => {
@@ -94,7 +111,7 @@ export const AuthProvider = ({ children }) => {
       contactRequestsSent: contactRequestsSentUpdate,
     });
   };
-  
+
   const add_friend_request_to_array = (user) => {
     const userUpdate = {
       _id: user._id,
