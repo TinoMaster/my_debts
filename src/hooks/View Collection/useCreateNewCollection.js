@@ -1,12 +1,15 @@
 import { useState } from "react";
 
-export const useCreateNewCollection = () => {
+export const useCreateNewCollection = (myContacts) => {
   const [openModal, setOpenModal] = useState(false);
   const [collectionName, setCollectionName] = useState("");
   const [errorNameCollection, setErrorNameCollection] = useState({});
+  const [modalErrorCreateCol, setModalErrorCreateCol] = useState(false);
 
   const openCloseWindow = () => {
-    setOpenModal((prev) => !prev);
+    myContacts.contacts.length === 0
+      ? setModalErrorCreateCol(true)
+      : setOpenModal((prev) => !prev);
   };
 
   const handlerNameCollection = (e) => {
@@ -18,7 +21,7 @@ export const useCreateNewCollection = () => {
     if (!collectionName) {
       setErrorNameCollection({
         error: true,
-        message: "El campo nombre esta vacio",
+        message: "El campo esta vacio",
       });
       return false;
     } else if (collectionName.length <= 2) {
@@ -45,5 +48,7 @@ export const useCreateNewCollection = () => {
     handlerNameCollection,
     collectionName,
     errorNameCollection,
+    modalErrorCreateCol,
+    setModalErrorCreateCol,
   };
 };

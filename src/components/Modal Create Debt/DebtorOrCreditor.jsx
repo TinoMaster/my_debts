@@ -1,16 +1,22 @@
 import React from "react";
 import { getID } from "../../utilities/getId";
 
-export const DebtorOrCreditor = ({ friends, newDebt, darkMode }) => {
+export const DebtorOrCreditor = ({
+  friends,
+  newDebt,
+  darkMode,
+  handlerInputNewDebt,
+}) => {
   const myId = getID();
   return (
     <div className="w-full flex flex-wrap">
       <h4 className="w-full text-center font-serif">
         {newDebt.acreedor !== myId ? "Acreedor" : "Deudor"}
       </h4>
+
       <select
-        name=""
-        id=""
+        onChange={handlerInputNewDebt}
+        name={newDebt.acreedor !== myId ? "acreedor" : "deudor"}
         className={`w-full text-center rounded-md ${
           darkMode ? "bg-black/20" : ""
         } py-2`}

@@ -8,8 +8,16 @@ export const Modal_Create_Debt = ({
   openCloseNewDebt,
   newDebt,
   funcHandlers,
+  pagoParcial,
+  commentPagoParcial,
 }) => {
-  const { handlerInputNewDebt, handlerIsPaid, handlerDebtType } = funcHandlers;
+  const {
+    handlerInputNewDebt,
+    handlerIsPaid,
+    handlerDebtType,
+    handlerPartialPaid,
+    handlerCommentPartialPaid,
+  } = funcHandlers;
   const { myContacts } = useContext(AuthContext);
   return (
     <div
@@ -30,6 +38,10 @@ export const Modal_Create_Debt = ({
         handlerIsPaid={handlerIsPaid}
         friends={myContacts.contacts}
         darkMode={darkMode}
+        handlerPartialPaid={handlerPartialPaid}
+        pagoParcial={pagoParcial}
+        handlerCommentPartialPaid={handlerCommentPartialPaid}
+        commentPagoParcial={commentPagoParcial}
       />
       <div className="flex justify-center py-2 mt-5">
         <button className="p-2 mx-2 bg-black/30 rounded-md shadow">

@@ -7,6 +7,10 @@ export const OtherCamps = ({
   handlerIsPaid,
   friends,
   darkMode,
+  handlerPartialPaid,
+  pagoParcial,
+  handlerCommentPartialPaid,
+  commentPagoParcial,
 }) => {
   return (
     <div className="w-full flex flex-wrap justify-between gap-5">
@@ -41,9 +45,30 @@ export const OtherCamps = ({
       <div className="w-1/3 flex flex-wrap">
         <h4 className="w-full text-center font-serif">Pago Parcial</h4>
         <input
+          onChange={handlerPartialPaid}
+          name="cantidad"
           type="number"
           disabled={newDebt.pagada.isDone ? true : false}
+          value={newDebt.pagada.isDone ? "" : pagoParcial}
           className="w-full p-1 shadow-inner shadow-black/30 text-darkMode font-medium rounded-md focus:outline-none"
+        />
+      </div>
+      <div
+        className={`w-full p-2 ${
+          pagoParcial > 0 && !newDebt.pagada.isDone ? "" : "hidden"
+        }`}
+      >
+        <h3 className="w-full text-xs text-center pb-1">
+          Desea agregar un comentario del pago parcial
+        </h3>
+        <textarea
+          onChange={handlerCommentPartialPaid}
+          className="w-full rounded-md h-14 resize-none"
+          value={commentPagoParcial}
+          name="comentario"
+          id=""
+          cols="10"
+          rows="5"
         />
       </div>
       {/* Deudores/acreedores */}
@@ -51,6 +76,7 @@ export const OtherCamps = ({
         friends={friends}
         newDebt={newDebt}
         darkMode={darkMode}
+        handlerInputNewDebt={handlerInputNewDebt}
       />
       {/* Comentarios */}
       <div className="w-full flex flex-wrap">
@@ -58,7 +84,7 @@ export const OtherCamps = ({
         <textarea
           onChange={handlerInputNewDebt}
           name="comentario"
-          className="w-full p-1 shadow-inner shadow-black/30 text-darkMode font-medium rounded-md focus:outline-none"
+          className="w-full h-14 resize-none p-1 shadow-inner shadow-black/30 text-darkMode font-medium rounded-md focus:outline-none"
         />
       </div>
     </div>

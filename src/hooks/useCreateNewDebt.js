@@ -21,22 +21,30 @@ export const useCreateNewDebt = () => {
   const [openNewDebt, setOpenNewDebt] = useState(false);
   const [newDebt, setNewDebt] = useState(initialState);
 
- /*  console.log(newDebt); */
+  /* States de pagos parciales */
+  const [pagoParcial, setPagoParcial] = useState(0);
+  const [commentPagoParcial, setCommentPagoParcial] = useState("");
 
   const idUser = getID();
 
-  const openCloseNewDebt = (name) => {
-    setNewDebt({ ...newDebt, name });
-    setOpenNewDebt((prev) => !prev);
-  };
-
+  /* Handlers */
   const handlerInputNewDebt = (e) => {
     let { name, value } = e.target;
     setNewDebt({ ...newDebt, [name]: value });
   };
 
   const handlerIsPaid = (e) => {
+    setCommentPagoParcial("");
+    setPagoParcial(0);
     setNewDebt({ ...newDebt, pagada: { isDone: e.target.checked } });
+  };
+
+  const handlerPartialPaid = (e) => {
+    setPagoParcial(e.target.value);
+  };
+
+  const handlerCommentPartialPaid = (e) => {
+    setCommentPagoParcial(e.target.value);
   };
 
   const handlerDebtType = (e) => {
@@ -47,11 +55,18 @@ export const useCreateNewDebt = () => {
     }
   };
 
+  /* Functions */
+  const openCloseNewDebt = (name) => {
+    setNewDebt({ ...newDebt, name });
+    setOpenNewDebt((prev) => !prev);
+  };
 
   const funcHandlers = {
     handlerInputNewDebt,
     handlerIsPaid,
     handlerDebtType,
+    handlerPartialPaid,
+    handlerCommentPartialPaid,
   };
 
   return {
@@ -59,5 +74,7 @@ export const useCreateNewDebt = () => {
     funcHandlers,
     openNewDebt,
     newDebt,
+    pagoParcial,
+    commentPagoParcial,
   };
 };

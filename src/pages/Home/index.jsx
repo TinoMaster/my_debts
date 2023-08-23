@@ -8,6 +8,7 @@ import { useCreateNewCollection } from "../../hooks/View Collection/useCreateNew
 import { useCreateNewDebt } from "../../hooks/useCreateNewDebt";
 import { Friends } from "../../components/Home/Friends";
 import { getUserName } from "../../utilities/getUserName";
+import { Modal_ErrorCreateCol } from "../../components/Home/Modal_ErrorCreateCol";
 
 export const Home = ({
   collections,
@@ -24,13 +25,31 @@ export const Home = ({
     handlerNameCollection,
     collectionName,
     errorNameCollection,
-  } = useCreateNewCollection();
-  const { openCloseNewDebt, openNewDebt, funcHandlers, newDebt } =
-    useCreateNewDebt();
+    modalErrorCreateCol,
+    setModalErrorCreateCol,
+  } = useCreateNewCollection(myContacts);
+  const {
+    openCloseNewDebt,
+    openNewDebt,
+    funcHandlers,
+    newDebt,
+    pagoParcial,
+    commentPagoParcial,
+  } = useCreateNewDebt();
   const username = getUserName();
   return (
     <div className="w-full h-full flex flex-col px-2 gap-5">
       {/* Modal create collection */}
+
+      {modalErrorCreateCol ? (
+        <ModalPortal>
+          <Modal_ErrorCreateCol
+            setModalErrorCreateCol={setModalErrorCreateCol}
+            darkMode={darkMode}
+          />
+        </ModalPortal>
+      ) : null}
+
       {openModal ? (
         <ModalPortal>
           <Modal_Create_collection
@@ -52,6 +71,8 @@ export const Home = ({
             openCloseNewDebt={openCloseNewDebt}
             newDebt={newDebt}
             funcHandlers={funcHandlers}
+            pagoParcial={pagoParcial}
+            commentPagoParcial={commentPagoParcial}
           />
         </ModalPortal>
       ) : null}
