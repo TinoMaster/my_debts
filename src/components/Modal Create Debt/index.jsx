@@ -10,6 +10,8 @@ export const Modal_Create_Debt = ({
   funcHandlers,
   pagoParcial,
   commentPagoParcial,
+  SendNewDebt,
+  errorCreateDebt,
 }) => {
   const {
     handlerInputNewDebt,
@@ -17,16 +19,24 @@ export const Modal_Create_Debt = ({
     handlerDebtType,
     handlerPartialPaid,
     handlerCommentPartialPaid,
+    handlerResetDebt,
   } = funcHandlers;
   const { myContacts } = useContext(AuthContext);
   return (
     <div
-      className={`bg-gradient-to-tr ${
+      className={`flex flex-col items-center relative bg-gradient-to-tr ${
         darkMode ? "from-darkMode to-slate-900" : "from-lightMode to-slate-200"
       } ${
         darkMode ? "text-lightMode" : "text-darkMode"
       } w-full mx-2 px-10 py-4 rounded-md max-w-[400px]`}
     >
+      {/* Error */}
+      {errorCreateDebt.error ? (
+        <div className="absolute -top-2 text-sm py-1 px-3 bg-red-400 rounded-md">
+          <p>{errorCreateDebt.message}</p>
+        </div>
+      ) : null}
+
       {/* Encabezado */}
       <h2 className="text-lg font-semibold w-full text-center">Nueva Deuda</h2>
       {/*Caja Elegir tipo de deuda */}
@@ -44,8 +54,17 @@ export const Modal_Create_Debt = ({
         commentPagoParcial={commentPagoParcial}
       />
       <div className="flex justify-center py-2 mt-5">
-        <button className="p-2 mx-2 bg-black/30 rounded-md shadow">
+        <button
+          onClick={SendNewDebt}
+          className="p-2 mx-2 bg-black/30 rounded-md shadow"
+        >
           Aceptar
+        </button>
+        <button
+          onClick={handlerResetDebt}
+          className="p-2 mx-2 bg-black/30 rounded-md shadow"
+        >
+          Resetear
         </button>
         <button
           onClick={openCloseNewDebt}

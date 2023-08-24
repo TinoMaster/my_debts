@@ -35,6 +35,8 @@ export const Home = ({
     newDebt,
     pagoParcial,
     commentPagoParcial,
+    SendNewDebt,
+    errorCreateDebt,
   } = useCreateNewDebt();
   const username = getUserName();
   return (
@@ -73,6 +75,8 @@ export const Home = ({
             funcHandlers={funcHandlers}
             pagoParcial={pagoParcial}
             commentPagoParcial={commentPagoParcial}
+            SendNewDebt={SendNewDebt}
+            errorCreateDebt={errorCreateDebt}
           />
         </ModalPortal>
       ) : null}

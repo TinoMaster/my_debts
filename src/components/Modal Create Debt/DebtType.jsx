@@ -10,7 +10,7 @@ export const DebtType = ({ handlerDebtType }) => {
         name="debtTipe"
         id="deudor"
         value="deudor"
-        className="hidden"
+        className=""
       />
       <label
         htmlFor="deudor"
@@ -24,7 +24,7 @@ export const DebtType = ({ handlerDebtType }) => {
         name="debtTipe"
         id="acreedor"
         value="acreedor"
-        className="hidden"
+        className=""
       />
       <label
         htmlFor="acreedor"

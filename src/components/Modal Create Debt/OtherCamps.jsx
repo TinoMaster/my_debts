@@ -49,7 +49,7 @@ export const OtherCamps = ({
           name="cantidad"
           type="number"
           disabled={newDebt.pagada.isDone ? true : false}
-          value={newDebt.pagada.isDone ? "" : pagoParcial}
+          value={pagoParcial}
           className="w-full p-1 shadow-inner shadow-black/30 text-darkMode font-medium rounded-md focus:outline-none"
         />
       </div>
@@ -63,7 +63,7 @@ export const OtherCamps = ({
         </h3>
         <textarea
           onChange={handlerCommentPartialPaid}
-          className="w-full rounded-md h-14 resize-none"
+          className="w-full rounded-md h-14 resize-none text-black"
           value={commentPagoParcial}
           name="comentario"
           id=""
@@ -84,6 +84,7 @@ export const OtherCamps = ({
         <textarea
           onChange={handlerInputNewDebt}
           name="comentario"
+          value={newDebt.comentario}
           className="w-full h-14 resize-none p-1 shadow-inner shadow-black/30 text-darkMode font-medium rounded-md focus:outline-none"
         />
       </div>
