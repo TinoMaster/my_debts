@@ -6,6 +6,7 @@ export const DebtorOrCreditor = ({
   newDebt,
   darkMode,
   handlerInputNewDebt,
+  refContactInput,
 }) => {
   const myId = getID();
   return (
@@ -15,6 +16,7 @@ export const DebtorOrCreditor = ({
       </h4>
 
       <select
+        ref={refContactInput}
         onChange={handlerInputNewDebt}
         name={newDebt.acreedor !== myId ? "acreedor" : "deudor"}
         className={`w-full text-center rounded-md ${

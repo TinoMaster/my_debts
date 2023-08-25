@@ -4,6 +4,14 @@ import { urls } from "../utilities/urls";
 export const getDebts = async (token = "", id = "") =>
   await httpHelper(token).get(`${urls.getMyDebts}/${id}`);
 
+export const createNewDebts = async (token = "", newDebt = {}) => {
+  const options = {
+    body: newDebt,
+    headers: { "content-type": "application/json" },
+  };
+  await httpHelper(token).post(`${urls.createNewDebt}`, options);
+};
+
 export const filterCollections = (debts, user) => {
   const collections = debts?.reduce((result, value) => {
     const check = {

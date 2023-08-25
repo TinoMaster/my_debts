@@ -1,11 +1,12 @@
 import React from "react";
 
-export const DebtType = ({ handlerDebtType }) => {
+export const DebtType = ({ handlerDebtType, refTypeDebt1, refTypeDebt2 }) => {
   return (
     <div className="flex flex-wrap justify-center p-2  my-5">
       <h3 className="w-full text-center pb-2">Escoge el tipo de deuda</h3>
       <input
         onChange={handlerDebtType}
+        ref={refTypeDebt1}
         type="radio"
         name="debtTipe"
         id="deudor"
@@ -20,6 +21,7 @@ export const DebtType = ({ handlerDebtType }) => {
       </label>
       <input
         onChange={handlerDebtType}
+        ref={refTypeDebt2}
         type="radio"
         name="debtTipe"
         id="acreedor"

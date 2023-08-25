@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { getID } from "../utilities/getId";
+import { createNewDebts } from "../services/debts";
+import { getToken } from "../utilities/getToken";
 
 const initialState = {
   name: "",
@@ -29,6 +31,11 @@ export const useCreateNewDebt = () => {
   const [commentPagoParcial, setCommentPagoParcial] = useState("");
 
   const idUser = getID();
+  const token = getToken();
+  const refContactInput = useRef(null);
+  const refTypeDebt1 = useRef(null);
+  const refTypeDebt2 = useRef(null);
+  /* console.log(newDebt); */
 
   /* Handlers */
   const handlerInputNewDebt = (e) => {
@@ -55,6 +62,7 @@ export const useCreateNewDebt = () => {
   };
 
   const handlerDebtType = (e) => {
+    refContactInput.current.value = "";
     setErrorCreateDebt({});
     if (e.target.value === "deudor") {
       setNewDebt({ ...newDebt, deudor: idUser, acreedor: "" });
@@ -64,6 +72,13 @@ export const useCreateNewDebt = () => {
   };
 
   const handlerResetDebt = () => {
+    refTypeDebt1.current.checked
+      ? (refTypeDebt1.current.checked = false)
+      : null;
+    refTypeDebt2.current.checked
+      ? (refTypeDebt2.current.checked = false)
+      : null;
+    refContactInput.current.value = "";
     setErrorCreateDebt({});
     setNewDebt(initialState);
     setPagoParcial("");
@@ -101,12 +116,11 @@ export const useCreateNewDebt = () => {
     }
   };
 
-  const SendNewDebt = () => {
+  const SendNewDebt = async () => {
     const validator = validateNewDebt();
     if (!validator.error) {
-      console.log("siiii");
-      coumpoundNewDebt();
-      console.log(newDebt);
+      await coumpoundNewDebt();
+      createNewDebts(token, newDebt).then((res) => console.log(res));
     } else setErrorCreateDebt(validator);
   };
 
@@ -128,5 +142,8 @@ export const useCreateNewDebt = () => {
     commentPagoParcial,
     SendNewDebt,
     errorCreateDebt,
+    refContactInput,
+    refTypeDebt1,
+    refTypeDebt2,
   };
 };

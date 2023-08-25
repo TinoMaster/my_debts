@@ -12,6 +12,9 @@ export const Modal_Create_Debt = ({
   commentPagoParcial,
   SendNewDebt,
   errorCreateDebt,
+  refContactInput,
+  refTypeDebt1,
+  refTypeDebt2,
 }) => {
   const {
     handlerInputNewDebt,
@@ -40,7 +43,11 @@ export const Modal_Create_Debt = ({
       {/* Encabezado */}
       <h2 className="text-lg font-semibold w-full text-center">Nueva Deuda</h2>
       {/*Caja Elegir tipo de deuda */}
-      <DebtType handlerDebtType={handlerDebtType} />
+      <DebtType
+        handlerDebtType={handlerDebtType}
+        refTypeDebt1={refTypeDebt1}
+        refTypeDebt2={refTypeDebt2}
+      />
       {/* Caja inferior */}
       <OtherCamps
         newDebt={newDebt}
@@ -52,6 +59,7 @@ export const Modal_Create_Debt = ({
         pagoParcial={pagoParcial}
         handlerCommentPartialPaid={handlerCommentPartialPaid}
         commentPagoParcial={commentPagoParcial}
+        refContactInput={refContactInput}
       />
       <div className="flex justify-center py-2 mt-5">
         <button
