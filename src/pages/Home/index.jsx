@@ -17,6 +17,7 @@ export const Home = ({
   darkMode,
   myContacts,
   loadingAuth,
+  addNewDebtToArray,
 }) => {
   const {
     openCloseWindow,
@@ -40,7 +41,7 @@ export const Home = ({
     refContactInput,
     refTypeDebt1,
     refTypeDebt2,
-  } = useCreateNewDebt();
+  } = useCreateNewDebt(addNewDebtToArray);
   const username = getUserName();
   return (
     <div className="w-full h-full flex flex-col px-2 gap-5">

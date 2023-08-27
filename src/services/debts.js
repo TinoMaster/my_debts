@@ -12,6 +12,9 @@ export const createNewDebts = async (token = "", newDebt = {}) => {
   await httpHelper(token).post(`${urls.createNewDebt}`, options);
 };
 
+export const delete_debt = async (token = "", id = "") =>
+  await httpHelper(token).del(`${urls.deleteOneDebt}/${id}`);
+
 export const filterCollections = (debts, user) => {
   const collections = debts?.reduce((result, value) => {
     const check = {

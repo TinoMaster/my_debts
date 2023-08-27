@@ -19,7 +19,7 @@ const initialState = {
   comentario: "",
 };
 
-export const useCreateNewDebt = () => {
+export const useCreateNewDebt = (addNewDebtToArray) => {
   const [openNewDebt, setOpenNewDebt] = useState(false);
   const [newDebt, setNewDebt] = useState(initialState);
   const [errorCreateDebt, setErrorCreateDebt] = useState({});
@@ -103,24 +103,46 @@ export const useCreateNewDebt = () => {
     return { error: false };
   };
 
-  const coumpoundNewDebt = () => {
-    const date = new Date();
-    setNewDebt({ ...newDebt, fecha: date, creador: idUser });
+  const thereIsPartialPaid = () => {
+    let pagos = [];
     if (pagoParcial && pagoParcial > 0) {
       const paid = {
         fecha: date,
         cantidad: pagoParcial,
         comentario: commentPagoParcial.length > 0 ? commentPagoParcial : "",
       };
-      setNewDebt({ ...newDebt, pagos: [paid] });
+      pagos.push(paid);
     }
+    return pagos;
+  };
+
+  const coumpoundNewDebt = () => {
+    const date = new Date();
+    return {
+      name: newDebt.name,
+      description: newDebt.description,
+      deuda: newDebt.deuda,
+      creador: idUser,
+      deudor: newDebt.deudor,
+      acreedor: newDebt.acreedor,
+      fecha: date,
+      comentario: newDebt.comentario,
+      pagada: newDebt.pagada,
+      pagos: thereIsPartialPaid(),
+    };
   };
 
   const SendNewDebt = async () => {
     const validator = validateNewDebt();
     if (!validator.error) {
-      await coumpoundNewDebt();
-      createNewDebts(token, newDebt).then((res) => console.log(res));
+      const dataToSend = await coumpoundNewDebt();
+      createNewDebts(token, dataToSend).then((res) => {
+        if (res.error) {
+          setErrorCreateDebt(res);
+        } else if (res.success) {
+          addNewDebtToArray(res.data);
+        }
+      });
     } else setErrorCreateDebt(validator);
   };
 

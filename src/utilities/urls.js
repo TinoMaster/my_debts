@@ -8,6 +8,7 @@ export const urls = {
   friend_response: `${host}/users/response_friend_request`,
   getMyDebts: `${host}/debts`,
   createNewDebt: `${host}/debts`,
+  deleteOneDebt: `${host}/debts`,
   getContacts: `${host}/users/contacts`,
   deleteFriend: `${host}/users/delete_friend`,
   deleteFriendRequest: `${host}/users/delete_friend_request`,

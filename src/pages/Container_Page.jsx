@@ -8,7 +8,8 @@ import { Contacts } from "./Contacts";
 import AuthContext from "../contexts/authContext";
 
 export const Container_Page = () => {
-  const { collections, ballance, loading, debts } = useDebts();
+  const { collections, ballance, loading, debts, addNewDebtToArray } =
+    useDebts();
   const { darkMode } = useContext(ThemeContext);
   const { myContacts, loadingAuth } = useContext(AuthContext);
   return (
@@ -24,6 +25,7 @@ export const Container_Page = () => {
               loading={loading}
               myContacts={myContacts}
               loadingAuth={loadingAuth}
+              addNewDebtToArray={addNewDebtToArray}
             />
           }
         />

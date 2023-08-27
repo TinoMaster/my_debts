@@ -1,3 +1,4 @@
+import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export const Collections_List = ({ collections, url, user }) => {
@@ -13,7 +14,7 @@ export const Collections_List = ({ collections, url, user }) => {
               to={`${url}/${collection.name}`}
               state={{ _id: collection.creador }}
               key={collection.name}
-              className="my-2 p-3 shadow-md rounded-md flex justify-between bg-white/5"
+              className="my-2 p-3 shadow-md rounded-md flex justify-between bg-white/5 relative"
             >
               <h4 className="">{collection.name}</h4>
               <p
@@ -35,7 +36,7 @@ export const Collections_List = ({ collections, url, user }) => {
               to={`${url}/${collection.name}`}
               state={{ _id: collection.creador }}
               key={collection.name}
-              className="my-2 p-3 shadow-md rounded-md flex justify-between bg-white/5"
+              className="my-2 p-3 shadow-md rounded-md flex justify-between bg-white/5 relative"
             >
               <h4 className="">{collection.name}</h4>
               <p
