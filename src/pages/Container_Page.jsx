@@ -8,8 +8,14 @@ import { Contacts } from "./Contacts";
 import AuthContext from "../contexts/authContext";
 
 export const Container_Page = () => {
-  const { collections, ballance, loading, debts, addNewDebtToArray } =
-    useDebts();
+  const {
+    collections,
+    ballance,
+    loading,
+    debts,
+    addNewDebtToArray,
+    deleteDebt,
+  } = useDebts();
   const { darkMode } = useContext(ThemeContext);
   const { myContacts, loadingAuth } = useContext(AuthContext);
   return (
@@ -31,7 +37,12 @@ export const Container_Page = () => {
         />
         <Route
           path="/collection/:name"
-          element={<View_Collection debts={debts} />}
+          element={
+            <View_Collection
+              debts={debts}
+              deleteDebt={deleteDebt}
+            />
+          }
         />
         <Route path="/contacts" element={<Contacts />} />
       </Routes>

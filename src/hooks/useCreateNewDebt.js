@@ -86,7 +86,7 @@ export const useCreateNewDebt = (addNewDebtToArray) => {
   };
 
   /* Functions */
-  const openCloseNewDebt = (name) => {
+  const openCloseNewDebt = (name = "") => {
     setNewDebt({ ...newDebt, name });
     setOpenNewDebt((prev) => !prev);
   };
@@ -141,6 +141,7 @@ export const useCreateNewDebt = (addNewDebtToArray) => {
           setErrorCreateDebt(res);
         } else if (res.success) {
           addNewDebtToArray(res.data);
+          setOpenNewDebt(false);
         }
       });
     } else setErrorCreateDebt(validator);

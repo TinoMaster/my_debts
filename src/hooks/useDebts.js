@@ -13,6 +13,7 @@ export const useDebts = () => {
   const [ballance, setBallance] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
+  const [emptyCollection, setEmptyCollection] = useState(0);
   const { user } = useContext(AuthContext);
 
   const error_getDebts = (res) => {
@@ -21,25 +22,29 @@ export const useDebts = () => {
   };
 
   const addNewDebtToArray = (debt) => {
-    console.log(debt);
+    setEmptyCollection((prev) => prev + 1);
     setDebts([...debts, debt]);
   };
 
-  /*  const delete_debt_from_debts = (id) => {
+  const delete_debt_from_debts = (id, collections, navigate) => {
+    setEmptyCollection((prev) => prev + 1);
     let newDebts = debts.filter((item) => item._id !== id);
     setDebts(newDebts);
+    if (collections === 1) {
+      navigate("/");
+    }
   };
 
-  const deleteDebt = (e, id) => {
+  const deleteDebt = (e, id, collections, navigate) => {
     e.stopPropagation();
     delete_debt(user.token, id).then((res) => {
       if (res.error) {
         setError(res);
       } else if (res.success) {
-        delete_debt_from_debts(id);
+        delete_debt_from_debts(id, collections, navigate);
       }
     });
-  }; */
+  };
 
   const success_getDebts = (res) => {
     setLoading(false);
@@ -56,12 +61,19 @@ export const useDebts = () => {
         if (res.error) {
           error_getDebts(res);
         } else {
-          console.log(res);
           success_getDebts(res);
         }
       });
     }
-  }, []);
+  }, [emptyCollection]);
 
-  return { collections, ballance, loading, debts, error, addNewDebtToArray };
+  return {
+    collections,
+    ballance,
+    loading,
+    debts,
+    error,
+    addNewDebtToArray,
+    deleteDebt,
+  };
 };

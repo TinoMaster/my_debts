@@ -9,7 +9,7 @@ export const createNewDebts = async (token = "", newDebt = {}) => {
     body: newDebt,
     headers: { "content-type": "application/json" },
   };
-  await httpHelper(token).post(`${urls.createNewDebt}`, options);
+  return await httpHelper(token).post(`${urls.createNewDebt}`, options);
 };
 
 export const delete_debt = async (token = "", id = "") =>
@@ -33,23 +33,19 @@ export const filterCollections = (debts, user) => {
     )
       for (const obj of result) {
         if (obj.name === check.name && obj.creador === check.creador) {
-          if (check.acreedor === user._id && check.creador === user._id) {
+          if (check.acreedor === user._id) {
             obj.deuda += check.deuda;
-          } else if (
-            check.acreedor !== user._id &&
-            check.creador === user._id
-          ) {
+          } else if (check.acreedor !== user._id) {
             obj.deuda -= check.deuda;
-          } else if (
-            check.acreedor === user._id &&
-            check.creador !== user._id
-          ) {
-            obj.deuda -= check.deuda;
-          } else if (check.acreedor !== user._id && check.creador !== user._id)
-            obj.deuda += check.deuda;
+          }
         }
       }
     else {
+      if (check.acreedor === user._id) {
+        check.deuda = check.deuda;
+      } else if (check.acreedor !== user._id) {
+        check.deuda = -check.deuda;
+      }
       result.push(check);
     }
 

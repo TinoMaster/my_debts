@@ -6,7 +6,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useContext } from "react";
 import AuthContext from "../../contexts/authContext";
 
-export const View_Collection = ({ debts }) => {
+export const View_Collection = ({ debts, deleteDebt }) => {
   const { name } = useParams();
   const location = useLocation();
   const { _id } = location.state;
@@ -36,6 +36,8 @@ export const View_Collection = ({ debts }) => {
                 debt={debt}
                 color={"#209A21"}
                 secondColor={"#F05C6B"}
+                deleteDebt={deleteDebt}
+                countCard={collection.length}
               />
             ))}
         </div>
@@ -49,6 +51,8 @@ export const View_Collection = ({ debts }) => {
                 debt={debt}
                 color={"#F05C6B"}
                 secondColor={"#209A21"}
+                deleteDebt={deleteDebt}
+                countCard={collection.length}
               />
             ))}
         </div>

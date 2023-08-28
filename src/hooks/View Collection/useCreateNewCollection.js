@@ -7,6 +7,7 @@ export const useCreateNewCollection = (myContacts) => {
   const [modalErrorCreateCol, setModalErrorCreateCol] = useState(false);
 
   const openCloseWindow = () => {
+    setCollectionName("");
     myContacts.contacts.length === 0
       ? setModalErrorCreateCol(true)
       : setOpenModal((prev) => !prev);
@@ -38,6 +39,8 @@ export const useCreateNewCollection = (myContacts) => {
     const validate = validateCollectionName();
     if (validate) {
       openCloseNewDebt(collectionName);
+      setOpenModal(false);
+      setCollectionName("");
     }
   };
 

@@ -1,4 +1,3 @@
-import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export const Collections_List = ({ collections, url, user }) => {
@@ -22,7 +21,7 @@ export const Collections_List = ({ collections, url, user }) => {
                   collection.deuda < 0 ? "text-red-400" : "text-green-400"
                 } text-sm md:text-base`}
               >
-                {collection.deuda ? collection.deuda : 0}
+                {collection.deuda}
               </p>
             </Link>
           ))}
@@ -41,10 +40,10 @@ export const Collections_List = ({ collections, url, user }) => {
               <h4 className="">{collection.name}</h4>
               <p
                 className={`${
-                  -collection.deuda < 0 ? "text-red-400" : "text-green-400"
+                  collection.deuda < 0 ? "text-red-400" : "text-green-400"
                 } text-sm md:text-base`}
               >
-                {collection.deuda ? -collection.deuda : 0}
+                {collection.deuda}
               </p>
             </Link>
           ))}

@@ -1,11 +1,27 @@
-import { FaDollarSign } from "react-icons/fa";
+import { FaDollarSign, FaTrash } from "react-icons/fa";
 import { useCardDebt } from "../../hooks/View Collection/useCardDebt";
-export const Card_Debt = ({ debt, color, secondColor }) => {
+import { useNavigate } from "react-router-dom";
+export const Card_Debt = ({
+  debt,
+  color,
+  secondColor,
+  deleteDebt,
+  countCard,
+}) => {
   const { description, deuda } = debt;
   const { partialPayment } = useCardDebt(debt);
 
+  const navigate = useNavigate();
+
   return (
     <div className="p-1 relative text-sm flex flex-col w-full md:w-1/3 ">
+      {/* Trash */}
+      <div
+        onClick={(e) => deleteDebt(e, debt._id, countCard, navigate)}
+        className="absolute -top-2 right-2"
+      >
+        <FaTrash />
+      </div>
       {/* Caja superior */}
       <div className="p-3 bg-gradient-to-tr from-white/5 to-secondary/10 rounded-md shadow-md">
         <div className="flex justify-between items-baseline">
