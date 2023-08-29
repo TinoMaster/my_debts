@@ -11,7 +11,7 @@ export const Colecciones = ({ collections, url, loading }) => {
         <div className="w-full flex flex-col items-center mb-3">
           <ListLoading />
         </div>
-      ) : collections.length > 0 ? (
+      ) : collections?.length > 0 ? (
         <Collections_List collections={collections} url={url} user={user} />
       ) : (
         <h3 className="m-2 p-3 shadow-md rounded-md text-center bg-white/5">

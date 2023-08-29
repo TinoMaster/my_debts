@@ -21,29 +21,29 @@ export const filterCollections = (debts, user) => {
       name: value.name,
       deuda:
         value.deuda - value.pagos?.reduce((res, el) => res + el.cantidad, 0),
-      creador: value.creador._id,
-      deudor: value.deudor._id,
-      acreedor: value.acreedor._id,
+      creador: value.creador,
+      deudor: value.deudor,
+      acreedor: value.acreedor,
     };
     if (result.length === 0) result.push(check);
     else if (
       result.some(
-        (el) => el.name === check.name && check.creador === el.creador
+        (el) => el.name === check.name && check.creador._id === el.creador._id
       )
     )
       for (const obj of result) {
-        if (obj.name === check.name && obj.creador === check.creador) {
-          if (check.acreedor === user._id) {
+        if (obj.name === check.name && obj.creador._id === check.creador._id) {
+          if (check.acreedor._id === user._id) {
             obj.deuda += check.deuda;
-          } else if (check.acreedor !== user._id) {
+          } else if (check.acreedor._id !== user._id) {
             obj.deuda -= check.deuda;
           }
         }
       }
     else {
-      if (check.acreedor === user._id) {
+      if (check.acreedor._id === user._id) {
         check.deuda = check.deuda;
-      } else if (check.acreedor !== user._id) {
+      } else if (check.acreedor._id !== user._id) {
         check.deuda = -check.deuda;
       }
       result.push(check);
@@ -54,7 +54,7 @@ export const filterCollections = (debts, user) => {
   return collections;
 };
 
-export const balanceTotal = (debts, user) => {
+export const balanceTotal = (debts = [], user) => {
   const balance = debts.reduce(
     (result, debt) => {
       const deuda =

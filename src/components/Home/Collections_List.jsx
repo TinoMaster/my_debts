@@ -1,51 +1,42 @@
 import { Link } from "react-router-dom";
+import { Collection } from "./Collection";
 
 export const Collections_List = ({ collections, url, user }) => {
   return (
     <div className="w-full">
       {/*Colecciones  */}
       <div className="">
-        <h3 className="text-center text-sm">Mias</h3>
+        {collections?.filter(
+          (collection) => collection?.creador._id === user?._id
+        ).length > 0 ? (
+          <h3 className="text-center text-sm">Creadas por mi</h3>
+        ) : null}
+
         {collections
-          ?.filter((collection) => collection?.creador === user?._id)
+          ?.filter((collection) => collection?.creador._id === user?._id)
           ?.map((collection) => (
-            <Link
-              to={`${url}/${collection.name}`}
-              state={{ _id: collection.creador }}
+            <Collection
               key={collection.name}
-              className="my-2 p-3 shadow-md rounded-md flex justify-between bg-white/5 relative"
-            >
-              <h4 className="">{collection.name}</h4>
-              <p
-                className={`${
-                  collection.deuda < 0 ? "text-red-400" : "text-green-400"
-                } text-sm md:text-base`}
-              >
-                {collection.deuda}
-              </p>
-            </Link>
+              url={url}
+              collection={collection}
+            />
           ))}
       </div>
       <div className="">
-        <h3 className="text-center text-sm">Otras</h3>
+        {collections?.filter(
+          (collection) => collection?.creador._id !== user?._id
+        ).length > 0 ? (
+          <h3 className="text-center text-sm">Creadas por otros</h3>
+        ) : null}
+
         {collections
-          ?.filter((collection) => collection?.creador !== user?._id)
+          ?.filter((collection) => collection?.creador._id !== user?._id)
           ?.map((collection) => (
-            <Link
-              to={`${url}/${collection.name}`}
-              state={{ _id: collection.creador }}
+            <Collection
               key={collection.name}
-              className="my-2 p-3 shadow-md rounded-md flex justify-between bg-white/5 relative"
-            >
-              <h4 className="">{collection.name}</h4>
-              <p
-                className={`${
-                  collection.deuda < 0 ? "text-red-400" : "text-green-400"
-                } text-sm md:text-base`}
-              >
-                {collection.deuda}
-              </p>
-            </Link>
+              collection={collection}
+              url={url}
+            />
           ))}
       </div>
     </div>

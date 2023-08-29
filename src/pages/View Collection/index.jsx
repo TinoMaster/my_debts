@@ -13,6 +13,7 @@ export const View_Collection = ({ debts, deleteDebt }) => {
   const { collection_by_name } = useViewCollection(debts, name, _id);
   const { user } = useContext(AuthContext);
   const collection = collection_by_name();
+  /* //TODO: Crear el creador de deuda dentro del visualizador de deudas */
   return (
     <div className="flex relative flex-col w-full">
       <Link
@@ -27,7 +28,11 @@ export const View_Collection = ({ debts, deleteDebt }) => {
       {/* Caja deudas */}
       <div className="flex flex-col gap-3 py-5">
         <div className="flex flex-wrap">
-          <h3 className="w-full text-center">Me deben</h3>
+          {collection?.filter((debt) => debt.acreedor._id === user._id).length >
+          0 ? (
+            <h3 className="w-full text-center">Me deben</h3>
+          ) : null}
+
           {collection
             ?.filter((debt) => debt.acreedor._id === user._id)
             ?.map((debt) => (
@@ -42,7 +47,11 @@ export const View_Collection = ({ debts, deleteDebt }) => {
             ))}
         </div>
         <div className="flex flex-wrap">
-          <h3 className="w-full text-center">Le debo</h3>
+          {collection?.filter((debt) => debt.deudor._id === user._id).length >
+          0 ? (
+            <h3 className="w-full text-center">Le debo</h3>
+          ) : null}
+
           {collection
             ?.filter((debt) => debt.deudor._id === user._id)
             ?.map((debt) => (
