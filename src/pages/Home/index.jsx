@@ -4,7 +4,7 @@ import { Colecciones } from "../../components/Home/Colecciones";
 import { Modal_Create_Debt } from "../../components/Modal Create Debt";
 import { Modal_Create_collection } from "../../components/Home/Modal_Create_collection";
 import { ModalPortal } from "../../components/modals/modalPortal";
-import { useCreateNewCollection } from "../../hooks/View Collection/useCreateNewCollection";
+import { useCreateNewCollection } from "../../hooks/Home/useCreateNewCollection";
 import { useCreateNewDebt } from "../../hooks/useCreateNewDebt";
 import { Friends } from "../../components/Home/Friends";
 import { getUserName } from "../../utilities/getUserName";

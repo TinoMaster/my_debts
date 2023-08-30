@@ -4,18 +4,36 @@ import { Card_Debt } from "../../components/View Collection/Card_Debt";
 import { Balance } from "../../components/View Collection/Balance";
 import { FaArrowLeft } from "react-icons/fa";
 import { useContext } from "react";
+import { IoIosAddCircle } from "react-icons/io";
 import AuthContext from "../../contexts/authContext";
+import { ModalPortal } from "../../components/modals/modalPortal";
+import { Modal_Create_Debt } from "../../components/Modal Create Debt";
 
 export const View_Collection = ({ debts, deleteDebt }) => {
   const { name } = useParams();
   const location = useLocation();
   const { _id } = location.state;
-  const { collection_by_name } = useViewCollection(debts, name, _id);
+  const { collection_by_name, openCloseNewDebt, modalNewDebt } =
+    useViewCollection(debts, name, _id);
   const { user } = useContext(AuthContext);
   const collection = collection_by_name();
-  /* //TODO: Crear el creador de deuda dentro del visualizador de deudas */
   return (
-    <div className="flex relative flex-col w-full">
+    <div className="flex relative flex-col w-full pb-10">
+      {/* Create new debt */}
+      <button
+        onClick={openCloseNewDebt}
+        className="absolute rounded-full bottom-0 right-0 shadow-md shadow-violet-400/20"
+      >
+        <IoIosAddCircle className="text-5xl rounded-full bg-primary/90 p-1 text-white shadow-xl shadow-violet-400/20 hover:shadow-white/20" />
+      </button>
+
+      {/* NewDebt */}
+     {/*  {modalNewDebt ? (
+        <ModalPortal>
+          <Modal_Create_Debt />
+        </ModalPortal>
+      ) : null} */}
+
       <Link
         to={"/"}
         className="absolute flex items-center gap-1 shadow-md p-2 rounded-md text-sm bg-white/5"
