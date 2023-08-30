@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const useViewCollection = (debts, name, _id) => {
   const [modalNewDebt, setModalNewDebt] = useState(false);
-  
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (_id === "") {
+      setModalNewDebt(true);
+    }
+  }, []);
 
   const openCloseNewDebt = () => {
-    setModalNewDebt((prev) => !prev);
+    _id === "" ? navigate("/") : setModalNewDebt(!modalNewDebt);
   };
 
   const collection_by_name = () => {

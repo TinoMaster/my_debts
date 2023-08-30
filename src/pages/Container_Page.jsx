@@ -41,6 +41,7 @@ export const Container_Page = () => {
             <View_Collection
               debts={debts}
               deleteDebt={deleteDebt}
+              darkMode={darkMode}
             />
           }
         />

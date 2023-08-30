@@ -1,11 +1,9 @@
 import { Balance_Deudas } from "../../components/Home/Balance_Deudas";
 import { Button_create_collection } from "../../components/Home/Button_create_collection";
 import { Colecciones } from "../../components/Home/Colecciones";
-import { Modal_Create_Debt } from "../../components/Modal Create Debt";
 import { Modal_Create_collection } from "../../components/Home/Modal_Create_collection";
 import { ModalPortal } from "../../components/modals/modalPortal";
 import { useCreateNewCollection } from "../../hooks/Home/useCreateNewCollection";
-import { useCreateNewDebt } from "../../hooks/useCreateNewDebt";
 import { Friends } from "../../components/Home/Friends";
 import { getUserName } from "../../utilities/getUserName";
 import { Modal_ErrorCreateCol } from "../../components/Home/Modal_ErrorCreateCol";
@@ -17,7 +15,6 @@ export const Home = ({
   darkMode,
   myContacts,
   loadingAuth,
-  addNewDebtToArray,
 }) => {
   const {
     openCloseWindow,
@@ -27,21 +24,8 @@ export const Home = ({
     collectionName,
     errorNameCollection,
     modalErrorCreateCol,
-    setModalErrorCreateCol,
+    setModalErrorCreateCol
   } = useCreateNewCollection(myContacts);
-  const {
-    openCloseNewDebt,
-    openNewDebt,
-    funcHandlers,
-    newDebt,
-    pagoParcial,
-    commentPagoParcial,
-    SendNewDebt,
-    errorCreateDebt,
-    refContactInput,
-    refTypeDebt1,
-    refTypeDebt2,
-  } = useCreateNewDebt(addNewDebtToArray);
   const username = getUserName();
   return (
     <div className="w-full h-full flex flex-col px-2 gap-5">
@@ -62,28 +46,9 @@ export const Home = ({
             darkMode={darkMode}
             openCloseWindow={openCloseWindow}
             createCollection={createCollection}
-            openCloseNewDebt={openCloseNewDebt}
             handlerNameCollection={handlerNameCollection}
             collectionName={collectionName}
             errorNameCollection={errorNameCollection}
-          />
-        </ModalPortal>
-      ) : null}
-
-      {openNewDebt ? (
-        <ModalPortal>
-          <Modal_Create_Debt
-            darkMode={darkMode}
-            openCloseNewDebt={openCloseNewDebt}
-            newDebt={newDebt}
-            funcHandlers={funcHandlers}
-            pagoParcial={pagoParcial}
-            commentPagoParcial={commentPagoParcial}
-            SendNewDebt={SendNewDebt}
-            errorCreateDebt={errorCreateDebt}
-            refContactInput={refContactInput}
-            refTypeDebt1={refTypeDebt1}
-            refTypeDebt2={refTypeDebt2}
           />
         </ModalPortal>
       ) : null}

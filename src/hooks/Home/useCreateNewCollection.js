@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const useCreateNewCollection = (myContacts) => {
   const [openModal, setOpenModal] = useState(false);
   const [collectionName, setCollectionName] = useState("");
   const [errorNameCollection, setErrorNameCollection] = useState({});
   const [modalErrorCreateCol, setModalErrorCreateCol] = useState(false);
+
+  const navigate = useNavigate();
 
   const openCloseWindow = () => {
     setCollectionName("");
@@ -35,12 +38,10 @@ export const useCreateNewCollection = (myContacts) => {
     return true;
   };
 
-  const createCollection = (openCloseNewDebt) => {
+  const createCollection = () => {
     const validate = validateCollectionName();
     if (validate) {
-      openCloseNewDebt(collectionName);
-      setOpenModal(false);
-      setCollectionName("");
+      navigate(`/collection/${collectionName}`);
     }
   };
 

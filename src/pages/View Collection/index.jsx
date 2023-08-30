@@ -9,12 +9,13 @@ import AuthContext from "../../contexts/authContext";
 import { ModalPortal } from "../../components/modals/modalPortal";
 import { Modal_Create_Debt } from "../../components/Modal Create Debt";
 
-export const View_Collection = ({ debts, deleteDebt }) => {
+export const View_Collection = ({ debts, deleteDebt, darkMode }) => {
   const { name } = useParams();
   const location = useLocation();
-  const { _id } = location.state;
+  const _id = location.state ? location.state._id : "";
   const { collection_by_name, openCloseNewDebt, modalNewDebt } =
     useViewCollection(debts, name, _id);
+  /* //TODO: Verificar si llega el nombre cuando cambia de pagina, implementar logica */
   const { user } = useContext(AuthContext);
   const collection = collection_by_name();
   return (
@@ -27,12 +28,15 @@ export const View_Collection = ({ debts, deleteDebt }) => {
         <IoIosAddCircle className="text-5xl rounded-full bg-primary/90 p-1 text-white shadow-xl shadow-violet-400/20 hover:shadow-white/20" />
       </button>
 
-      {/* NewDebt */}
-     {/*  {modalNewDebt ? (
+      {modalNewDebt ? (
         <ModalPortal>
-          <Modal_Create_Debt />
+          <Modal_Create_Debt
+            darkMode={darkMode}
+            openCloseNewDebt={openCloseNewDebt}
+            name={name}
+          />
         </ModalPortal>
-      ) : null} */}
+      ) : null}
 
       <Link
         to={"/"}

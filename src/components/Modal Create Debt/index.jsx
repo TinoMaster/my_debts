@@ -2,20 +2,21 @@ import { useContext } from "react";
 import AuthContext from "../../contexts/authContext";
 import { DebtType } from "./DebtType";
 import { OtherCamps } from "./OtherCamps";
+import { useCreateNewDebt } from "../../hooks/useCreateNewDebt";
 
-export const Modal_Create_Debt = ({
-  darkMode,
-  openCloseNewDebt,
-  newDebt,
-  funcHandlers,
-  pagoParcial,
-  commentPagoParcial,
-  SendNewDebt,
-  errorCreateDebt,
-  refContactInput,
-  refTypeDebt1,
-  refTypeDebt2,
-}) => {
+export const Modal_Create_Debt = ({ darkMode, openCloseNewDebt, name }) => {
+  const { myContacts } = useContext(AuthContext);
+  const {
+    newDebt,
+    funcHandlers,
+    pagoParcial,
+    commentPagoParcial,
+    SendNewDebt,
+    errorCreateDebt,
+    refContactInput,
+    refTypeDebt1,
+    refTypeDebt2,
+  } = useCreateNewDebt(name, () => {});
   const {
     handlerInputNewDebt,
     handlerIsPaid,
@@ -24,7 +25,6 @@ export const Modal_Create_Debt = ({
     handlerCommentPartialPaid,
     handlerResetDebt,
   } = funcHandlers;
-  const { myContacts } = useContext(AuthContext);
   return (
     <div
       className={`flex flex-col items-center relative bg-gradient-to-tr ${

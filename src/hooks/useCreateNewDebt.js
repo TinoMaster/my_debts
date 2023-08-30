@@ -19,8 +19,7 @@ const initialState = {
   comentario: "",
 };
 
-export const useCreateNewDebt = (addNewDebtToArray) => {
-  const [openNewDebt, setOpenNewDebt] = useState(false);
+export const useCreateNewDebt = (name, addNewDebtToArray) => {
   const [newDebt, setNewDebt] = useState(initialState);
   const [errorCreateDebt, setErrorCreateDebt] = useState({});
   const [successCreateDebt, setSuccessCreateDebt] = useState({});
@@ -86,10 +85,6 @@ export const useCreateNewDebt = (addNewDebtToArray) => {
   };
 
   /* Functions */
-  const openCloseNewDebt = (name = "") => {
-    setNewDebt({ ...newDebt, name });
-    setOpenNewDebt((prev) => !prev);
-  };
 
   const validateNewDebt = () => {
     if (newDebt.description.length === 0)
@@ -119,7 +114,7 @@ export const useCreateNewDebt = (addNewDebtToArray) => {
   const coumpoundNewDebt = () => {
     const date = new Date();
     return {
-      name: newDebt.name,
+      name,
       description: newDebt.description,
       deuda: newDebt.deuda,
       creador: idUser,
@@ -141,7 +136,6 @@ export const useCreateNewDebt = (addNewDebtToArray) => {
           setErrorCreateDebt(res);
         } else if (res.success) {
           addNewDebtToArray(res.data);
-          setOpenNewDebt(false);
         }
       });
     } else setErrorCreateDebt(validator);
@@ -157,9 +151,7 @@ export const useCreateNewDebt = (addNewDebtToArray) => {
   };
 
   return {
-    openCloseNewDebt,
     funcHandlers,
-    openNewDebt,
     newDebt,
     pagoParcial,
     commentPagoParcial,
