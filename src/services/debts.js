@@ -51,7 +51,20 @@ export const filterCollections = (debts, user) => {
 
     return result;
   }, []);
-  return collections;
+
+  const newCollection = collections.reduce((res, value) => {
+    const contact =
+      value.creador._id === user._id ? value.deudor : value.creador;
+    const newCollection = {
+      name: value.name,
+      deuda: value.deuda,
+      creador: value.creador,
+      contact,
+    };
+    res.push(newCollection);
+    return res;
+  }, []);
+  return newCollection;
 };
 
 export const balanceTotal = (debts = [], user) => {

@@ -4,7 +4,14 @@ import { DebtType } from "./DebtType";
 import { OtherCamps } from "./OtherCamps";
 import { useCreateNewDebt } from "../../hooks/useCreateNewDebt";
 
-export const Modal_Create_Debt = ({ darkMode, openCloseNewDebt, name }) => {
+export const Modal_Create_Debt = ({
+  darkMode,
+  openCloseNewDebt,
+  name,
+  addNewDebtToArray,
+  isNew,
+  contact,
+}) => {
   const { myContacts } = useContext(AuthContext);
   const {
     newDebt,
@@ -16,7 +23,7 @@ export const Modal_Create_Debt = ({ darkMode, openCloseNewDebt, name }) => {
     refContactInput,
     refTypeDebt1,
     refTypeDebt2,
-  } = useCreateNewDebt(name, () => {});
+  } = useCreateNewDebt(name, addNewDebtToArray, isNew, contact);
   const {
     handlerInputNewDebt,
     handlerIsPaid,
@@ -25,6 +32,8 @@ export const Modal_Create_Debt = ({ darkMode, openCloseNewDebt, name }) => {
     handlerCommentPartialPaid,
     handlerResetDebt,
   } = funcHandlers;
+
+  const nameOfContact = () => myContacts?.contacts[0]?.friend.name;
   return (
     <div
       className={`flex flex-col items-center relative bg-gradient-to-tr ${
@@ -60,6 +69,8 @@ export const Modal_Create_Debt = ({ darkMode, openCloseNewDebt, name }) => {
         handlerCommentPartialPaid={handlerCommentPartialPaid}
         commentPagoParcial={commentPagoParcial}
         refContactInput={refContactInput}
+        isNew={isNew}
+        nameOfContact={nameOfContact}
       />
       <div className="flex justify-center py-2 mt-5">
         <button

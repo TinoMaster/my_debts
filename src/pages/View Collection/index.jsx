@@ -9,13 +9,18 @@ import AuthContext from "../../contexts/authContext";
 import { ModalPortal } from "../../components/modals/modalPortal";
 import { Modal_Create_Debt } from "../../components/Modal Create Debt";
 
-export const View_Collection = ({ debts, deleteDebt, darkMode }) => {
+export const View_Collection = ({
+  debts,
+  deleteDebt,
+  darkMode,
+  addNewDebtToArray,
+}) => {
   const { name } = useParams();
   const location = useLocation();
   const _id = location.state ? location.state._id : "";
+  const contact = location.state ? location.state.contact : "";
   const { collection_by_name, openCloseNewDebt, modalNewDebt } =
     useViewCollection(debts, name, _id);
-  /* //TODO: Verificar si llega el nombre cuando cambia de pagina, implementar logica */
   const { user } = useContext(AuthContext);
   const collection = collection_by_name();
   return (
@@ -34,6 +39,9 @@ export const View_Collection = ({ debts, deleteDebt, darkMode }) => {
             darkMode={darkMode}
             openCloseNewDebt={openCloseNewDebt}
             name={name}
+            contact={contact}
+            addNewDebtToArray={addNewDebtToArray}
+            isNew={_id === "" ? true : false}
           />
         </ModalPortal>
       ) : null}

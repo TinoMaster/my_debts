@@ -7,36 +7,42 @@ export const DebtorOrCreditor = ({
   darkMode,
   handlerInputNewDebt,
   refContactInput,
+  isNew,
+  nameOfContact,
 }) => {
   const myId = getID();
+
   return (
     <div className="w-full flex flex-wrap">
       <h4 className="w-full text-center font-serif">
         {newDebt.acreedor !== myId ? "Acreedor" : "Deudor"}
       </h4>
 
-      <select
-        ref={refContactInput}
-        onChange={handlerInputNewDebt}
-        name={newDebt.acreedor !== myId ? "acreedor" : "deudor"}
-        className={`w-full text-center rounded-md ${
-          darkMode ? "bg-black/20" : ""
-        } py-2`}
-      >
-        <option
-          value=""
-          className={`${darkMode ? "bg-black/50" : ""}  `}
-        ></option>
-        {friends.map((friend) => (
-          <option
-            key={friend.friend._id}
-            value={friend.friend._id}
-            className={`${darkMode ? "bg-black/50" : ""}  `}
-          >
-            {friend.friend.name}
-          </option>
-        ))}
-      </select>
+      {isNew ? (
+        <select
+          ref={refContactInput}
+          onChange={handlerInputNewDebt}
+          name={newDebt.acreedor !== myId ? "acreedor" : "deudor"}
+          className={`w-full text-center rounded-md ${
+            darkMode ? "bg-black/20" : ""
+          } py-2`}
+        >
+          <option className={`${darkMode ? "bg-black/50" : ""}  `}></option>
+          {friends.map((friend) => (
+            <option
+              key={friend.friend._id}
+              value={friend.friend._id}
+              className={`${darkMode ? "bg-black/50" : ""}  `}
+            >
+              {friend.friend.name}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <div className="w-full py-2 bg-white/5 rounded-md shadow-inner flex justify-center items-center">
+          <h4 className="">{nameOfContact()}</h4>
+        </div>
+      )}
     </div>
   );
 };

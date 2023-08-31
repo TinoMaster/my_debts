@@ -12,6 +12,8 @@ export const OtherCamps = ({
   handlerCommentPartialPaid,
   commentPagoParcial,
   refContactInput,
+  isNew,
+  nameOfContact,
 }) => {
   return (
     <div className="w-full flex flex-wrap justify-between gap-5">
@@ -79,6 +81,8 @@ export const OtherCamps = ({
         darkMode={darkMode}
         handlerInputNewDebt={handlerInputNewDebt}
         refContactInput={refContactInput}
+        isNew={isNew}
+        nameOfContact={nameOfContact}
       />
       {/* Comentarios */}
       <div className="w-full flex flex-wrap">

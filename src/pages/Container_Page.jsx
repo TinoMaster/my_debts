@@ -31,7 +31,6 @@ export const Container_Page = () => {
               loading={loading}
               myContacts={myContacts}
               loadingAuth={loadingAuth}
-              addNewDebtToArray={addNewDebtToArray}
             />
           }
         />
@@ -42,6 +41,7 @@ export const Container_Page = () => {
               debts={debts}
               deleteDebt={deleteDebt}
               darkMode={darkMode}
+              addNewDebtToArray={addNewDebtToArray}
             />
           }
         />

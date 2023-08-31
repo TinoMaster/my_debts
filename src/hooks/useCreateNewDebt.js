@@ -19,8 +19,10 @@ const initialState = {
   comentario: "",
 };
 
-export const useCreateNewDebt = (name, addNewDebtToArray) => {
-  const [newDebt, setNewDebt] = useState(initialState);
+const date = new Date();
+
+export const useCreateNewDebt = (name, addNewDebtToArray, isNew, contact) => {
+  const [newDebt, setNewDebt] = useState({ ...initialState, name });
   const [errorCreateDebt, setErrorCreateDebt] = useState({});
   const [successCreateDebt, setSuccessCreateDebt] = useState({});
   const [loadingCreateDebt, setLoadingCreateDebt] = useState(false);
@@ -28,6 +30,8 @@ export const useCreateNewDebt = (name, addNewDebtToArray) => {
   /* States de pagos parciales */
   const [pagoParcial, setPagoParcial] = useState("");
   const [commentPagoParcial, setCommentPagoParcial] = useState("");
+
+  /* console.log(newDebt); */
 
   const idUser = getID();
   const token = getToken();
@@ -61,7 +65,7 @@ export const useCreateNewDebt = (name, addNewDebtToArray) => {
   };
 
   const handlerDebtType = (e) => {
-    refContactInput.current.value = "";
+    if (isNew) refContactInput.current.value = "";
     setErrorCreateDebt({});
     if (e.target.value === "deudor") {
       setNewDebt({ ...newDebt, deudor: idUser, acreedor: "" });
@@ -77,9 +81,10 @@ export const useCreateNewDebt = (name, addNewDebtToArray) => {
     refTypeDebt2.current.checked
       ? (refTypeDebt2.current.checked = false)
       : null;
-    refContactInput.current.value = "";
+    if (isNew) refContactInput.current.value = "";
+
     setErrorCreateDebt({});
-    setNewDebt(initialState);
+    setNewDebt({ ...initialState, name: newDebt.name });
     setPagoParcial("");
     setCommentPagoParcial("");
   };
@@ -89,10 +94,10 @@ export const useCreateNewDebt = (name, addNewDebtToArray) => {
   const validateNewDebt = () => {
     if (newDebt.description.length === 0)
       return { error: true, message: "El titulo no puede estar vacio" };
-    if (newDebt.acreedor.length === 0)
-      return { error: true, message: "Debe agregar el contacto de la deuda" };
-    if (newDebt.deudor.length === 0)
-      return { error: true, message: "Debe agregar el contacto de la deuda" };
+    if (newDebt.acreedor.length === 0 && isNew)
+      return { error: true, message: "Elige el tipo de deuda o el contacto" };
+    if (newDebt.deudor.length === 0 && isNew)
+      return { error: true, message: "Elige el tipo de deuda o el contacto" };
     if (newDebt.deuda.length === 0 || newDebt.deuda === 0)
       return { error: true, message: "Debe agregar la cantidad de la deuda" };
     return { error: false };
@@ -112,14 +117,14 @@ export const useCreateNewDebt = (name, addNewDebtToArray) => {
   };
 
   const coumpoundNewDebt = () => {
-    const date = new Date();
+    console.log(contact);
     return {
       name,
       description: newDebt.description,
       deuda: newDebt.deuda,
       creador: idUser,
-      deudor: newDebt.deudor,
-      acreedor: newDebt.acreedor,
+      deudor: newDebt.deudor === "" ? contact._id : newDebt.deudor,
+      acreedor: newDebt.acreedor === "" ? contact._id : newDebt.acreedor,
       fecha: date,
       comentario: newDebt.comentario,
       pagada: newDebt.pagada,

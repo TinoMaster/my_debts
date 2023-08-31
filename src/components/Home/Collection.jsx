@@ -5,7 +5,7 @@ export const Collection = ({ url, collection }) => {
   return (
     <Link
       to={`${url}/${collection.name}`}
-      state={{ _id: collection.creador._id }}
+      state={{ _id: collection.creador._id, contact: collection.contact }}
       className="my-2 p-3 shadow-md rounded-md flex flex-wrap bg-white/5 relative hover:bg-primary/50 transition-colors"
     >
       <div className="w-full flex justify-between">
