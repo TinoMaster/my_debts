@@ -1,6 +1,8 @@
 import { FaDollarSign, FaTrash } from "react-icons/fa";
 import { useCardDebt } from "../../hooks/View Collection/useCardDebt";
 import { useNavigate } from "react-router-dom";
+import { ModalPortal } from "../modals/modalPortal";
+import { ModalViewCard } from "./ModalViewCard";
 export const Card_Debt = ({
   debt,
   color,
@@ -9,21 +11,42 @@ export const Card_Debt = ({
   countCard,
 }) => {
   const { description, deuda } = debt;
-  const { partialPayment } = useCardDebt(debt);
+  const {
+    partial_payment,
+    modalViewCard,
+    openModalViewCard,
+    setModalViewCard,
+  } = useCardDebt(debt);
 
   const navigate = useNavigate();
+  const partialPayment = partial_payment(debt);
 
   return (
-    <div className="p-1 relative text-sm flex flex-col w-full md:w-1/3 ">
-      {/* Trash */}
-      <div
-        onClick={(e) => deleteDebt(e, debt._id, countCard, navigate)}
-        className="absolute -top-2 right-2"
-      >
-        <FaTrash />
-      </div>
+    <div className="p-1 text-sm flex flex-col w-full md:w-1/3">
+      {/* Modal */}
+      {modalViewCard ? (
+        <ModalPortal>
+          <button
+            onClick={() => setModalViewCard(false)}
+            className="absolute z-10 top-20 right-10 px-2 py-1 rounded-full bg-white text-2xl"
+          >
+            x
+          </button>
+          <ModalViewCard debt={debt} partialPayment={partialPayment} />
+        </ModalPortal>
+      ) : null}
       {/* Caja superior */}
-      <div className="p-3 bg-gradient-to-tr from-white/5 to-secondary/10 rounded-md shadow-md">
+      <div
+        onClick={openModalViewCard}
+        className="p-3 relative bg-gradient-to-tr from-white/5 to-secondary/10 rounded-md shadow-md hover:bg-black/10 hover:cursor-pointer"
+      >
+        {/* Trash */}
+        <button
+          onClick={(e) => deleteDebt(e, debt._id, countCard, navigate)}
+          className="absolute -top-2 right-2 hover:text-red-300"
+        >
+          <FaTrash />
+        </button>
         <div className="flex justify-between items-baseline">
           <h2 className="pb-1 text-center font-semibold">{description}</h2>
           <h3 className="text-xs p-1 bg-white/5 rounded-md shadow">

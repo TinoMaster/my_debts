@@ -58,7 +58,6 @@ export const useDebts = () => {
     if (user._id.length > 0) {
       setLoading(true);
       getDebts(user.token, user._id).then((res) => {
-        console.log(res);
         if (res.error) {
           error_getDebts(res);
         } else {
