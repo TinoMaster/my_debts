@@ -12,7 +12,7 @@ export const useViewCollection = (debts, name, _id) => {
   }, []);
 
   const openCloseNewDebt = () => {
-    _id === "" ? navigate("/") : setModalNewDebt(!modalNewDebt);
+    _id === "" ? navigate("/") : setModalNewDebt((prev) => !prev);
   };
 
   const collection_by_name = () => {
@@ -21,5 +21,10 @@ export const useViewCollection = (debts, name, _id) => {
     );
   };
 
-  return { collection_by_name, openCloseNewDebt, modalNewDebt };
+  return {
+    collection_by_name,
+    openCloseNewDebt,
+    modalNewDebt,
+    setModalNewDebt,
+  };
 };

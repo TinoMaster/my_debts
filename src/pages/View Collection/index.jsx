@@ -19,25 +19,32 @@ export const View_Collection = ({
   const location = useLocation();
   const _id = location.state ? location.state._id : "";
   const contact = location.state ? location.state.contact : "";
-  const { collection_by_name, openCloseNewDebt, modalNewDebt } =
-    useViewCollection(debts, name, _id);
+  const {
+    collection_by_name,
+    openCloseNewDebt,
+    modalNewDebt,
+    setModalNewDebt,
+  } = useViewCollection(debts, name, _id);
   const { user } = useContext(AuthContext);
   const collection = collection_by_name();
   return (
-    <div className="flex relative flex-col w-full pb-10">
+    <div className="flex flex-col w-full pb-10">
       {/* Create new debt */}
-      <button
-        onClick={openCloseNewDebt}
-        className="absolute rounded-full bottom-0 right-0 shadow-md shadow-violet-400/20"
-      >
-        <IoIosAddCircle className="text-5xl rounded-full bg-primary/90 p-1 text-white shadow-xl shadow-violet-400/20 hover:shadow-white/20" />
-      </button>
+      {user?._id === _id ? (
+        <button
+          onClick={openCloseNewDebt}
+          className="absolute rounded-full bottom-3 right-3 z-10 shadow-md shadow-violet-400/20"
+        >
+          <IoIosAddCircle className="text-5xl rounded-full bg-primary p-1 text-white shadow-xl shadow-violet-400/20 hover:shadow-white/20" />
+        </button>
+      ) : null}
 
       {modalNewDebt ? (
         <ModalPortal>
           <Modal_Create_Debt
             darkMode={darkMode}
             openCloseNewDebt={openCloseNewDebt}
+            setModalNewDebt={setModalNewDebt}
             name={name}
             contact={contact}
             addNewDebtToArray={addNewDebtToArray}
@@ -48,7 +55,7 @@ export const View_Collection = ({
 
       <Link
         to={"/"}
-        className="absolute flex items-center gap-1 shadow-md p-2 rounded-md text-sm bg-white/5"
+        className="absolute flex items-center gap-1 shadow-md p-2 z-10 rounded-md text-sm bg-darkMode"
       >
         <FaArrowLeft /> Volver
       </Link>

@@ -7,6 +7,7 @@ import { useCreateNewDebt } from "../../hooks/useCreateNewDebt";
 export const Modal_Create_Debt = ({
   darkMode,
   openCloseNewDebt,
+  setModalNewDebt,
   name,
   addNewDebtToArray,
   isNew,
@@ -23,7 +24,13 @@ export const Modal_Create_Debt = ({
     refContactInput,
     refTypeDebt1,
     refTypeDebt2,
-  } = useCreateNewDebt(name, addNewDebtToArray, isNew, contact);
+  } = useCreateNewDebt(
+    name,
+    addNewDebtToArray,
+    isNew,
+    contact,
+    setModalNewDebt
+  );
   const {
     handlerInputNewDebt,
     handlerIsPaid,

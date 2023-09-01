@@ -21,7 +21,13 @@ const initialState = {
 
 const date = new Date();
 
-export const useCreateNewDebt = (name, addNewDebtToArray, isNew, contact) => {
+export const useCreateNewDebt = (
+  name,
+  addNewDebtToArray,
+  isNew,
+  contact,
+  setModalNewDebt
+) => {
   const [newDebt, setNewDebt] = useState({ ...initialState, name });
   const [errorCreateDebt, setErrorCreateDebt] = useState({});
   const [successCreateDebt, setSuccessCreateDebt] = useState({});
@@ -117,7 +123,6 @@ export const useCreateNewDebt = (name, addNewDebtToArray, isNew, contact) => {
   };
 
   const coumpoundNewDebt = () => {
-    console.log(contact);
     return {
       name,
       description: newDebt.description,
@@ -132,15 +137,16 @@ export const useCreateNewDebt = (name, addNewDebtToArray, isNew, contact) => {
     };
   };
 
-  const SendNewDebt = async () => {
+  const SendNewDebt = () => {
     const validator = validateNewDebt();
     if (!validator.error) {
-      const dataToSend = await coumpoundNewDebt();
+      const dataToSend = coumpoundNewDebt();
       createNewDebts(token, dataToSend).then((res) => {
         if (res.error) {
           setErrorCreateDebt(res);
         } else if (res.success) {
           addNewDebtToArray(res.data);
+          setModalNewDebt(false);
         }
       });
     } else setErrorCreateDebt(validator);
