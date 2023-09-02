@@ -26,13 +26,11 @@ export const Card_Debt = ({
       {/* Modal */}
       {modalViewCard ? (
         <ModalPortal>
-          <button
-            onClick={() => setModalViewCard(false)}
-            className="absolute z-10 top-20 right-10 px-2 py-1 rounded-full bg-white text-2xl"
-          >
-            x
-          </button>
-          <ModalViewCard debt={debt} partialPayment={partialPayment} />
+          <ModalViewCard
+            debt={debt}
+            partialPayment={partialPayment}
+            setModalViewCard={setModalViewCard}
+          />
         </ModalPortal>
       ) : null}
       {/* Caja superior */}
