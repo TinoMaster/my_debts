@@ -1,35 +1,48 @@
 import React from "react";
 import { formaterData } from "../../utilities/formaterData";
+import { FaDollarSign } from "react-icons/fa";
 
 export const ModalViewCard = ({ debt, partialPayment, setModalViewCard }) => {
-  console.log(debt);
-
   return (
-    <div className="w-[90%] max-w-[400px] h-[85%] top-5 relative bg-gradient-to-br from-darkMode to-slate-900 rounded-md text-white">
-      {/* Card */}
-      <div className="w-full flex flex-wrap items-start">
-        {/* title */}
-        <h2 className="w-full text-center py-5 shadow rounded-t-md shadow-black/50 bg-gradient-to-tr from-darkMode to-slate-950 font-roboto font-semibold text-lg">
+    <div className="w-[90%] max-w-[400px] h-[85%] flex flex-col top-5 relative bg-gradient-to-br overflow-hidden px-2 py-5 from-slate-600 to-darkMode rounded-md text-white">
+      {/* title */}
+      <div className="flex flex-col px-2 py-1">
+        <h2 className="w-full rounded-t-md font-roboto text-2xl font-semibold">
           {debt.description}
         </h2>
+        <div className="flex text-sm gap-2 items-center">
+          <p className="font-roboto">coleccion:</p>
+          <p className="bg-white rounded-md text-darkMode px-1">{debt.name}</p>
+        </div>
+      </div>
+      {/* Card */}
+      <div className="h-full flex flex-col relative p-2 bg-white/10 rounded-md shadow-inner shadow-black/50">
         {/* Deuda total y resto */}
-        <div className="w-full p-2 shadow-md bg-gradient-to-tr from-white/5 to-white/10 m-2 rounded-md">
+        <div className="w-full p-2 shadow-md bg-gradient-to-tr from-white/5 to-white/10 rounded-md">
           <div className="flex w-full gap-2 justify-between">
             <p>Total:</p>
-            <p>{debt.deuda}</p>
+            <p className="flex items-center">
+              <FaDollarSign className="text-xs" /> {debt.deuda}
+            </p>
           </div>
           <div className="flex w-full gap-2 justify-between">
             <p>Pagado:</p>
-            <p>{partialPayment}</p>
+            <p className="flex items-center">
+              <FaDollarSign className="text-xs" />
+              {partialPayment}
+            </p>
           </div>
           <div className="flex w-full gap-2 justify-between">
             <p>Resto:</p>
-            <p>{debt.deuda - partialPayment}</p>
+            <p className="flex items-center">
+              <FaDollarSign className="text-xs" />
+              {debt.deuda - partialPayment}
+            </p>
           </div>
         </div>
         {/* Description and information */}
         <h3 className="w-full text-center">Info</h3>
-        <div className="w-full flex flex-wrap p-2 m-2 outline-1 outline-dashed outline-slate-700 rounded-md">
+        <div className="w-full flex flex-wrap p-2 outline-1 outline-dashed outline-slate-700 rounded-md">
           {/* fecha */}
           <div className="w-1/2 flex gap-1 p-1 justify-center items-center">
             <p className="font-semibold">Fecha:</p>
@@ -60,9 +73,12 @@ export const ModalViewCard = ({ debt, partialPayment, setModalViewCard }) => {
         </div>
         {/* Pagos */}
         <h3 className="w-full text-center">Pagos:</h3>
-        <div className="w-full flex flex-col p-2 m-2">
+        <div className="w-full h-full flex flex-col p-2 overflow-auto relative shadow-inner shadow-black/50 rounded-md">
           {debt.pagos.map((el) => (
-            <div key={el._id} className="flex justify-between p-2 rounded-md shadow bg-white/5 overflow-hidden">
+            <div
+              key={el._id}
+              className="flex justify-between p-2 rounded-md shadow bg-white/5 overflow-hidden"
+            >
               <div className="flex w-1/3 gap-1 items-center">
                 <p>pago:</p>
                 <p className="text-sm">{el.cantidad}</p>
@@ -77,11 +93,12 @@ export const ModalViewCard = ({ debt, partialPayment, setModalViewCard }) => {
               </div>
             </div>
           ))}
+          <button className="absolute bottom-2 right-2">Add</button>
         </div>
         {/* Buttons */}
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center py-2">
           <button
-            className="p-2 rounded-md bg-red-400"
+            className="p-2 rounded-md bg-gradient-to-tr from-darkMode to-slate-700 hover:to-slate-600 transition-colors"
             onClick={() => setModalViewCard(false)}
           >
             Cerrar
