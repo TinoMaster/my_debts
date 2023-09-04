@@ -12,6 +12,14 @@ export const createNewDebts = async (token = "", newDebt = {}) => {
   return await httpHelper(token).post(`${urls.createNewDebt}`, options);
 };
 
+export const addNewPayToDebt = async (token = "", id = "", data = {}) => {
+  const options = {
+    body: data,
+    headers: { "content-type": "application/json" },
+  };
+  return await httpHelper(token).put(`${urls.addNewPay}/${id}`, options);
+};
+
 export const delete_debt = async (token = "", id = "") =>
   await httpHelper(token).del(`${urls.deleteOneDebt}/${id}`);
 

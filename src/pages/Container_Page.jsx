@@ -15,6 +15,7 @@ export const Container_Page = () => {
     debts,
     addNewDebtToArray,
     deleteDebt,
+    add_NewPay_ToDebtArray,
   } = useDebts();
   const { darkMode } = useContext(ThemeContext);
   const { myContacts, loadingAuth } = useContext(AuthContext);
@@ -42,6 +43,7 @@ export const Container_Page = () => {
               deleteDebt={deleteDebt}
               darkMode={darkMode}
               addNewDebtToArray={addNewDebtToArray}
+              add_NewPay_ToDebtArray={add_NewPay_ToDebtArray}
             />
           }
         />

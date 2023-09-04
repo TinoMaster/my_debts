@@ -8,7 +8,7 @@ export const useBalance = () => {
     const balance = collection.reduce(
       (result, debt) => {
         const deuda =
-          debt.deuda - debt.pagos?.reduce((res, el) => res + el.cantidad, 0);
+          debt.deuda - debt.pagos?.reduce((res, el) => res + el?.cantidad, 0);
         if (debt.acreedor._id === user._id) {
           result[0] += deuda;
         } else if (debt.deudor._id === user._id) {

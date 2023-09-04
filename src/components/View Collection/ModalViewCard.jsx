@@ -4,11 +4,35 @@ import { FaDollarSign } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useModalViewCard } from "../../hooks/View Collection/useModalViewCard";
 import { ModalNewPay } from "./ModalNewPay";
+import { BsCheckAll } from "react-icons/bs";
 
-export const ModalViewCard = ({ debt, partialPayment, setModalViewCard }) => {
-  const { modalNewPay, openModalNewPay, closeModalNewPay } = useModalViewCard();
+export const ModalViewCard = ({
+  debt,
+  partialPayment,
+  setModalViewCard,
+  add_NewPay_ToDebtArray,
+}) => {
+  const {
+    modalNewPay,
+    openModalNewPay,
+    closeModalNewPay,
+    handleInputNewPay,
+    newPay,
+    sendNewPay,
+    error,
+    success,
+    loading,
+  } = useModalViewCard(add_NewPay_ToDebtArray);
   return (
     <div className="w-[90%] max-w-[400px] h-[85%] flex flex-col top-5 relative bg-gradient-to-br overflow-hidden px-2 py-5 from-slate-600 to-darkMode rounded-md text-white">
+      {/* Success new pay */}
+      {success ? (
+        <p className="absolute right-1 p-2 bg-green-400/80 rounded-md flex gap-1 items-center transition-all">
+          <BsCheckAll className="text-xl" />
+          Pago agregado
+        </p>
+      ) : null}
+
       {/* title */}
       <div className="flex flex-col px-2 py-1">
         <h2 className="w-full rounded-t-md font-roboto text-2xl font-semibold">
@@ -77,23 +101,23 @@ export const ModalViewCard = ({ debt, partialPayment, setModalViewCard }) => {
         </div>
         {/* Pagos */}
         <h3 className="w-full text-center">Pagos:</h3>
-        <div className="w-full h-full flex flex-col p-2 overflow-auto relative shadow-inner shadow-black/50 rounded-md">
-          {debt.pagos.map((el) => (
+        <div className="w-full max-h-72 flex flex-col p-2 overflow-auto relative shadow-inner shadow-black/50 rounded-md">
+          {debt?.pagos.map((el) => (
             <div
-              key={el._id}
-              className="flex justify-between p-2 rounded-md shadow bg-white/5 overflow-hidden"
+              key={el?._id}
+              className="flex justify-between p-2 rounded-md shadow text-xs bg-white/5"
             >
               <div className="flex w-1/3 gap-1 items-center">
                 <p>pago:</p>
-                <p className="text-sm">{el.cantidad}</p>
+                <p className="text-sm">{el?.cantidad}</p>
               </div>
               <div className="flex w-1/3 gap-1 items-center">
                 <p>fecha:</p>
-                <p className="text-sm">{formaterData(el.fecha)}</p>
+                <p className="text-sm">{formaterData(el?.fecha)}</p>
               </div>
               <div className="flex w-1/3 gap-1 items-center overflow-hidden">
                 <p>coment:</p>
-                <p className="text-sm">"Esto ..."</p>
+                <p className="text-sm">{`${el?.comentario?.slice(0,7)}...`}</p>
               </div>
             </div>
           ))}
@@ -115,7 +139,17 @@ export const ModalViewCard = ({ debt, partialPayment, setModalViewCard }) => {
         </div>
       </div>
       {/* Modal Crear pago */}
-      {modalNewPay ? <ModalNewPay closeModalNewPay={closeModalNewPay} /> : null}
+      {modalNewPay ? (
+        <ModalNewPay
+          closeModalNewPay={closeModalNewPay}
+          handleInputNewPay={handleInputNewPay}
+          newPay={newPay}
+          sendNewPay={sendNewPay}
+          id={debt._id}
+          error={error}
+          loading={loading}
+        />
+      ) : null}
     </div>
   );
 };

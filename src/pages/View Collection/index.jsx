@@ -14,6 +14,7 @@ export const View_Collection = ({
   deleteDebt,
   darkMode,
   addNewDebtToArray,
+  add_NewPay_ToDebtArray,
 }) => {
   const { name } = useParams();
   const location = useLocation();
@@ -80,6 +81,7 @@ export const View_Collection = ({
                 secondColor={"#F05C6B"}
                 deleteDebt={deleteDebt}
                 countCard={collection.length}
+                add_NewPay_ToDebtArray={add_NewPay_ToDebtArray}
               />
             ))}
         </div>
@@ -99,6 +101,7 @@ export const View_Collection = ({
                 secondColor={"#209A21"}
                 deleteDebt={deleteDebt}
                 countCard={collection.length}
+                add_NewPay_ToDebtArray={add_NewPay_ToDebtArray}
               />
             ))}
         </div>

@@ -13,7 +13,7 @@ export const useCardDebt = () => {
     } else if (debt.pagada.isDone) {
       return debt.deuda;
     } else if (debt.pagos.length > 0) {
-      return debt.pagos.reduce((res, ele) => (res += ele.cantidad), 0);
+      return debt.pagos.reduce((res, ele) => (res += ele?.cantidad), 0);
     }
   };
 

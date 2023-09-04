@@ -46,6 +46,14 @@ export const useDebts = () => {
     });
   };
 
+  const add_NewPay_ToDebtArray = (newDebt, newPay) => {
+    const index = debts.findIndex((el) => el._id === newDebt._id);
+    setDebts([
+      ...debts.filter((debt) => debt._id !== newDebt._id),
+      { ...debts[index], pagos: [...debts[index].pagos, newPay] },
+    ]);
+  };
+
   const success_getDebts = (res) => {
     setLoading(false);
     setError({});
@@ -75,5 +83,6 @@ export const useDebts = () => {
     error,
     addNewDebtToArray,
     deleteDebt,
+    add_NewPay_ToDebtArray,
   };
 };

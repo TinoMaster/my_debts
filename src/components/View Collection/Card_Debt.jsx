@@ -9,6 +9,7 @@ export const Card_Debt = ({
   secondColor,
   deleteDebt,
   countCard,
+  add_NewPay_ToDebtArray,
 }) => {
   const { description, deuda } = debt;
   const {
@@ -30,6 +31,7 @@ export const Card_Debt = ({
             debt={debt}
             partialPayment={partialPayment}
             setModalViewCard={setModalViewCard}
+            add_NewPay_ToDebtArray={add_NewPay_ToDebtArray}
           />
         </ModalPortal>
       ) : null}
