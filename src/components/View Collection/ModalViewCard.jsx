@@ -1,8 +1,12 @@
 import React from "react";
 import { formaterData } from "../../utilities/formaterData";
 import { FaDollarSign } from "react-icons/fa";
+import { AiOutlinePlus } from "react-icons/ai";
+import { useModalViewCard } from "../../hooks/View Collection/useModalViewCard";
+import { ModalNewPay } from "./ModalNewPay";
 
 export const ModalViewCard = ({ debt, partialPayment, setModalViewCard }) => {
+  const { modalNewPay, openModalNewPay, closeModalNewPay } = useModalViewCard();
   return (
     <div className="w-[90%] max-w-[400px] h-[85%] flex flex-col top-5 relative bg-gradient-to-br overflow-hidden px-2 py-5 from-slate-600 to-darkMode rounded-md text-white">
       {/* title */}
@@ -93,7 +97,12 @@ export const ModalViewCard = ({ debt, partialPayment, setModalViewCard }) => {
               </div>
             </div>
           ))}
-          <button className="absolute bottom-2 right-2">Add</button>
+          <button
+            onClick={openModalNewPay}
+            className="absolute bottom-3 right-3 bg-gradient-to-tr from-darkMode to-slate-700 p-2 rounded-full shadow-md shadow-black/30 hover:to-slate-600"
+          >
+            <AiOutlinePlus />
+          </button>
         </div>
         {/* Buttons */}
         <div className="w-full flex justify-center py-2">
@@ -105,6 +114,8 @@ export const ModalViewCard = ({ debt, partialPayment, setModalViewCard }) => {
           </button>
         </div>
       </div>
+      {/* Modal Crear pago */}
+      {modalNewPay ? <ModalNewPay closeModalNewPay={closeModalNewPay} /> : null}
     </div>
   );
 };
