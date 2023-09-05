@@ -46,12 +46,15 @@ export const useDebts = () => {
     });
   };
 
+  /* //TODO: Fixed this */
   const add_NewPay_ToDebtArray = (newDebt, newPay) => {
+    console.log(newPay);
     const index = debts.findIndex((el) => el._id === newDebt._id);
-    setDebts([
+    const newDebts = [
       ...debts.filter((debt) => debt._id !== newDebt._id),
       { ...debts[index], pagos: [...debts[index].pagos, newPay] },
-    ]);
+    ];
+    setDebts(newDebts);
   };
 
   const success_getDebts = (res) => {
