@@ -9,12 +9,14 @@ const initialPay = {
   comentario: "",
 };
 
-export const useModalViewCard = (add_NewPay_ToDebtArray) => {
+export const useModalViewCard = (refresh_debts_afterPay) => {
   const [modalNewPay, setModalNewPay] = useState(false);
   const [newPay, setNewPay] = useState(initialPay);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
   const [success, setSuccess] = useState(false);
+  const [modalViewPay, setModalViewPay] = useState(false);
+  const [payToView, setPayToView] = useState({});
 
   const token = getToken();
 
@@ -31,6 +33,14 @@ export const useModalViewCard = (add_NewPay_ToDebtArray) => {
     setError({});
     setNewPay(initialPay);
     setModalNewPay(false);
+  };
+
+  const openModalViewPay = (pay) => {
+    setPayToView(pay);
+    setModalViewPay(true);
+  };
+  const closeModalViewPay = () => {
+    setModalViewPay(false);
   };
 
   const validatePay = () => {
@@ -55,7 +65,7 @@ export const useModalViewCard = (add_NewPay_ToDebtArray) => {
           setError(res);
           setLoading(false);
         } else if (res.success) {
-          add_NewPay_ToDebtArray(res.data, res.newPaid);
+          refresh_debts_afterPay();
           setLoading(false);
           setSuccess(true);
           closeModalNewPay();
@@ -75,5 +85,9 @@ export const useModalViewCard = (add_NewPay_ToDebtArray) => {
     error,
     success,
     loading,
+    modalViewPay,
+    openModalViewPay,
+    closeModalViewPay,
+    payToView,
   };
 };

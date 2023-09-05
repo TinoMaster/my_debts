@@ -14,6 +14,7 @@ export const useDebts = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
   const [emptyCollection, setEmptyCollection] = useState(0);
+  const [addNewPay, setAddNewPay] = useState(0);
   const { user } = useContext(AuthContext);
 
   const error_getDebts = (res) => {
@@ -46,15 +47,8 @@ export const useDebts = () => {
     });
   };
 
-  /* //TODO: Fixed this */
-  const add_NewPay_ToDebtArray = (newDebt, newPay) => {
-    console.log(newPay);
-    const index = debts.findIndex((el) => el._id === newDebt._id);
-    const newDebts = [
-      ...debts.filter((debt) => debt._id !== newDebt._id),
-      { ...debts[index], pagos: [...debts[index].pagos, newPay] },
-    ];
-    setDebts(newDebts);
+  const refresh_debts_afterPay = () => {
+    setAddNewPay((prev) => prev + 1);
   };
 
   const success_getDebts = (res) => {
@@ -76,7 +70,7 @@ export const useDebts = () => {
         }
       });
     }
-  }, [emptyCollection]);
+  }, [emptyCollection, addNewPay]);
 
   return {
     collections,
@@ -86,6 +80,6 @@ export const useDebts = () => {
     error,
     addNewDebtToArray,
     deleteDebt,
-    add_NewPay_ToDebtArray,
+    refresh_debts_afterPay,
   };
 };

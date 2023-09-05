@@ -4,13 +4,15 @@ import { FaDollarSign } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useModalViewCard } from "../../hooks/View Collection/useModalViewCard";
 import { ModalNewPay } from "./ModalNewPay";
-import { BsCheckAll } from "react-icons/bs";
+import { BsCalendar3, BsCheckAll } from "react-icons/bs";
+import { ModalViewPay } from "./ModalViewPay";
+import { ModalPortal } from "../modals/modalPortal";
 
 export const ModalViewCard = ({
   debt,
   partialPayment,
   setModalViewCard,
-  add_NewPay_ToDebtArray,
+  refresh_debts_afterPay,
 }) => {
   const {
     modalNewPay,
@@ -22,7 +24,11 @@ export const ModalViewCard = ({
     error,
     success,
     loading,
-  } = useModalViewCard(add_NewPay_ToDebtArray);
+    modalViewPay,
+    openModalViewPay,
+    closeModalViewPay,
+    payToView,
+  } = useModalViewCard(refresh_debts_afterPay);
   return (
     <div className="w-[90%] max-w-[400px] h-[85%] flex flex-col top-5 relative bg-gradient-to-br overflow-hidden px-2 py-5 from-slate-600 to-darkMode rounded-md text-white">
       {/* Success new pay */}
@@ -31,6 +37,16 @@ export const ModalViewCard = ({
           <BsCheckAll className="text-xl" />
           Pago agregado
         </p>
+      ) : null}
+
+      {/* Modal View Pay */}
+      {modalViewPay ? (
+        <ModalPortal>
+          <ModalViewPay
+            paid={payToView}
+            closeModalViewPay={closeModalViewPay}
+          />
+        </ModalPortal>
       ) : null}
 
       {/* title */}
@@ -44,7 +60,7 @@ export const ModalViewCard = ({
         </div>
       </div>
       {/* Card */}
-      <div className="h-full flex flex-col relative p-2 bg-white/10 rounded-md shadow-inner shadow-black/50">
+      <div className="h-full flex flex-col relative p-2 gap-2 bg-white/10 rounded-md shadow-inner shadow-black/50">
         {/* Deuda total y resto */}
         <div className="w-full p-2 shadow-md bg-gradient-to-tr from-white/5 to-white/10 rounded-md">
           <div className="flex w-full gap-2 justify-between">
@@ -94,36 +110,33 @@ export const ModalViewCard = ({
           {/* comentario */}
           <div className="w-full flex flex-col gap-1 p-1 justify-center items-center">
             <p className="font-semibold">Comentario:</p>
-            <p className="font-serif text-center shadow-inner shadow-black py-1">
-              {debt.comentario}
+            <p className="font-serif text-center py-1 h-10 w-full shadow-inner shadow-black/20">
+              {debt?.comentario}
             </p>
           </div>
         </div>
         {/* Pagos */}
         <h3 className="w-full text-center">Pagos:</h3>
-        <div className="w-full max-h-72 flex flex-col p-2 overflow-auto relative shadow-inner shadow-black/50 rounded-md">
+        <div className="w-full h-full max-h-52 gap-1 flex flex-col p-2 overflow-auto shadow-inner shadow-black/50 rounded-md">
           {debt?.pagos.map((el) => (
             <div
+              onClick={() => openModalViewPay(el)}
               key={el?._id}
-              className="flex justify-between p-2 rounded-md shadow text-xs bg-white/5"
+              className="flex justify-between p-3 rounded-md text-sm shadow-md bg-white/5 hover:shadow-primary hover:cursor-pointer transition-all hover:bg-primary/5"
             >
-              <div className="flex w-1/3 gap-1 items-center">
-                <p>pago:</p>
-                <p className="text-sm">{el?.cantidad}</p>
-              </div>
-              <div className="flex w-1/3 gap-1 items-center">
-                <p>fecha:</p>
-                <p className="text-sm">{formaterData(el?.fecha)}</p>
-              </div>
-              <div className="flex w-1/3 gap-1 items-center overflow-hidden">
-                <p>coment:</p>
-                <p className="text-sm">{`${el?.comentario?.slice(0,7)}...`}</p>
-              </div>
+              <p className="text-sm flex gap-1 items-center">
+                <BsCalendar3 className="shadow-md text-primary bg-lightMode" />{" "}
+                {formaterData(el?.fecha)}
+              </p>
+              <p className="text-sm flex items-center">
+                <FaDollarSign /> {el?.cantidad}
+              </p>
             </div>
           ))}
+
           <button
             onClick={openModalNewPay}
-            className="absolute bottom-3 right-3 bg-gradient-to-tr from-darkMode to-slate-700 p-2 rounded-full shadow-md shadow-black/30 hover:to-slate-600"
+            className="absolute bottom-20 right-4 bg-gradient-to-tr from-darkMode to-slate-700 p-2 rounded-full shadow-md shadow-black/30 hover:to-slate-600"
           >
             <AiOutlinePlus />
           </button>
