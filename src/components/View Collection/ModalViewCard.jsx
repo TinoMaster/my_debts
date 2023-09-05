@@ -28,6 +28,7 @@ export const ModalViewCard = ({
     openModalViewPay,
     closeModalViewPay,
     payToView,
+    deletePaid,
   } = useModalViewCard(refresh_debts_afterPay);
   return (
     <div className="w-[90%] max-w-[400px] h-[85%] flex flex-col top-5 relative bg-gradient-to-br overflow-hidden px-2 py-5 from-slate-600 to-darkMode rounded-md text-white">
@@ -45,6 +46,7 @@ export const ModalViewCard = ({
           <ModalViewPay
             paid={payToView}
             closeModalViewPay={closeModalViewPay}
+            deletePaid={deletePaid}
           />
         </ModalPortal>
       ) : null}
@@ -120,7 +122,7 @@ export const ModalViewCard = ({
         <div className="w-full h-full max-h-52 gap-1 flex flex-col p-2 overflow-auto shadow-inner shadow-black/50 rounded-md">
           {debt?.pagos.map((el) => (
             <div
-              onClick={() => openModalViewPay(el)}
+              onClick={() => openModalViewPay(el, debt._id)}
               key={el?._id}
               className="flex justify-between p-3 rounded-md text-sm shadow-md bg-white/5 hover:shadow-primary hover:cursor-pointer transition-all hover:bg-primary/5"
             >

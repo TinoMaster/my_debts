@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addNewPayToDebt } from "../../services/debts";
+import { addNewPayToDebt, deletePayToDebt } from "../../services/debts";
 import { getToken } from "../../utilities/getToken";
 
 const date = new Date();
@@ -16,7 +16,9 @@ export const useModalViewCard = (refresh_debts_afterPay) => {
   const [error, setError] = useState({});
   const [success, setSuccess] = useState(false);
   const [modalViewPay, setModalViewPay] = useState(false);
+  /* States of pays */
   const [payToView, setPayToView] = useState({});
+  const [idDebt, setIdDebt] = useState("");
 
   const token = getToken();
 
@@ -35,7 +37,8 @@ export const useModalViewCard = (refresh_debts_afterPay) => {
     setModalNewPay(false);
   };
 
-  const openModalViewPay = (pay) => {
+  const openModalViewPay = (pay, id) => {
+    setIdDebt(id);
     setPayToView(pay);
     setModalViewPay(true);
   };
@@ -75,6 +78,20 @@ export const useModalViewCard = (refresh_debts_afterPay) => {
     }
   };
 
+  const deletePaid = (idPaid) => {
+    deletePayToDebt(token, idDebt, idPaid).then((res) => {
+      if (res.error) {
+        setError(res);
+        setTimeout(() => {
+          setError({});
+        }, 3000);
+      } else if (res.success) {
+        setModalViewPay(false);
+        refresh_debts_afterPay();
+      }
+    });
+  };
+
   return {
     modalNewPay,
     openModalNewPay,
@@ -89,5 +106,6 @@ export const useModalViewCard = (refresh_debts_afterPay) => {
     openModalViewPay,
     closeModalViewPay,
     payToView,
+    deletePaid,
   };
 };

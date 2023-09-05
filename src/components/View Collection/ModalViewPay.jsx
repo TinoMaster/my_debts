@@ -3,7 +3,7 @@ import { formaterData } from "../../utilities/formaterData";
 import { BsCalendar3 } from "react-icons/bs";
 import { FaDollarSign } from "react-icons/fa";
 
-export const ModalViewPay = ({ paid, closeModalViewPay }) => {
+export const ModalViewPay = ({ paid, closeModalViewPay, deletePaid }) => {
   return (
     <div className="absolute w-full h-full flex justify-center items-center">
       <div className="w-80 bg-gradient-to-tr from-slate-600 to-darkMode text-white flex p-2 flex-col rounded-md shadow-lg shadow-black/50">
@@ -41,7 +41,12 @@ export const ModalViewPay = ({ paid, closeModalViewPay }) => {
           >
             Cerrar
           </button>
-          <button className="px-2 py-1 shadow-md rounded-md bg-red-500/50">Eliminar</button>
+          <button
+            onClick={() => deletePaid(paid._id)}
+            className="px-2 py-1 shadow-md rounded-md bg-red-500/50"
+          >
+            Eliminar
+          </button>
         </div>
       </div>
     </div>

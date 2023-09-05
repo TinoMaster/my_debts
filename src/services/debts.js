@@ -20,6 +20,14 @@ export const addNewPayToDebt = async (token = "", id = "", data = {}) => {
   return await httpHelper(token).put(`${urls.addNewPay}/${id}`, options);
 };
 
+export const deletePayToDebt = async (token = "", id = "", idPaid = "") => {
+  const options = {
+    body: { idPaid },
+    headers: { "content-type": "application/json" },
+  };
+  return await httpHelper(token).put(`${urls.deletePaid}/${id}`, options);
+};
+
 export const delete_debt = async (token = "", id = "") =>
   await httpHelper(token).del(`${urls.deleteOneDebt}/${id}`);
 
