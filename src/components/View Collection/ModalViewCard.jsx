@@ -119,7 +119,7 @@ export const ModalViewCard = ({
         </div>
         {/* Pagos */}
         <h3 className="w-full text-center">Pagos:</h3>
-        <div className="w-full h-full max-h-52 gap-1 flex flex-col p-2 overflow-auto shadow-inner shadow-black/50 rounded-md">
+        <div className="w-full h-full max-h-80 gap-1 flex flex-col p-2 overflow-auto shadow-inner shadow-black/50 rounded-md">
           {debt?.pagos.map((el) => (
             <div
               onClick={() => openModalViewPay(el, debt._id)}
