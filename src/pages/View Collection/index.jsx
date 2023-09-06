@@ -56,7 +56,11 @@ export const View_Collection = ({
 
       <Link
         to={"/"}
-        className="absolute flex items-center gap-1 shadow-md p-2 z-10 rounded-md text-sm bg-darkMode"
+        className={`absolute flex items-center gap-1 shadow-md p-2 z-10 rounded-md text-sm bg-gradient-to-tr ${
+          darkMode
+            ? "from-darkMode to-slate-700"
+            : "from-slate-100 to-slate-200"
+        }`}
       >
         <FaArrowLeft /> Volver
       </Link>
@@ -82,6 +86,7 @@ export const View_Collection = ({
                 deleteDebt={deleteDebt}
                 countCard={collection.length}
                 refresh_debts_afterPay={refresh_debts_afterPay}
+                darkMode={darkMode}
               />
             ))}
         </div>

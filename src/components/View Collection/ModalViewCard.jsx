@@ -13,6 +13,7 @@ export const ModalViewCard = ({
   partialPayment,
   setModalViewCard,
   refresh_debts_afterPay,
+  darkMode,
 }) => {
   const {
     modalNewPay,
@@ -31,7 +32,13 @@ export const ModalViewCard = ({
     deletePaid,
   } = useModalViewCard(refresh_debts_afterPay);
   return (
-    <div className="w-[90%] max-w-[400px] h-[85%] flex flex-col top-5 relative bg-gradient-to-br overflow-hidden px-2 py-5 from-slate-600 to-darkMode rounded-md text-white">
+    <div
+      className={`w-[90%] max-w-[400px] h-[85%] flex flex-col top-5 relative bg-gradient-to-br ${
+        darkMode
+          ? "from-slate-600 to-darkMode text-white"
+          : "from-lightMode to-slate-100"
+      } overflow-hidden px-2 py-5 rounded-md shadow-xl shadow-black/40`}
+    >
       {/* Success new pay */}
       {success ? (
         <p className="absolute right-1 p-2 bg-green-400/80 rounded-md flex gap-1 items-center transition-all">
@@ -47,6 +54,7 @@ export const ModalViewCard = ({
             paid={payToView}
             closeModalViewPay={closeModalViewPay}
             deletePaid={deletePaid}
+            darkMode={darkMode}
           />
         </ModalPortal>
       ) : null}
@@ -119,7 +127,7 @@ export const ModalViewCard = ({
         </div>
         {/* Pagos */}
         <h3 className="w-full text-center">Pagos:</h3>
-        <div className="w-full h-full max-h-80 gap-1 flex flex-col p-2 overflow-auto shadow-inner shadow-black/50 rounded-md">
+        <div className="w-full h-full max-h-80 gap-1 flex flex-col p-2 pb-8 overflow-auto shadow-inner shadow-black/50 rounded-md">
           {debt?.pagos.map((el) => (
             <div
               onClick={() => openModalViewPay(el, debt._id)}
@@ -138,7 +146,11 @@ export const ModalViewCard = ({
 
           <button
             onClick={openModalNewPay}
-            className="absolute bottom-20 right-4 bg-gradient-to-tr from-darkMode to-slate-700 p-2 rounded-full shadow-md shadow-black/30 hover:to-slate-600"
+            className={`absolute bottom-20 right-8 bg-gradient-to-tr ${
+              darkMode
+                ? "from-darkMode to-slate-700 text-white"
+                : "from-lightMode to-slate-400"
+            }  p-2 rounded-full shadow-md shadow-black/30 hover:to-slate-600`}
           >
             <AiOutlinePlus />
           </button>
@@ -146,7 +158,11 @@ export const ModalViewCard = ({
         {/* Buttons */}
         <div className="w-full flex justify-center py-2">
           <button
-            className="p-2 rounded-md bg-gradient-to-tr from-darkMode to-slate-700 hover:to-slate-600 transition-colors"
+            className={`p-2 rounded-md bg-gradient-to-tr ${
+              darkMode
+                ? "from-darkMode to-slate-700"
+                : "from-lightMode to-slate-300"
+            }  hover:to-slate-600 transition-colors shadow-md shadow-black/20`}
             onClick={() => setModalViewCard(false)}
           >
             Cerrar
@@ -163,6 +179,7 @@ export const ModalViewCard = ({
           id={debt._id}
           error={error}
           loading={loading}
+          darkMode={darkMode}
         />
       ) : null}
     </div>

@@ -137,7 +137,7 @@ export const useCreateNewDebt = (
     };
   };
 
-  const SendNewDebt = () => {
+  const SendNewDebt = (openCloseNewDebt) => {
     const validator = validateNewDebt();
     if (!validator.error) {
       const dataToSend = coumpoundNewDebt();
@@ -146,7 +146,7 @@ export const useCreateNewDebt = (
           setErrorCreateDebt(res);
         } else if (res.success) {
           addNewDebtToArray(res.data);
-          setModalNewDebt(false);
+          openCloseNewDebt();
         }
       });
     } else setErrorCreateDebt(validator);

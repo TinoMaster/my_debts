@@ -81,7 +81,7 @@ export const Modal_Create_Debt = ({
       />
       <div className="flex justify-center py-2 mt-5">
         <button
-          onClick={SendNewDebt}
+          onClick={() => SendNewDebt(openCloseNewDebt)}
           className="p-2 mx-2 bg-black/30 rounded-md shadow"
         >
           Aceptar

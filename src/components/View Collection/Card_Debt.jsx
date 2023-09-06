@@ -10,6 +10,7 @@ export const Card_Debt = ({
   deleteDebt,
   countCard,
   refresh_debts_afterPay,
+  darkMode,
 }) => {
   const { description, deuda } = debt;
   const {
@@ -32,6 +33,7 @@ export const Card_Debt = ({
             partialPayment={partialPayment}
             setModalViewCard={setModalViewCard}
             refresh_debts_afterPay={refresh_debts_afterPay}
+            darkMode={darkMode}
           />
         </ModalPortal>
       ) : null}

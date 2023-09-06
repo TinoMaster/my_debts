@@ -3,10 +3,21 @@ import { formaterData } from "../../utilities/formaterData";
 import { BsCalendar3 } from "react-icons/bs";
 import { FaDollarSign } from "react-icons/fa";
 
-export const ModalViewPay = ({ paid, closeModalViewPay, deletePaid }) => {
+export const ModalViewPay = ({
+  paid,
+  closeModalViewPay,
+  deletePaid,
+  darkMode,
+}) => {
   return (
     <div className="absolute w-full h-full flex justify-center items-center">
-      <div className="w-80 bg-gradient-to-tr from-slate-600 to-darkMode text-white flex p-2 flex-col rounded-md shadow-lg shadow-black/50">
+      <div
+        className={`w-80 bg-gradient-to-br ${
+          darkMode
+            ? "from-slate-600 to-darkMode"
+            : "from-slate-100 to-slate-200"
+        } flex p-2 flex-col rounded-md shadow-lg shadow-black/50`}
+      >
         <div className="flex justify-between p-2">
           <div className="flex flex-col gap-1">
             <div className="flex gap-1 items-center">
