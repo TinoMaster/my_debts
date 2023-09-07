@@ -14,8 +14,8 @@ export const Principal_Menu = (props) => {
     <div
       style={{ backgroundColor: `${bg}` }}
       className={`w-full flex bg-gradient-to-tr z-20 ${
-        darkMode ? "from-darkMode to-slate-800" : "from-lightMode to-slate-200"
-      } justify-between items-center p-4 sticky top-0 rounded-md`}
+        darkMode ? "from-primary to-slate-800" : "from-primary to-slate-400"
+      } justify-between items-center p-4 sticky top-0 text-white`}
     >
       <Link to={"/"}>
         <h2>{title}</h2>

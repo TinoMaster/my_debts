@@ -5,7 +5,6 @@ import { Modal_Create_collection } from "../../components/Home/Modal_Create_coll
 import { ModalPortal } from "../../components/modals/modalPortal";
 import { useCreateNewCollection } from "../../hooks/Home/useCreateNewCollection";
 import { Friends } from "../../components/Home/Friends";
-import { getUserName } from "../../utilities/getUserName";
 import { Modal_ErrorCreateCol } from "../../components/Home/Modal_ErrorCreateCol";
 
 export const Home = ({
@@ -24,11 +23,11 @@ export const Home = ({
     collectionName,
     errorNameCollection,
     modalErrorCreateCol,
-    setModalErrorCreateCol
+    setModalErrorCreateCol,
   } = useCreateNewCollection(myContacts);
-  const username = getUserName();
+
   return (
-    <div className="w-full h-full flex flex-col px-2 gap-5">
+    <div className="w-full h-full flex flex-col gap-4">
       {/* Modal create collection */}
 
       {modalErrorCreateCol ? (
@@ -53,8 +52,6 @@ export const Home = ({
         </ModalPortal>
       ) : null}
 
-      {/* Username Provisional */}
-      <h3>{username}</h3>
       {/* Friend */}
       <Friends
         users={myContacts?.contacts}
@@ -62,12 +59,13 @@ export const Home = ({
         loadingAuth={loadingAuth}
       />
       {/* Balance Deudas */}
-      <Balance_Deudas ballance={ballance} />
+      <Balance_Deudas ballance={ballance} darkMode={darkMode} />
       {/* Colecciones */}
       <Colecciones
         collections={collections}
         url={"/collection"}
         loading={loading}
+        darkMode={darkMode}
       />
       <Button_create_collection openCloseWindow={openCloseWindow} />
     </div>

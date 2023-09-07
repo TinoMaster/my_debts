@@ -38,13 +38,13 @@ export const Modal_Create_collection = ({
       <div className="flex justify-center py-2">
         <button
           onClick={() => createCollection(openCloseNewDebt)}
-          className="p-2 mx-2 bg-black/30 rounded-md shadow"
+          className="p-2 mx-2 bg-secondary/50 text-white rounded-md shadow"
         >
           Aceptar
         </button>
         <button
           onClick={openCloseWindow}
-          className="p-2 mx-2 bg-black/30 rounded-md shadow"
+          className="p-2 mx-2 bg-primary/50 text-white rounded-md shadow"
         >
           Cancelar
         </button>

@@ -50,13 +50,13 @@ export const Modal_friendRequest = ({
       <div className="flex justify-center py-2">
         <button
           onClick={sendFriendRequest}
-          className="p-2 mx-2 bg-black/30 rounded-md shadow"
+          className="p-2 mx-2 bg-secondary/50 text-white rounded-md shadow"
         >
           Aceptar
         </button>
         <button
           onClick={() => setModalUserName(false)}
-          className="p-2 mx-2 bg-black/30 rounded-md shadow"
+          className="p-2 mx-2 bg-primary/50 text-white rounded-md shadow"
         >
           Cancelar
         </button>

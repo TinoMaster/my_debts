@@ -34,21 +34,24 @@ export const Card_Debt = ({
             setModalViewCard={setModalViewCard}
             refresh_debts_afterPay={refresh_debts_afterPay}
             darkMode={darkMode}
+            color={color}
+            secondColor={secondColor}
+            deleteDebt={deleteDebt}
+            countCard={countCard}
+            navigate={navigate}
           />
         </ModalPortal>
       ) : null}
       {/* Caja superior */}
       <div
         onClick={openModalViewCard}
-        className="p-3 relative bg-gradient-to-tr from-white/5 to-secondary/10 rounded-md shadow-md hover:bg-black/10 hover:cursor-pointer"
+        style={{ borderColor: color }}
+        className={`p-3 relative bg-gradient-to-tr ${
+          darkMode
+            ? "from-white/5 to-slate-50/5 border"
+            : "from-white/90 to-slate-50"
+        } rounded-md shadow-md hover:bg-black/10 hover:cursor-pointer`}
       >
-        {/* Trash */}
-        <button
-          onClick={(e) => deleteDebt(e, debt._id, countCard, navigate)}
-          className="absolute -top-2 right-2 hover:text-red-300"
-        >
-          <FaTrash />
-        </button>
         <div className="flex justify-between items-baseline">
           <h2 className="pb-1 text-center font-semibold">{description}</h2>
           <h3 className="text-xs p-1 bg-white/5 rounded-md shadow">

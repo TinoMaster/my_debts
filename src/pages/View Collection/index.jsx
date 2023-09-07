@@ -36,7 +36,7 @@ export const View_Collection = ({
           onClick={openCloseNewDebt}
           className="absolute rounded-full bottom-3 right-3 z-10 shadow-md shadow-violet-400/20"
         >
-          <IoIosAddCircle className="text-5xl rounded-full bg-primary p-1 text-white shadow-xl shadow-violet-400/20 hover:shadow-white/20" />
+          <IoIosAddCircle className="text-5xl rounded-full shadow-xl bg-secondary/80 text-white/80 hover:shadow-white/20" />
         </button>
       ) : null}
 
@@ -57,22 +57,22 @@ export const View_Collection = ({
       <Link
         to={"/"}
         className={`absolute flex items-center gap-1 shadow-md p-2 z-10 rounded-md text-sm bg-gradient-to-tr ${
-          darkMode
-            ? "from-darkMode to-slate-700"
-            : "from-slate-100 to-slate-200"
+          darkMode ? "from-darkMode to-slate-700" : "from-slate-100 to-white"
         }`}
       >
         <FaArrowLeft /> Volver
       </Link>
       <h2 className="text-sm py-4 px-2 text-center">{name}</h2>
       {/* Balance */}
-      <Balance collection={collection} />
+      <Balance collection={collection} darkMode={darkMode} />
       {/* Caja deudas */}
       <div className="flex flex-col gap-3 py-5">
         <div className="flex flex-wrap">
           {collection?.filter((debt) => debt.acreedor._id === user._id).length >
           0 ? (
-            <h3 className="w-full text-center">Me deben</h3>
+            <h3 className="w-full text-center text-sm text-slate-500">
+              Me deben
+            </h3>
           ) : null}
 
           {collection
@@ -93,7 +93,9 @@ export const View_Collection = ({
         <div className="flex flex-wrap">
           {collection?.filter((debt) => debt.deudor._id === user._id).length >
           0 ? (
-            <h3 className="w-full text-center">Le debo</h3>
+            <h3 className="w-full text-center text-sm text-slate-500">
+              Le debo
+            </h3>
           ) : null}
 
           {collection
@@ -107,6 +109,7 @@ export const View_Collection = ({
                 deleteDebt={deleteDebt}
                 countCard={collection.length}
                 refresh_debts_afterPay={refresh_debts_afterPay}
+                darkMode={darkMode}
               />
             ))}
         </div>

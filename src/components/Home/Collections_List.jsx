@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Collection } from "./Collection";
 
-export const Collections_List = ({ collections, url, user }) => {
+export const Collections_List = ({ collections, url, user, darkMode }) => {
   return (
     <div className="w-full">
       {/*Colecciones  */}
@@ -9,7 +9,7 @@ export const Collections_List = ({ collections, url, user }) => {
         {collections?.filter(
           (collection) => collection?.creador._id === user?._id
         ).length > 0 ? (
-          <h3 className="text-center text-sm">Creadas por mi</h3>
+          <h3 className="pl-3 text-xs text-slate-700">Mias</h3>
         ) : null}
 
         {collections
@@ -19,6 +19,7 @@ export const Collections_List = ({ collections, url, user }) => {
               key={collection.name}
               url={url}
               collection={collection}
+              darkMode={darkMode}
             />
           ))}
       </div>
@@ -26,7 +27,7 @@ export const Collections_List = ({ collections, url, user }) => {
         {collections?.filter(
           (collection) => collection?.creador._id !== user?._id
         ).length > 0 ? (
-          <h3 className="text-center text-sm">Creadas por otros</h3>
+          <h3 className="pl-3 text-xs text-slate-700">de otros</h3>
         ) : null}
 
         {collections
@@ -36,6 +37,7 @@ export const Collections_List = ({ collections, url, user }) => {
               key={collection.name}
               collection={collection}
               url={url}
+              darkMode={darkMode}
             />
           ))}
       </div>

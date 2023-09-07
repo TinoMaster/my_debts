@@ -4,9 +4,11 @@ import { FaDollarSign } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useModalViewCard } from "../../hooks/View Collection/useModalViewCard";
 import { ModalNewPay } from "./ModalNewPay";
-import { BsCalendar3, BsCheckAll } from "react-icons/bs";
+import { BsCalendar3, BsCashCoin, BsCheckAll } from "react-icons/bs";
+import { GiCash } from "react-icons/gi";
 import { ModalViewPay } from "./ModalViewPay";
 import { ModalPortal } from "../modals/modalPortal";
+import { MdPaid } from "react-icons/md";
 
 export const ModalViewCard = ({
   debt,
@@ -14,6 +16,11 @@ export const ModalViewCard = ({
   setModalViewCard,
   refresh_debts_afterPay,
   darkMode,
+  color,
+  secondColor,
+  deleteDebt,
+  countCard,
+  navigate,
 }) => {
   const {
     modalNewPay,
@@ -33,10 +40,10 @@ export const ModalViewCard = ({
   } = useModalViewCard(refresh_debts_afterPay);
   return (
     <div
-      className={`w-[90%] max-w-[400px] h-[85%] flex flex-col top-5 relative bg-gradient-to-br ${
+      className={`w-[90%] max-w-[400px] h-[85%] flex flex-col top-5 relative bg-gradient-to-tr ${
         darkMode
           ? "from-slate-600 to-darkMode text-white"
-          : "from-lightMode to-slate-100"
+          : "from-slate-50 to-white"
       } overflow-hidden px-2 py-5 rounded-md shadow-xl shadow-black/40`}
     >
       {/* Success new pay */}
@@ -66,28 +73,42 @@ export const ModalViewCard = ({
         </h2>
         <div className="flex text-sm gap-2 items-center">
           <p className="font-roboto">coleccion:</p>
-          <p className="bg-white rounded-md text-darkMode px-1">{debt.name}</p>
+          <p className="bg-primary/40 text-white shadow-md rounded-md px-1">
+            {debt.name}
+          </p>
         </div>
       </div>
       {/* Card */}
-      <div className="h-full flex flex-col relative p-2 gap-2 bg-white/10 rounded-md shadow-inner shadow-black/50">
+      <div className="h-full flex flex-col relative p-2 gap-2 bg-black/5 rounded-md shadow-black/50">
         {/* Deuda total y resto */}
-        <div className="w-full p-2 shadow-md bg-gradient-to-tr from-white/5 to-white/10 rounded-md">
-          <div className="flex w-full gap-2 justify-between">
-            <p>Total:</p>
+        <div className="w-full p-2 bg-gradient-to-tr from-white to-white/90 rounded-md">
+          <div style={{ color }} className="flex w-full gap-2 justify-between">
+            <p className="flex gap-1 items-center">
+              <GiCash />
+              Total
+            </p>
             <p className="flex items-center">
               <FaDollarSign className="text-xs" /> {debt.deuda}
             </p>
           </div>
-          <div className="flex w-full gap-2 justify-between">
-            <p>Pagado:</p>
+          <div
+            style={{ color: secondColor }}
+            className="flex w-full gap-2 justify-between"
+          >
+            <p className="flex gap-1 items-center">
+              <MdPaid />
+              Pagado
+            </p>
             <p className="flex items-center">
               <FaDollarSign className="text-xs" />
               {partialPayment}
             </p>
           </div>
-          <div className="flex w-full gap-2 justify-between">
-            <p>Resto:</p>
+          <div className="flex w-full gap-2 justify-between text-yellow-600">
+            <p className="flex gap-1 items-center">
+              <BsCashCoin />
+              Resto
+            </p>
             <p className="flex items-center">
               <FaDollarSign className="text-xs" />
               {debt.deuda - partialPayment}
@@ -95,8 +116,8 @@ export const ModalViewCard = ({
           </div>
         </div>
         {/* Description and information */}
-        <h3 className="w-full text-center">Info</h3>
-        <div className="w-full flex flex-wrap p-2 outline-1 outline-dashed outline-slate-700 rounded-md">
+        <h3 className="w-full text-center text-sm text-slate-500">Info</h3>
+        <div className="w-full flex flex-wrap p-2 bg-gradient-to-tr text-slate-600 from-white to-white/90 rounded-md">
           {/* fecha */}
           <div className="w-1/2 flex gap-1 p-1 justify-center items-center">
             <p className="font-semibold">Fecha:</p>
@@ -120,19 +141,19 @@ export const ModalViewCard = ({
           {/* comentario */}
           <div className="w-full flex flex-col gap-1 p-1 justify-center items-center">
             <p className="font-semibold">Comentario:</p>
-            <p className="font-serif text-center py-1 h-10 w-full shadow-inner shadow-black/20">
+            <p className="font-serif text-center py-1 h-10 w-full rounded-md shadow-black/20">
               {debt?.comentario}
             </p>
           </div>
         </div>
         {/* Pagos */}
-        <h3 className="w-full text-center">Pagos:</h3>
-        <div className="w-full h-full max-h-80 gap-1 flex flex-col p-2 pb-8 overflow-auto shadow-inner shadow-black/50 rounded-md">
+        <h3 className="w-full text-center text-sm text-slate-500">Pagos</h3>
+        <div className="w-full h-full bg-white max-h-56 gap-1 flex flex-col p-2 pb-8 overflow-auto shadow-inner shadow-black/50 rounded-md">
           {debt?.pagos.map((el) => (
             <div
               onClick={() => openModalViewPay(el, debt._id)}
               key={el?._id}
-              className="flex justify-between p-3 rounded-md text-sm shadow-md bg-white/5 hover:shadow-primary hover:cursor-pointer transition-all hover:bg-primary/5"
+              className="flex justify-between p-3 rounded-md text-sm shadow-md bg-white/90 hover:shadow-primary hover:cursor-pointer transition-all hover:bg-primary/5"
             >
               <p className="text-sm flex gap-1 items-center">
                 <BsCalendar3 className="shadow-md text-primary bg-lightMode" />{" "}
@@ -156,7 +177,7 @@ export const ModalViewCard = ({
           </button>
         </div>
         {/* Buttons */}
-        <div className="w-full flex justify-center py-2">
+        <div className="w-full flex justify-center py-2 gap-2">
           <button
             className={`p-2 rounded-md bg-gradient-to-tr ${
               darkMode
@@ -166,6 +187,16 @@ export const ModalViewCard = ({
             onClick={() => setModalViewCard(false)}
           >
             Cerrar
+          </button>
+          <button
+            className={`p-2 rounded-md bg-gradient-to-tr ${
+              darkMode
+                ? "from-darkMode to-slate-700"
+                : "from-lightMode to-slate-300"
+            }  hover:to-slate-600 transition-colors shadow-md shadow-black/20`}
+            onClick={(e) => deleteDebt(e, debt._id, countCard, navigate)}
+          >
+            Borrar
           </button>
         </div>
       </div>
