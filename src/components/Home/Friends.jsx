@@ -52,7 +52,9 @@ export const Friends = ({ users = [], darkMode, loadingAuth }) => {
                     <div
                       key={user.friend._id}
                       onClick={() => deleteFriend(user.friend._id)}
-                      className={`w-12 h-12 bg-white/90 text-slate-600 shadow-md rounded-full flex justify-center items-center hover:cursor-pointer hover:bg-primary/30 transition-colors`}
+                      className={`w-12 h-12 bg-white/90 text-slate-600 shadow-md rounded-full flex justify-center items-center hover:cursor-pointer ${
+                        darkMode ? "hover:shadow-white/30" : "hover:shadow-white/30"
+                      }  transition-shadow`}
                     >
                       <h3>{cutName(user.friend?.name)}</h3>
                     </div>

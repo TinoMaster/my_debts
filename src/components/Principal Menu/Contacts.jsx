@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { IoMdContact } from "react-icons/io";
+import { IoIosNotifications } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 export const Contacts = ({ request = 0 }) => {
@@ -11,7 +11,7 @@ export const Contacts = ({ request = 0 }) => {
         </span>
       ) : null}
       <Link to={"/contacts"}>
-        <IoMdContact className="text-2xl relative" />
+        <IoIosNotifications className="text-2xl relative hover:scale-110 duration-200" />
       </Link>
     </div>
   );

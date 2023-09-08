@@ -13,7 +13,7 @@ export const Contacts = () => {
     <div className="flex w-full justify-center items-center">
       {myContacts?.contactRequestsReceived?.length === 0 &&
       myContacts?.contactRequestsSent?.length === 0 ? (
-        <div>No tiene solicitudes de contacto</div>
+        <div>No tienes notificaciones disponibles</div>
       ) : (
         <div className="w-full flex flex-col gap-5 justify-center">
           {myContacts?.contactRequestsReceived?.length > 0 ? (
