@@ -28,6 +28,7 @@ export const Principal_Menu = (props) => {
       <div className="flex gap-5 justify-center items-center">
         <Contacts request={myContacts?.contactRequestsReceived?.length} />
         <Settings openCloseSetting={handlersPM.handlTogOpenCloseSetting} />
+        {/* Imagen de usuario */}
         <div className="flex">
           <div className="w-11 h-11 relative rounded-full bg-white"></div>
         </div>
@@ -41,15 +42,15 @@ export const Principal_Menu = (props) => {
             ? "from-primary to-slate-700"
             : "from-primary/80 to-slate-400"
         }  right-3 top-16 p-3 text-xs gap-2 rounded-md shadow-md shadow-black/40 transition-transform duration-300 ${
-          statesPM.openSettings ? "translate-x-0" : "translate-x-36"
+          statesPM.openSettings ? "translate-x-0" : "translate-x-40"
         }`}
       >
-        <p className="flex gap-2 items-center p-1 rounded-md hover:shadow-md shadow-black/40 transition-shadow">
+        <div className="flex gap-2 items-center p-1 rounded-md hover:shadow-md shadow-black/40 transition-shadow">
           <div className="flex items-center gap-1">
             <MdDeveloperMode className="text-lg" /> Modo:
           </div>
           <ButtonModeDark />
-        </p>
+        </div>
 
         <p
           onClick={closeSession}

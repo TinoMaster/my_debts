@@ -3,6 +3,7 @@ import AuthContext from "../../contexts/authContext";
 import { DebtType } from "./DebtType";
 import { OtherCamps } from "./OtherCamps";
 import { useCreateNewDebt } from "../../hooks/useCreateNewDebt";
+import { BiSolidNews } from "react-icons/bi";
 
 export const Modal_Create_Debt = ({
   darkMode,
@@ -44,10 +45,12 @@ export const Modal_Create_Debt = ({
   return (
     <div
       className={`flex flex-col items-center relative bg-gradient-to-tr ${
-        darkMode ? "from-darkMode to-slate-900" : "from-lightMode to-slate-200"
+        darkMode
+          ? "from-darkMode to-slate-800 text-slate-300"
+          : "from-lightMode to-slate-200 text-slate-500"
       } ${
         darkMode ? "text-lightMode" : "text-darkMode"
-      } w-full mx-2 px-10 py-4 rounded-md max-w-[400px]`}
+      } w-full mx-2 px-5 py-4 rounded-md shadow-xl shadow-black/30 border border-secondary/30 max-w-[400px]`}
     >
       {/* Error */}
       {errorCreateDebt.error ? (
@@ -57,12 +60,16 @@ export const Modal_Create_Debt = ({
       ) : null}
 
       {/* Encabezado */}
-      <h2 className="text-lg font-semibold w-full text-center">Nueva Deuda</h2>
+      <h2 className="text-2xl font-bold w-full py-4 pl-2 flex items-center gap-2">
+        Nueva Deuda
+        <BiSolidNews className="text-2xl" />
+      </h2>
       {/*Caja Elegir tipo de deuda */}
       <DebtType
         handlerDebtType={handlerDebtType}
         refTypeDebt1={refTypeDebt1}
         refTypeDebt2={refTypeDebt2}
+        darkMode={darkMode}
       />
       {/* Caja inferior */}
       <OtherCamps
@@ -82,19 +89,19 @@ export const Modal_Create_Debt = ({
       <div className="flex justify-center py-2 mt-5">
         <button
           onClick={() => SendNewDebt(openCloseNewDebt)}
-          className="p-2 mx-2 bg-black/30 rounded-md shadow"
+          className="p-2 mx-2 bg-secondary/60 text-white rounded-md shadow"
         >
           Aceptar
         </button>
         <button
           onClick={handlerResetDebt}
-          className="p-2 mx-2 bg-black/30 rounded-md shadow"
+          className="p-2 mx-2 bg-yellow-600/60 text-white rounded-md shadow"
         >
           Resetear
         </button>
         <button
           onClick={openCloseNewDebt}
-          className="p-2 mx-2 bg-black/30 rounded-md shadow"
+          className="p-2 mx-2 bg-red-500/60 text-white rounded-md shadow"
         >
           Cancelar
         </button>

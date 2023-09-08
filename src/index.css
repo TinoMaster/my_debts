@@ -5,3 +5,11 @@
 .inputAuth {
   @apply w-full mx-auto border-b-2 placeholder:text-slate-400 text-lightMode my-2 py-1 px-7 focus:border-b-secondary/50 focus:outline-none bg-transparent;
 }
+
+.input-DebtType:checked + label {
+  @apply bg-secondary text-white shadow-lg;
+}
+
+.input-checkboxPaid:checked + label {
+  @apply text-green-400;
+}

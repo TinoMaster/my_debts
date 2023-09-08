@@ -4,7 +4,7 @@ import { Card_Debt } from "../../components/View Collection/Card_Debt";
 import { Balance } from "../../components/View Collection/Balance";
 import { FaArrowLeft } from "react-icons/fa";
 import { useContext } from "react";
-import { IoIosAddCircle } from "react-icons/io";
+import { MdOutlinePlaylistAdd } from "react-icons/md";
 import AuthContext from "../../contexts/authContext";
 import { ModalPortal } from "../../components/modals/modalPortal";
 import { Modal_Create_Debt } from "../../components/Modal Create Debt";
@@ -34,9 +34,9 @@ export const View_Collection = ({
       {user?._id === _id ? (
         <button
           onClick={openCloseNewDebt}
-          className="absolute rounded-full bottom-3 right-3 z-10 shadow-md shadow-violet-400/20"
+          className="absolute rounded-full bottom-4 p-1 bg-white right-4 z-10 border border-secondary shadow-md shadow-violet-400/20"
         >
-          <IoIosAddCircle className="text-5xl rounded-full shadow-xl bg-secondary/80 text-white/80 hover:shadow-white/20" />
+          <MdOutlinePlaylistAdd className="text-4xl rounded-full shadow-xl p-2 bg-white text-secondary/80 hover:shadow-white/20" />
         </button>
       ) : null}
 
