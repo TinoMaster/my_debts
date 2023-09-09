@@ -43,7 +43,9 @@ export const Friends = ({ users = [], darkMode, loadingAuth }) => {
       <h3 className="w-full text-sm text-lightMode pl-2">Contactos</h3>
       <div className="flex w-full  rounded-md px-2">
         {loadingAuth ? (
-          <ContactsLoading />
+          <div className="mr-4">
+            <ContactsLoading />
+          </div>
         ) : (
           <div className="min-w-11/12 overflow-auto flex rounded-l-md scroll-auto scroll-pe-0 snap-mandatory bg-whit p-2">
             <div className="flex gap-3">
@@ -53,7 +55,9 @@ export const Friends = ({ users = [], darkMode, loadingAuth }) => {
                       key={user.friend._id}
                       onClick={() => deleteFriend(user.friend._id)}
                       className={`w-12 h-12 bg-white/90 text-slate-600 shadow-md rounded-full flex justify-center items-center hover:cursor-pointer ${
-                        darkMode ? "hover:shadow-white/30" : "hover:shadow-white/30"
+                        darkMode
+                          ? "hover:shadow-white/30"
+                          : "hover:shadow-white/30"
                       }  transition-shadow`}
                     >
                       <h3>{cutName(user.friend?.name)}</h3>

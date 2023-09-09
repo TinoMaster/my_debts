@@ -41,8 +41,11 @@ export const filterCollections = (debts, user) => {
       deudor: value.deudor,
       acreedor: value.acreedor,
     };
-    if (result.length === 0) result.push(check);
-    else if (
+    if (result.length === 0) {
+      if (check.acreedor._id === user._id) {
+        result.push(check);
+      } else result.push({ ...check, deuda: -check.deuda });
+    } else if (
       result.some(
         (el) => el.name === check.name && check.creador._id === el.creador._id
       )

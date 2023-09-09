@@ -8,12 +8,14 @@ import { Link } from "react-router-dom";
 import { usePrincipalMenu } from "../../hooks/Principal Menu/usePrincipalMenu";
 import { BiSolidLogOutCircle } from "react-icons/bi";
 import { MdDeveloperMode } from "react-icons/md";
+import { PiCopySimpleFill } from "react-icons/pi";
 
 export const Principal_Menu = (props) => {
   const { bg, title } = props;
   const { user, closeSession, myContacts } = useContext(AuthContext);
   const { darkMode } = useContext(ThemeContext);
-  const { statesPM, handlersPM } = usePrincipalMenu();
+  const { statesPM, handlersPM, copyUserName, usernameIsCopy } =
+    usePrincipalMenu();
   return (
     <div
       style={{ backgroundColor: `${bg}` }}
@@ -52,12 +54,31 @@ export const Principal_Menu = (props) => {
           <ButtonModeDark />
         </div>
 
-        <p
+        <div
           onClick={closeSession}
           className="flex items-center gap-1 hover:shadow-md shadow-black/40 hover:cursor-pointer transition-shadow p-1 rounded-none"
         >
           <BiSolidLogOutCircle className="text-lg" /> Desconectarse
-        </p>
+        </div>
+
+        {/* UserName */}
+        <div
+          onClick={() => copyUserName(user.username)}
+          className="flex flex-col relative items-center gap-1 hover:cursor-pointer transition-shadow p-1 rounded-none"
+        >
+          {/* IsCopy */}
+          {usernameIsCopy ? (
+            <div className="absolute top-0 -right-5 p-1 bg-primary/10 rounded-md">
+              <p className="text-white/70">Copiado</p>
+            </div>
+          ) : null}
+
+          <p>username:</p>
+          <div className="flex items-center gap-1">
+            <p>{`${user.username.slice(0, 10)}...`}</p>
+            <PiCopySimpleFill className="text-lg shadow-md" />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -58,7 +58,7 @@ const useRegister = () => {
       ...register,
       role: "user",
       active: true,
-      username: register.name + date.getDate(),
+      username: `${register.name}${date.getTime()}`,
     };
 
     register_user(dataToSend).then((res) => {
@@ -71,7 +71,7 @@ const useRegister = () => {
         setError({});
         setTimeout(() => {
           setSuccess(false);
-          window.location.href = "/login";
+          window.location.href = "/";
         }, 2000);
       }
     });
