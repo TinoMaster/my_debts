@@ -3,6 +3,7 @@ import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import useLogin from "../../hooks/Login/useLogin";
 import { PrincipalLoader } from "../loaders/principalLoader";
 import { PiSealWarning } from "react-icons/pi";
+import { Logo } from "./Logo";
 
 export const LoginComponent = () => {
   const {
@@ -34,13 +35,11 @@ export const LoginComponent = () => {
           <p className="font-thin">Login satisfactorio</p>
         </div>
       )}
-      <h2 className="font-serif text-3xl text-center font-extrabold">
+      <h2 className="font-serif text-3xl pb-10 text-center font-extrabold">
         Ingresar a su cuenta
       </h2>
 
-      <div className="w-48 my-5 h-48 flex border-2 shadow-lg bg-darkMode/90 items-center justify-center rounded-full overflow-hidden">
-        {/* <img className="w-full h-full scale-75" src={logo} alt="Logo" /> */}
-      </div>
+      <Logo />
 
       <form onSubmit={sendLogin} className="w-full flex flex-col">
         <label htmlFor="nombre" className="flex flex-col w-4/5 m-auto">
@@ -105,7 +104,7 @@ export const LoginComponent = () => {
         <input
           value="Enviar"
           type="submit"
-          className="my-5 p-2 w-2/3 m-auto bg-secondary/80 text-white rounded-lg shadow-md shadow-secondary/75 hover:cursor-pointer hover:bg-secondary/90"
+          className="my-5 p-2 w-2/3 m-auto bg-gradient-to-tr from-primary/80 to-slate-700 text-white rounded-lg shadow-md shadow-secondary/75 hover:cursor-pointer hover:bg-secondary/90"
         />
       </form>
     </>
