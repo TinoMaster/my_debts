@@ -38,13 +38,16 @@ export const useDebts = () => {
 
   const deleteDebt = (e, id, collections, navigate) => {
     e.stopPropagation();
-    delete_debt(user.token, id).then((res) => {
-      if (res.error) {
-        setError(res);
-      } else if (res.success) {
-        delete_debt_from_debts(id, collections, navigate);
-      }
-    });
+    const confirm = window.confirm("Seguro que desea eliminar la deuda");
+    if (confirm) {
+      delete_debt(user.token, id).then((res) => {
+        if (res.error) {
+          setError(res);
+        } else if (res.success) {
+          delete_debt_from_debts(id, collections, navigate);
+        }
+      });
+    }
   };
 
   const refresh_debts_afterPay = () => {

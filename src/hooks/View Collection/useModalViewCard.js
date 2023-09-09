@@ -79,17 +79,20 @@ export const useModalViewCard = (refresh_debts_afterPay) => {
   };
 
   const deletePaid = (idPaid) => {
-    deletePayToDebt(token, idDebt, idPaid).then((res) => {
-      if (res.error) {
-        setError(res);
-        setTimeout(() => {
-          setError({});
-        }, 3000);
-      } else if (res.success) {
-        setModalViewPay(false);
-        refresh_debts_afterPay();
-      }
-    });
+    const confirm = window.confirm("Seguro que desea eliminar el pago");
+    if (confirm) {
+      deletePayToDebt(token, idDebt, idPaid).then((res) => {
+        if (res.error) {
+          setError(res);
+          setTimeout(() => {
+            setError({});
+          }, 3000);
+        } else if (res.success) {
+          setModalViewPay(false);
+          refresh_debts_afterPay();
+        }
+      });
+    }
   };
 
   return {

@@ -26,6 +26,7 @@ export const ModalViewCard = ({
   deleteDebt,
   countCard,
   navigate,
+  isMyCollection,
 }) => {
   const {
     modalNewPay,
@@ -67,6 +68,7 @@ export const ModalViewCard = ({
             closeModalViewPay={closeModalViewPay}
             deletePaid={deletePaid}
             darkMode={darkMode}
+            isMyCollection={isMyCollection}
           />
         </ModalPortal>
       ) : null}
@@ -191,17 +193,18 @@ export const ModalViewCard = ({
               </p>
             </div>
           ))}
-
-          <button
-            onClick={openModalNewPay}
-            className={`absolute bottom-20 right-5 bg-gradient-to-tr ${
-              darkMode
-                ? "from-darkMode to-slate-700 text-white"
-                : "from-lightMode to-slate-400"
-            }  p-2 rounded-full shadow-md shadow-black/30 hover:to-slate-600`}
-          >
-            <AiOutlinePlus />
-          </button>
+          {isMyCollection() ? (
+            <button
+              onClick={openModalNewPay}
+              className={`absolute bottom-20 right-5 bg-gradient-to-tr ${
+                darkMode
+                  ? "from-darkMode to-slate-700 text-white"
+                  : "from-lightMode to-slate-400"
+              }  p-2 rounded-full shadow-md shadow-black/30 hover:to-slate-600`}
+            >
+              <AiOutlinePlus />
+            </button>
+          ) : null}
         </div>
         {/* Buttons */}
         <div className="w-full flex justify-center py-2 gap-2">
@@ -211,12 +214,14 @@ export const ModalViewCard = ({
           >
             <BsFillDoorClosedFill /> Cerrar
           </button>
-          <button
-            className={`flex items-center gap-1 p-2 rounded-md bg-gradient-to-tr from-red-500 to-red-500/50  hover:to-slate-600 transition-colors shadow-md shadow-black/20`}
-            onClick={(e) => deleteDebt(e, debt._id, countCard, navigate)}
-          >
-            <MdDelete /> Borrar
-          </button>
+          {isMyCollection() ? (
+            <button
+              className={`flex items-center gap-1 p-2 rounded-md bg-gradient-to-tr from-red-500 to-red-500/50  hover:to-slate-600 transition-colors shadow-md shadow-black/20`}
+              onClick={(e) => deleteDebt(e, debt._id, countCard, navigate)}
+            >
+              <MdDelete /> Borrar
+            </button>
+          ) : null}
         </div>
       </div>
       {/* Modal Crear pago */}

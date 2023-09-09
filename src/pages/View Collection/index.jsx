@@ -20,18 +20,19 @@ export const View_Collection = ({
   const location = useLocation();
   const _id = location.state ? location.state._id : "";
   const contact = location.state ? location.state.contact : "";
+  const { user } = useContext(AuthContext);
   const {
     collection_by_name,
     openCloseNewDebt,
     modalNewDebt,
     setModalNewDebt,
-  } = useViewCollection(debts, name, _id);
-  const { user } = useContext(AuthContext);
+    isMyCollection,
+  } = useViewCollection(debts, name, _id, user);
   const collection = collection_by_name();
   return (
     <div className="flex flex-col w-full pb-10">
       {/* Create new debt */}
-      {user?._id === _id ? (
+      {isMyCollection() ? (
         <button
           onClick={openCloseNewDebt}
           className="absolute rounded-full bottom-4 p-1 bg-white right-4 z-10 border border-secondary shadow-md shadow-violet-400/20"
@@ -87,6 +88,7 @@ export const View_Collection = ({
                 countCard={collection.length}
                 refresh_debts_afterPay={refresh_debts_afterPay}
                 darkMode={darkMode}
+                isMyCollection={isMyCollection}
               />
             ))}
         </div>
@@ -110,6 +112,7 @@ export const View_Collection = ({
                 countCard={collection.length}
                 refresh_debts_afterPay={refresh_debts_afterPay}
                 darkMode={darkMode}
+                isMyCollection={isMyCollection}
               />
             ))}
         </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const useViewCollection = (debts, name, _id) => {
+export const useViewCollection = (debts, name, _id, user) => {
   const [modalNewDebt, setModalNewDebt] = useState(false);
 
   const navigate = useNavigate();
@@ -10,6 +10,11 @@ export const useViewCollection = (debts, name, _id) => {
       setModalNewDebt(true);
     }
   }, []);
+
+  const isMyCollection = () => {
+    if (_id === user?._id) return true;
+    return false;
+  };
 
   const openCloseNewDebt = () => {
     _id === "" ? navigate("/") : setModalNewDebt((prev) => !prev);
@@ -26,5 +31,6 @@ export const useViewCollection = (debts, name, _id) => {
     openCloseNewDebt,
     modalNewDebt,
     setModalNewDebt,
+    isMyCollection,
   };
 };

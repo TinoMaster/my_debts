@@ -11,6 +11,7 @@ export const Card_Debt = ({
   countCard,
   refresh_debts_afterPay,
   darkMode,
+  isMyCollection,
 }) => {
   const { description, deuda } = debt;
   const {
@@ -39,6 +40,7 @@ export const Card_Debt = ({
             deleteDebt={deleteDebt}
             countCard={countCard}
             navigate={navigate}
+            isMyCollection={isMyCollection}
           />
         </ModalPortal>
       ) : null}
