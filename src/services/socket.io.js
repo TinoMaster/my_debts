@@ -1,6 +1,7 @@
 import io from "socket.io-client";
+import { server } from "../config/serverConfig";
 
-const socket = io("http://localhost:5000"); // Cambia la URL según tu configuración
+const socket = io(server.production); // Cambia la URL según tu configuración
 
 const userSocketConnected = (userId) => {
   const data = {
@@ -21,4 +22,8 @@ const emitEvent = (eventName, data) => {
   socket.emit(eventName, data);
 };
 
-export { subscribeToEvent, emitEvent, userSocketConnected/* , unsubscribeToEvent */ };
+export {
+  subscribeToEvent,
+  emitEvent,
+  userSocketConnected /* , unsubscribeToEvent */,
+};

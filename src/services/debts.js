@@ -68,7 +68,7 @@ export const filterCollections = (debts, user) => {
     return result;
   }, []);
 
-  const newCollection = collections.reduce((res, value) => {
+  const newCollection = collections?.reduce((res, value) => {
     const contact =
       value.creador._id === user._id ? value.deudor : value.creador;
     const newCollection = {

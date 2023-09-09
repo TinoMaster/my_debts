@@ -1,4 +1,6 @@
-const host = "http://localhost:5000/api/v1";
+import { server } from "../config/serverConfig";
+
+const host = `${server.production}api/v1`;
 
 export const urls = {
   register: `${host}/users/register`,
