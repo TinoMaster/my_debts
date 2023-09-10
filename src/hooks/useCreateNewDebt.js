@@ -37,6 +37,8 @@ export const useCreateNewDebt = (
   const [pagoParcial, setPagoParcial] = useState("");
   const [commentPagoParcial, setCommentPagoParcial] = useState("");
 
+  console.log(newDebt);
+
   /* console.log(newDebt); */
 
   const idUser = getID();
@@ -100,9 +102,9 @@ export const useCreateNewDebt = (
   const validateNewDebt = () => {
     if (newDebt.description.length === 0)
       return { error: true, message: "El titulo no puede estar vacio" };
-    if (newDebt.acreedor.length === 0 && isNew)
+    if (newDebt.acreedor.length === 0)
       return { error: true, message: "Elige el tipo de deuda o el contacto" };
-    if (newDebt.deudor.length === 0 && isNew)
+    if (newDebt.deudor.length === 0)
       return { error: true, message: "Elige el tipo de deuda o el contacto" };
     if (newDebt.deuda.length === 0 || newDebt.deuda === 0)
       return { error: true, message: "Debe agregar la cantidad de la deuda" };
@@ -123,7 +125,7 @@ export const useCreateNewDebt = (
   };
 
   const coumpoundNewDebt = () => {
-    return {
+    const data = {
       name,
       description: newDebt.description,
       deuda: newDebt.deuda,
@@ -135,12 +137,13 @@ export const useCreateNewDebt = (
       pagada: newDebt.pagada,
       pagos: thereIsPartialPaid(),
     };
+    return new Promise((response) => response(data));
   };
 
-  const SendNewDebt = (openCloseNewDebt) => {
+  const SendNewDebt = async (openCloseNewDebt) => {
     const validator = validateNewDebt();
     if (!validator.error) {
-      const dataToSend = coumpoundNewDebt();
+      const dataToSend = await coumpoundNewDebt();
       createNewDebts(token, dataToSend).then((res) => {
         if (res.error) {
           setErrorCreateDebt(res);
