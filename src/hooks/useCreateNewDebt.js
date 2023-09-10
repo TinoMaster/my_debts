@@ -37,8 +37,6 @@ export const useCreateNewDebt = (
   const [pagoParcial, setPagoParcial] = useState("");
   const [commentPagoParcial, setCommentPagoParcial] = useState("");
 
-  console.log(newDebt);
-
   /* console.log(newDebt); */
 
   const idUser = getID();

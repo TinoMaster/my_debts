@@ -20,7 +20,7 @@ export const Container_Page = () => {
   const { darkMode } = useContext(ThemeContext);
   const { myContacts, loadingAuth } = useContext(AuthContext);
   return (
-    <div className="w-full max-w-720p h-full overflow-auto p-2 pb-24">
+    <div className="w-full max-w-720p h-full overflow-hidden p-2 pb-16">
       <Routes>
         <Route
           path="/"

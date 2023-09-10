@@ -30,14 +30,14 @@ export const View_Collection = ({
   } = useViewCollection(debts, name, _id, user);
   const collection = collection_by_name();
   return (
-    <div className="flex flex-col w-full pb-10">
+    <div className="flex flex-col w-full h-screen pt-5 overflow-auto pb-20">
       {/* Create new debt */}
       {isMyCollection() ? (
         <button
           onClick={openCloseNewDebt}
-          className="absolute rounded-full bottom-4 p-1 bg-white right-4 z-10 border border-secondary shadow-md shadow-violet-400/20"
+          className="absolute rounded-full bottom-4 p-1 bg-white right-4 z-10 border border-primary shadow-md shadow-violet-400/20"
         >
-          <MdOutlinePlaylistAdd className="text-4xl rounded-full shadow-xl p-2 bg-white text-secondary/80 hover:shadow-white/20" />
+          <MdOutlinePlaylistAdd className="text-4xl rounded-full shadow-xl p-2 bg-white text-primary/80 hover:shadow-white/20" />
         </button>
       ) : null}
 

@@ -4,16 +4,11 @@ import { FaDollarSign } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useModalViewCard } from "../../hooks/View Collection/useModalViewCard";
 import { ModalNewPay } from "./ModalNewPay";
-import {
-  BsCalendar3,
-  BsCashCoin,
-  BsCheckAll,
-  BsFillDoorClosedFill,
-} from "react-icons/bs";
+import { BsCalendar3, BsCashCoin, BsCheckAll } from "react-icons/bs";
 import { GiCash } from "react-icons/gi";
 import { ModalViewPay } from "./ModalViewPay";
 import { ModalPortal } from "../modals/modalPortal";
-import { MdDelete, MdPaid } from "react-icons/md";
+import { MdPaid } from "react-icons/md";
 
 export const ModalViewCard = ({
   debt,
@@ -207,19 +202,19 @@ export const ModalViewCard = ({
           ) : null}
         </div>
         {/* Buttons */}
-        <div className="w-full flex justify-center py-2 gap-2">
+        <div className="w-full flex justify-center py-2 gap-2 text-white">
           <button
             className={`flex items-center gap-1 p-2 rounded-md bg-gradient-to-tr from-secondary to-secondary/50  hover:to-slate-600 transition-colors shadow-md shadow-black/20`}
             onClick={() => setModalViewCard(false)}
           >
-            <BsFillDoorClosedFill /> Cerrar
+            Cerrar
           </button>
           {isMyCollection() ? (
             <button
               className={`flex items-center gap-1 p-2 rounded-md bg-gradient-to-tr from-red-500 to-red-500/50  hover:to-slate-600 transition-colors shadow-md shadow-black/20`}
               onClick={(e) => deleteDebt(e, debt._id, countCard, navigate)}
             >
-              <MdDelete /> Borrar
+              Borrar
             </button>
           ) : null}
         </div>
