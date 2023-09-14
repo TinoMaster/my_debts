@@ -41,7 +41,6 @@ export const Modal_Create_Debt = ({
     handlerResetDebt,
   } = funcHandlers;
 
-  const nameOfContact = () => myContacts?.contacts[0]?.friend.name;
   return (
     <div
       className={`flex flex-col items-center relative bg-gradient-to-tr ${
@@ -70,6 +69,7 @@ export const Modal_Create_Debt = ({
         refTypeDebt1={refTypeDebt1}
         refTypeDebt2={refTypeDebt2}
         darkMode={darkMode}
+        contact={contact}
       />
       {/* Caja inferior */}
       <OtherCamps
@@ -84,7 +84,7 @@ export const Modal_Create_Debt = ({
         commentPagoParcial={commentPagoParcial}
         refContactInput={refContactInput}
         isNew={isNew}
-        nameOfContact={nameOfContact}
+        nameOfContact={contact.name}
       />
       <div className="flex justify-center py-2 mt-5">
         <button

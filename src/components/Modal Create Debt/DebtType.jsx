@@ -5,12 +5,14 @@ export const DebtType = ({
   refTypeDebt1,
   refTypeDebt2,
   darkMode,
+  contact,
 }) => {
+  console.log(contact);
   return (
     <div className="flex flex-wrap justify-between gap-2 w-full pb-4">
       <h3 className="w-full pb- pl-2 font-bold">Escoge el tipo de deuda</h3>
       <input
-        onChange={handlerDebtType}
+        onChange={(e) => handlerDebtType(e, contact)}
         ref={refTypeDebt1}
         type="radio"
         name="debtTipe"
@@ -27,7 +29,7 @@ export const DebtType = ({
         Deudor
       </label>
       <input
-        onChange={handlerDebtType}
+        onChange={(e) => handlerDebtType(e, contact)}
         ref={refTypeDebt2}
         type="radio"
         name="debtTipe"

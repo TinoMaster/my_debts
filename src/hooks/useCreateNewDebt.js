@@ -70,13 +70,22 @@ export const useCreateNewDebt = (
     setCommentPagoParcial(e.target.value);
   };
 
-  const handlerDebtType = (e) => {
+  const handlerDebtType = (e, contact) => {
     if (isNew) refContactInput.current.value = "";
+
     setErrorCreateDebt({});
     if (e.target.value === "deudor") {
-      setNewDebt({ ...newDebt, deudor: idUser, acreedor: "" });
+      setNewDebt({
+        ...newDebt,
+        deudor: idUser,
+        acreedor: isNew ? "" : contact._id,
+      });
     } else if (e.target.value === "acreedor") {
-      setNewDebt({ ...newDebt, acreedor: idUser, deudor: "" });
+      setNewDebt({
+        ...newDebt,
+        acreedor: idUser,
+        deudor: isNew ? "" : contact._id,
+      });
     }
   };
 

@@ -42,7 +42,7 @@ export const DebtorOrCreditor = ({
             darkMode ? "bg-white/5 border border-secondary/30" : "bg-white"
           } shadow-black/30 rounded-md flex items-center`}
         >
-          <h4 className="">{nameOfContact()}</h4>
+          <h4 className="">{nameOfContact}</h4>
         </div>
       )}
     </div>

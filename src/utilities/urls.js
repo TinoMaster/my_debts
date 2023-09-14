@@ -1,6 +1,6 @@
 import { server } from "../config/serverConfig";
 
-const host = `${server.production}api/v1`;
+const host = `${server.local}api/v1`;
 
 export const urls = {
   register: `${host}/users/register`,
