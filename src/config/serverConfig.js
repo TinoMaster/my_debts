@@ -1,4 +1,4 @@
 export const server = {
   local: "http://localhost:5000/",
-  production: "https://apidebts-g67o-dev.fl0.io/",
+  production: "https://debts-api-dev-rtxq.2.ie-1.fl0.io/",
 };

@@ -7,7 +7,6 @@ export const DebtType = ({
   darkMode,
   contact,
 }) => {
-  console.log(contact);
   return (
     <div className="flex flex-wrap justify-between gap-2 w-full pb-4">
       <h3 className="w-full pb- pl-2 font-bold">Escoge el tipo de deuda</h3>

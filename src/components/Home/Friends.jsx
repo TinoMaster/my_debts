@@ -16,7 +16,6 @@ export const Friends = ({ users = [], darkMode, loadingAuth }) => {
     success,
     username,
     sendFriendRequest,
-    deleteFriend,
   } = friendRequest();
   return (
     <div
@@ -53,7 +52,6 @@ export const Friends = ({ users = [], darkMode, loadingAuth }) => {
                 ? users.map((user) => (
                     <div
                       key={user.friend._id}
-                      onClick={() => deleteFriend(user.friend._id)}
                       className={`w-12 h-12 bg-white/90 text-slate-600 shadow-md rounded-full flex justify-center items-center hover:cursor-pointer ${
                         darkMode
                           ? "hover:shadow-white/30"
